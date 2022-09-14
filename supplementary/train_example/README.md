@@ -7,6 +7,12 @@ The full flowchart of DyScore training is demonstrated in model_train.py:
 4. Store the trained model to pkl file
 5. Use the trained model to predict the test set
 
+* Install dependent modules 
+```
+pip install -r requirments.txt
+```
+
+
 * Train the DyScore model with CSV file in example_data
 
 ```
