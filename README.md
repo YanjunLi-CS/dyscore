@@ -148,6 +148,9 @@ Input CSV file generated from docked structure, as well as the output data from 
 
 The full flowchart of DyScore training is demonstrated in model_train.py
 
+* predict_example
+
+Example for using DyScore/DyScore-MF model with provided CSV file
 
 ## Citation
 If you use DyScore, please consider citing:
