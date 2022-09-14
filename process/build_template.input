@@ -14,4 +14,17 @@ MULTI_WEIGHT[1]                         1.0
 SCORE_LIST                              OUTPUT_DIRECTORY/record/build_dyscore.list
 SCORE_LOG                               OUTPUT_DIRECTORY/record/build_dyscore.score
 SCORE_OPTIMIZE                          YES
-
+#----------------------------------------------------------
+#   Stable estimate
+#----------------------------------------------------------
+APPLY_STABLE_ESTIMATE                   YES
+#----------------------------------------------------------
+#   Structure lock-key matching
+#----------------------------------------------------------
+APPLY_STRUCTURE_MATCHING                YES
+#----------------------------------------------------------
+#   Depth tendency
+#----------------------------------------------------------
+APPLY_DEPTH_TENDENCY                    YES
+APPLY_COMPETITIVE_HBOND                 YES
+METAL_PRIORITY[]                        1

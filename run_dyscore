@@ -353,11 +353,11 @@ then
     echo "--> Docking"
     cat ${output}/$listname | parallel --progress "process/vina_1.1.2 --config ${output}/vina.conf --ligand ${output}/pdbqt/{.}.pdbqt --out ${output}/docked/{.}.pdbqt  >/dev/null 2>&1" #>/dev/null 2>&1
     #vina
-    cat ${output}/$listname | parallel --tag "grep 'VINA RESULT:' ${output}/docked/{.}.pdbqt" >$output/record/vina.dat 2>/dev/null 
+    cat ${output}/$listname | parallel -k --tag "grep 'VINA RESULT:' ${output}/docked/{.}.pdbqt" >$output/record/vina.dat 2>/dev/null 
 else
     echo "--> Analyze docked file"
     cat ${output}/$listname | parallel cp  ${output}/pdbqt/{.}.pdbqt ${output}/docked/{.}.pdbqt 2>/dev/null
-    cat ${output}/$listname | parallel --tag "process/vina_1.1.2 --config ${output}/vina.conf --ligand ${output}/pdbqt/{.}.pdbqt --out ${output}/docked/{.}.pdbqt  --score_only |grep Affinity" |awk '{print $1" REMARK VINA RESULT: "$3}' > $output/record/vina.dat 2>/dev/null #>/dev/null 2>&1" #>/dev/null 2>&1
+    cat ${output}/$listname | parallel -k --tag "process/vina_1.1.2 --config ${output}/vina.conf --ligand ${output}/pdbqt/{.}.pdbqt --out ${output}/docked/{.}.pdbqt  --score_only |grep Affinity" |awk '{print $1" REMARK VINA RESULT: "$3}' > $output/record/vina.dat 2>/dev/null #>/dev/null 2>&1" #>/dev/null 2>&1
 fi
 
 
@@ -369,15 +369,15 @@ cat ${output}/$listname | parallel "babel -p 7 ${output}/docked/{.}.pdbqt ${outp
 #run
 source activate dyscore2  
 echo "--> Calculating DSXscore" 
-cat ${output}/$listname | parallel --tag "process/DSXscore/dsxscore $output/receptor_addh.mol2 ${output}/docked/{.}.mol2 ${output}/tmp/{.}.DSXtmp" | grep none |awk '{print $1,$3,$4}'  > ${output}/record/DSXscore.dat  2>/dev/null  
+cat ${output}/$listname | parallel -k --tag "process/DSXscore/dsxscore $output/receptor_addh.mol2 ${output}/docked/{.}.mol2 ${output}/tmp/{.}.DSXtmp" | grep none |awk '{print $1,$3,$4}'  > ${output}/record/DSXscore.dat  2>/dev/null  
 echo "--> Calculating NNscore" 
-cat ${output}/$listname | parallel --tag "process/NNscore/NNScore2.01.py -receptor $output/receptor.pdbqt -ligand ${output}/docked/{.}.pdbqt" |grep "Average Score:" |grep "\.smi\|\.sdf\|\.mol2\|\.pdb" |awk '{print $1,$4}' > ${output}/record/NNscore.dat  2>/dev/null 
+cat ${output}/$listname | parallel -k --tag "process/NNscore/NNScore2.01.py -receptor $output/receptor.pdbqt -ligand ${output}/docked/{.}.pdbqt" |grep "Average Score:" |grep "\.smi\|\.sdf\|\.mol2\|\.pdb" |awk '{print $1,$4}' > ${output}/record/NNscore.dat  2>/dev/null 
 echo "--> Calculating RF-Score3" 
-cat ${output}/$listname | parallel --tag "process/rf-score3/rf-score process/rf-score3/pdbbind-2015-refined.rf $output/receptor.pdbqt ${output}/docked/{.}.pdbqt"  |grep "\.smi\|\.sdf\|\.mol2\|\.pdb" >${output}/record/rf-score3.dat  2>/dev/null 
+cat ${output}/$listname | parallel -k --tag "process/rf-score3/rf-score process/rf-score3/pdbbind-2015-refined.rf $output/receptor.pdbqt ${output}/docked/{.}.pdbqt"  |grep "\.smi\|\.sdf\|\.mol2\|\.pdb" >${output}/record/rf-score3.dat  2>/dev/null 
 echo "--> Calculating Score2" 
-cat ${output}/$listname | parallel --tag "process/score2/score2 $output/receptor_addh.pdb ${output}/docked/{.}.mol2" |grep Predicted |awk '{print $1,$5}'  >${output}/record/score2.dat  2>/dev/null 
+cat ${output}/$listname | parallel -k --tag "process/score2/score2 $output/receptor_addh.pdb ${output}/docked/{.}.mol2" |grep Predicted |awk '{print $1,$5}'  >${output}/record/score2.dat  2>/dev/null 
 echo "--> Calculating Xscore" 
-cat ${output}/$listname | parallel --tag "process/xscore/xscore_nooutput -score $output/receptor_addh_xscore.pdb ${output}/docked/{.}.mol2" |grep "Predicted average" |awk '{print $1,$6}'  >${output}/record/xscore.dat  2>/dev/null 
+cat ${output}/$listname | parallel -k --tag "process/xscore/xscore_nooutput -score $output/receptor_addh_xscore.pdb ${output}/docked/{.}.mol2" |grep "Predicted average" |awk '{print $1,$6}'  >${output}/record/xscore.dat  2>/dev/null 
 
 
 #Matching Score and Stability Score
@@ -395,11 +395,11 @@ then
     source activate dyscore3 
     echo "--> Enable MF calculation"
     echo "--> Calculating Formal Charge"
-    cat ${output}/$listname | parallel --tag "process/getcharge_mol2 ${output}/ph7/{.}.mol2"  >${output}/record/charge.dat  2>/dev/null 
+    cat ${output}/$listname | parallel -k --tag "process/getcharge_mol2 ${output}/ph7/{.}.mol2"  >${output}/record/charge.dat  2>/dev/null 
     echo "--> Calculating Molecular Property"
-    cat ${output}/$listname | parallel --tag "process/padel ${output}/ph7/{.}.mol2 ${output}/padel/{.}.csv"  >${output}/record/padel.dat  2>/dev/null 
+    cat ${output}/$listname | parallel -k --tag "process/padel ${output}/ph7/{.}.mol2 ${output}/padel/{.}.csv"  >${output}/record/padel.dat  2>/dev/null 
     echo "--> Calculating Fingerprint"
-    cat ${output}/$listname | parallel --tag "process/getFP2 ${output}/ph7/{.}.mol2"  >${output}/record/FP2.dat  2>/dev/null 
+    cat ${output}/$listname | parallel -k --tag "process/getFP2 ${output}/ph7/{.}.mol2"  >${output}/record/FP2.dat  2>/dev/null 
 fi
 
 echo "--> Collect features"
