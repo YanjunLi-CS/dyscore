@@ -1,0 +1,454 @@
+#
+# This table contains the parameters applied to the target protein.
+# Twenty amino acids as well as several specific residues are presented.
+# The lines headed by "ATOM" are organized as following:
+# The 1st column: heading
+# The 2nd column: name of the atom used in PDB file
+# The 3rd column: atom type used in AMBER force field
+# The 4th column: atomic hydrophobic scale, derived from XLOGP2
+# The 5th column: hydrogen bonding character
+# The 6th column: VDW radius from AMBER force field
+# The 7th column: atom type used in Tripos force field 
+#
+#----------------------------------------------------------------------------
+#	 	 XlogP	HB  Charge  r  	 Type    	
+#----------------------------------------------------------------------------
+RESI ACE  7       0.00  !  Acetyl
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	 0.267	N   0.000  1.94  C.3
+ATOM CH3  CT     0.267  N   0.000  1.94  C.3
+ATOM HA1  HC   	 0.000	N   0.000  0.00  H
+ATOM HA2  HC   	 0.000	N   0.000  0.00  H
+ATOM HA3  HC   	 0.000	N   0.000  0.00  H
+#
+RESI ALA  11      0.00  !  Alanine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.528	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM HB3  HC   	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI ARG  25      1.00  !  Arginine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.358 	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HG1  HC   	 0.000	N   0.000  0.00  H
+ATOM HG2  HC   	 0.000	N   0.000  0.00  H
+ATOM CD   CT   	-0.137  N   0.000  1.94  C.3
+ATOM HD1  H1   	 0.000	N   0.000  0.00  H
+ATOM HD2  H1   	 0.000	N   0.000  0.00  H
+ATOM NE   N2   	-0.096	D   0.000  1.83  N.am
+ATOM HE   H    	 0.000	N   0.000  0.00  H
+ATOM CZ   CA   	 0.005	N   1.000  1.90  C.cat
+ATOM NH1  N2   	-0.646	D   0.000  1.83  N.am
+ATOM HH11 H    	 0.000	N   0.000  0.00  H
+ATOM HH12 H    	 0.000	N   0.000  0.00  H
+ATOM NH2  N2   	-0.646	D   0.000  1.83  N.am
+ATOM HH21 H    	 0.000	N   0.000  0.00  H
+ATOM HH22 H    	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI ASN  17      0.00  !  Asparagine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	-0.008	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   C    	-0.030	N   0.000  1.90  C.2
+ATOM OD1  O    	-0.399	A   0.000  1.66  O.2
+ATOM AD1  O     -0.399  A   0.000  1.66  O.2
+ATOM ND2  N    	-0.646	D   0.000  1.83  N.am
+ATOM AD2  N     -0.646  D   0.000  1.83  N.am
+ATOM HD21 H    	 0.000	N   0.000  0.00  H
+ATOM HD22 H    	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI ASP  13     -1.00  !  Aspartic acid
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.008	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   C    	-0.030	N   0.000  1.90  C.2
+ATOM OD1  O2   	-0.880	A  -0.500  1.66  O.co2
+ATOM OD2  O2   	-0.880	A  -0.500  1.66  O.co2
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI CYS  12      0.00  !  Cysteine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.358 	N   0.000  1.94  C.3
+ATOM HB1  H1   	 0.000	N   0.000  0.00  H
+ATOM HB2  H1   	 0.000	N   0.000  0.00  H
+ATOM SG   SH   	 0.419	N   0.000  2.09  S.3
+ATOM HG   HS   	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI GLN  20      0.00  !  Glutamine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   CT   	-0.008	N   0.000  1.94  C.3
+ATOM HG1  HC   	 0.000	N   0.000  0.00  H
+ATOM HG2  HC   	 0.000	N   0.000  0.00  H
+ATOM CD   C    	-0.030	N   0.000  1.90  C.2
+ATOM OE1  O    	-0.399	A   0.000  1.66  O.2
+ATOM AE1  O     -0.399  A   0.000  1.66  O.2
+ATOM NE2  N    	-0.646	D   0.000  1.83  N.am
+ATOM AE2  N     -0.646  D   0.000  1.83  N.am
+ATOM HE21 H    	 0.000	N   0.000  0.00  H
+ATOM HE22 H    	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI GLU  16     -1.00  !  Glutamic acid
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   CT   	-0.008	N   0.000  1.94  C.3
+ATOM HG1  HC   	 0.000	N   0.000  0.00  H
+ATOM HG2  HC   	 0.000	N   0.000  0.00  H
+ATOM CD   C    	-0.030	N   0.000  1.90  C.2
+ATOM OE1  O2   	-0.880	A  -0.500  1.66  O.co2
+ATOM OE2  O2   	-0.880	A  -0.500  1.66  O.co2
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI GLY  8       0.00  !  Glycine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.303	N   0.000  1.94  C.3
+ATOM HA1  H1   	 0.000	N   0.000  0.00  H
+ATOM HA2  H1   	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI HIS  19      0.90  !  Histidine (uncharged with proton on nd1)
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	-0.008	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   CC   	-0.027	N   0.000  1.90  C.2
+ATOM ND1  NA   	 0.135	DA  0.500  1.87  N.2
+ATOM HD1  H    	 0.000	N   0.000  0.00  H
+ATOM CD2  CV   	-0.310	N   0.000  1.90  C.2
+ATOM HD2  H4   	 0.000	N   0.000  0.00  H
+ATOM CE1  CR   	-0.310	N   0.000  1.90  C.2
+ATOM HE1  H5   	 0.000	N   0.000  0.00  H
+ATOM NE2  NB   	 0.135	DA  0.500  1.87  N.2
+ATOM HE2  H5   	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI ILE  20      0.00  !  Isoleucine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.127	N   0.000  1.94  C.3
+ATOM HB   HC   	 0.000	N   0.000  0.00  H
+ATOM CG2  CT   	 0.528	N   0.000  1.94  C.3
+ATOM HG21 HC   	 0.000	N   0.000  0.00  H
+ATOM HG22 HC   	 0.000	N   0.000  0.00  H
+ATOM HG23 HC   	 0.000	N   0.000  0.00  H
+ATOM CG1  CT   	 0.358	N   0.000  1.94  C.3
+ATOM HG11 HC   	 0.000	N   0.000  0.00  H
+ATOM HG12 HC   	 0.000	N   0.000  0.00  H
+ATOM CD1  CT   	 0.528	N   0.000  1.94  C.3
+# care below
+ATOM CD   CT   	 0.528	N   0.000  1.94  C.3
+ATOM HD11 HC   	 0.000	N   0.000  0.00  H
+ATOM HD12 HC   	 0.000	N   0.000  0.00  H
+ATOM HD13 HC   	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI LEU  20      0.00  !  Leucine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   CT   	 0.127	N   0.000  1.94  C.3
+ATOM HG   HC   	 0.000	N   0.000  0.00  H
+ATOM CD1  CT   	 0.528	N   0.000  1.94  C.3
+ATOM HD11 HC   	 0.000	N   0.000  0.00  H
+ATOM HD12 HC   	 0.000	N   0.000  0.00  H
+ATOM HD13 HC   	 0.000	N   0.000  0.00  H
+ATOM CD2  CT   	 0.528	N   0.000  1.94  C.3
+ATOM HD21 HC   	 0.000	N   0.000  0.00  H
+ATOM HD22 HC   	 0.000	N   0.000  0.00  H
+ATOM HD23 HC   	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI LYS  23      1.00  !  Lysine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C   	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   HC   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HG1  HC   	 0.000	N   0.000  0.00  H
+ATOM HG2  HC   	 0.000	N   0.000  0.00  H
+ATOM CD   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HD1  HC   	 0.000	N   0.000  0.00  H
+ATOM HD2  HC   	 0.000	N   0.000  0.00  H
+ATOM CE   CT   	-0.137	N   0.000  1.94  C.3
+ATOM HE1  HP   	 0.000	N   0.000  0.00  H
+ATOM HE2  HP   	 0.000	N   0.000  0.00  H
+ATOM NZ   N3   	-2.000	D   1.000  1.86  N.4
+ATOM HZ1  H    	 0.000	N   0.000  0.00  H
+ATOM HZ2  H    	 0.000	N   0.000  0.00  H
+ATOM HZ3  H    	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI MET  18      0.00  !  Methionine
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM HA   H1   	 0.000	N   0.000  0.00  H
+ATOM CB   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HB1  HC   	 0.000	N   0.000  0.00  H
+ATOM HB2  HC   	 0.000	N   0.000  0.00  H
+ATOM CG   CT   	 0.358	N   0.000  1.94  C.3
+ATOM HG1  H1   	 0.000	N   0.000  0.00  H
+ATOM HG2  H1   	 0.000	N   0.000  0.00  H
+ATOM SD   S    	 0.255	N   0.000  2.09  S.3
+ATOM CE   CT   	 0.528	N   0.000  1.94  C.3
+ATOM HE1  H1   	 0.000	N   0.000  0.00  H
+ATOM HE2  H1   	 0.000	N   0.000  0.00  H
+ATOM HE3  H1   	 0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI NME  6       0.00  !  N-Methyl
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM H    H    	 0.000	N   0.000  0.00  H
+ATOM CA   CT   	-0.032	N   0.000  1.94  C.3
+ATOM HA1  H1   	 0.000	N   0.000  0.00  H
+ATOM HA2  H1   	 0.000	N   0.000  0.00  H
+ATOM HA3  H1   	 0.000	N   0.000  0.00  H
+#
+RESI PHE  21      0.00  !  Phenylalanine
+ATOM N    N   	-0.096	D   0.000  1.83  N.am
+ATOM H    H   	 0.000	N   0.000  0.00  H
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O     -0.399	A   0.000  1.66  O.2
+ATOM CA   CT    -0.305	N   0.000  1.94  C.3
+ATOM HA   H1     0.000	N   0.000  0.00  H
+ATOM CB   CT    -0.008	N   0.000  1.94  C.3
+ATOM HB1  HC     0.000	N   0.000  0.00  H
+ATOM HB2  HC     0.000	N   0.000  0.00  H
+ATOM CG   CA     0.296	N   0.000  1.85  C.ar
+ATOM CD1  CA     0.337	N   0.000  1.85  C.ar
+ATOM HD1  HA     0.000	N   0.000  0.00  H
+ATOM CD2  CA     0.337	N   0.000  1.85  C.ar
+ATOM HD2  HA     0.000	N   0.000  0.00  H
+ATOM CE1  CA     0.337	N   0.000  1.85  C.ar
+ATOM HE1  HA     0.000	N   0.000  0.00  H
+ATOM CE2  CA     0.337	N   0.000  1.85  C.ar
+ATOM HE2  HA     0.000	N   0.000  0.00  H
+ATOM CZ   CA     0.337	N   0.000  1.85  C.ar
+ATOM HZ   HA     0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI PRO  15      0.00  !  Proline
+ATOM C    C     -0.030	N   0.000  1.90  C.2
+ATOM O    O     -0.399	A   0.000  1.66  O.2
+ATOM N    N      0.078	N   0.000  1.83  N.am
+ATOM CD   CT    -0.137	N   0.000  1.94  C.3
+ATOM HD1  H1     0.000	N   0.000  0.00  H
+ATOM HD2  H1     0.000	N   0.000  0.00  H
+ATOM CA   CT    -0.305	N   0.000  1.94  C.3
+ATOM HA   H1     0.000	N   0.000  0.00  H
+ATOM CB   CT     0.358	N   0.000  1.94  C.3
+ATOM HB1  HC     0.000	N   0.000  0.00  H
+ATOM HB2  HC     0.000	N   0.000  0.00  H
+ATOM CG   CT     0.358	N   0.000  1.94  C.3
+ATOM HG1  HC     0.000	N   0.000  0.00  H
+ATOM HG2  HC     0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI SER  12      0.00  !  Serine
+ATOM N    N     -0.096	D   0.000  1.83  N.am
+ATOM H    H      0.000	N   0.000  0.00  H
+ATOM C    C     -0.030	N   0.000  1.90  C.2
+ATOM O    O     -0.399	A   0.000  1.66  O.2
+ATOM CA   CT    -0.305	N   0.000  1.94  C.3
+ATOM HA   H1     0.000	N   0.000  0.00  H
+ATOM CB   CT    -0.137	N   0.000  1.94  C.3
+ATOM HB1  H1     0.000	N   0.000  0.00  H
+ATOM HB2  H1     0.000	N   0.000  0.00  H
+ATOM OG   OH    -0.467	DA  0.000  1.74  O.3
+ATOM HG   HO     0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI THR  15      0.00  !  Threonine
+ATOM N    N     -0.096	D   0.000  1.83  N.am
+ATOM H    H      0.000	N   0.000  0.00  H
+ATOM C    C     -0.030	N   0.000  1.90  C.2
+ATOM O    O     -0.399	A   0.000  1.66  O.2
+ATOM CA   CT    -0.305	N   0.000  1.94  C.3
+ATOM HA   H1     0.000	N   0.000  0.00  H
+ATOM CB   CT    -0.205	N   0.000  1.94  C.3
+ATOM HB   H1     0.000	N   0.000  0.00  H
+ATOM OG1  OH    -0.467	DA  0.000  1.74  O.3
+ATOM HG1  HO     0.000	N   0.000  0.00  H
+ATOM CG2  CT     0.528	N   0.000  1.94  C.3
+ATOM HG21 HC     0.000	N   0.000  0.00  H
+ATOM HG22 HC     0.000	N   0.000  0.00  H
+ATOM HG23 HC     0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI TRP  25      0.00  !  Tryptophan
+ATOM N    N     -0.096	D   0.000  1.83  N.am
+ATOM H    H      0.000	N   0.000  0.00  H
+ATOM C    C     -0.030	N   0.000  1.90  C.2
+ATOM O    O     -0.399	A   0.000  1.66  O.2
+ATOM CA   CT    -0.305	N   0.000  1.94  C.3
+ATOM HA   H1     0.000	N   0.000  0.00  H
+ATOM CB   CT    -0.008	N   0.000  1.94  C.3
+ATOM HB1  HC     0.000	N   0.000  0.00  H
+ATOM HB2  HC     0.000	N   0.000  0.00  H
+ATOM CG   C*     0.013	N   0.000  1.90  C.2
+ATOM CD2  CB     0.296	N   0.000  1.85  C.ar
+ATOM CE2  CN    -0.151	N   0.000  1.85  C.ar
+ATOM CE3  CA     0.337	N   0.000  1.85  C.ar
+ATOM HE3  HA     0.000	N   0.000  0.00  H
+ATOM CD1  CW    -0.310	N   0.000  1.90  C.2
+ATOM HD1  H4     0.000	N   0.000  0.00  H
+ATOM NE1  NA     0.545	D   0.000  1.87  N.pl3
+ATOM HE1  H      0.000	N   0.000  0.00  H
+ATOM CZ2  CA     0.337	N   0.000  1.85  C.ar
+ATOM HZ2  HA     0.000	N   0.000  0.00  H
+ATOM CZ3  CA     0.337	N   0.000  1.85  C.ar
+ATOM HZ3  HA     0.000	N   0.000  0.00  H
+ATOM CH2  CA     0.337	N   0.000  1.85  C.ar
+ATOM HH2  HA     0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI TYR  22      0.00  !  Tyrosine
+ATOM N    N     -0.096	D   0.000  1.83  N.am
+ATOM H    H      0.000	N   0.000  0.00  H
+ATOM C    C     -0.030	N   0.000  1.90  C.2
+ATOM O    O     -0.399	A   0.000  1.66  O.2
+ATOM CA   CT    -0.305	N   0.000  1.94  C.3
+ATOM HA   H1     0.000	N   0.000  0.00  H
+ATOM CB   CT    -0.008	N   0.000  1.94  C.3
+ATOM HB1  HC     0.000	N   0.000  0.00  H
+ATOM HB2  HC     0.000	N   0.000  0.00  H
+ATOM CG   CA     0.296	N   0.000  1.85  C.ar
+ATOM CD1  CA     0.337	N   0.000  1.85  C.ar
+ATOM HD1  HA     0.000	N   0.000  0.00  H
+ATOM CD2  CA     0.337	N   0.000  1.85  C.ar
+ATOM HD2  HA     0.000	N   0.000  0.00  H
+ATOM CE1  CA     0.337	N   0.000  1.85  C.ar
+ATOM HE1  HA     0.000	N   0.000  0.00  H
+ATOM CE2  CA     0.337	N   0.000  1.85  C.ar
+ATOM HE2  HA     0.000	N   0.000  0.00  H
+ATOM CZ   C     -0.151	N   0.000  1.85  C.ar
+ATOM OH   OH     0.082	DA  0.000  1.74  O.3
+ATOM HH   HO     0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI VAL  17      0.00  !  Valine
+ATOM N    N     -0.096	D   0.000  1.83  N.am
+ATOM H    H      0.000	N   0.000  0.00  H
+ATOM C    C     -0.030	N   0.000  1.90  C.2
+ATOM O    O     -0.399	A   0.000  1.66  O.2
+ATOM CA   CT    -0.305	N   0.000  1.94  C.3
+ATOM HA   H1     0.000	N   0.000  0.00  H
+ATOM CB   CT     0.127	N   0.000  1.94  C.3
+ATOM HB   HC     0.000	N   0.000  0.00  H
+ATOM CG1  CT     0.528	N   0.000  1.94  C.3
+ATOM HG11 HC     0.000	N   0.000  0.00  H
+ATOM HG12 HC     0.000	N   0.000  0.00  H
+ATOM HG13 HC     0.000	N   0.000  0.00  H
+ATOM CG2  CT     0.528	N   0.000  1.94  C.3
+ATOM HG21 HC     0.000	N   0.000  0.00  H
+ATOM HG22 HC     0.000	N   0.000  0.00  H
+ATOM HG23 HC     0.000	N   0.000  0.00  H
+ATOM OXT  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI TPO  11     -2.00  !  aua spec residue
+ATOM N    N    	-0.096	D   0.000  1.83  N.am
+ATOM C    C    	-0.030	N   0.000  1.90  C.2
+ATOM O    O    	-0.399	A   0.000  1.66  O.2
+ATOM CA   CT   	-0.305	N   0.000  1.94  C.3
+ATOM CB   CT   	 0.358	N   0.000  1.94  C.3
+ATOM OG1  OH    -0.467	DA  0.000  1.74  O.3
+ATOM CG2  CT     0.528	N   0.000  1.94  C.3
+ATOM P    P    	-0.447	N   0.000  2.03  P.3
+ATOM O3P  O2   	-0.880	A  -0.500  1.66  O.co2
+ATOM O2P  O2   	-0.880	A  -0.500  1.66  O.co2
+ATOM O1P  O2    -0.880  A  -0.500  1.66  O.co2
+#
+RESI HET  15 
+ATOM O    OW    -1.000	DA  0.000  1.77  O.w	
+ATOM H1   H  	 0.000	N   0.000  0.00  H
+ATOM H2   H      0.000	N   0.000  0.00  H
+ATOM LI   LI    -2.000	M   1.000  0.50  Li  
+ATOM NA   NA    -2.000	M   1.000  0.50  Na	
+ATOM K    K     -2.000	M   1.000  0.50  K  
+ATOM MG   MG    -2.000	M   2.000  0.50  Mg    
+ATOM CA   CA    -2.000	M   2.000  0.50  Ca	
+ATOM AL   AL    -2.000	M   3.000  0.50  Al	
+ATOM MN   MN	-2.000	M   2.000  0.50  Mn  	
+ATOM FE   FE    -2.000	M   2.000  0.50  Fe
+ATOM CO   CO    -2.000  M   2.000  0.50  Co
+ATOM NI   NI    -2.000  M   2.000  0.50  Ni
+ATOM CU   CU	-2.000  M   2.000  0.50  Cu
+ATOM ZN   ZN    -2.000	M   2.000  0.50  Zn
+#
+END
