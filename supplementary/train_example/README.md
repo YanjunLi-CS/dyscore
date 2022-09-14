@@ -16,5 +16,6 @@ python model_train.py --weight_save example.pkl --data_dir example_data
 * Train the DyScore-MF model with CSV file in example_data_mf
 
 ```
-python model_train.py --weight_save example_mf.pkl --data_dir example_data_mf --add_feat [20, 21, 22, 23, 24, 25, 26, 27]
+python model_train.py --weight_save example_mf.pkl --data_dir example_data_mf --add_feat 20 21 22 23 24 25 26 27
 ```
+*Note: The number passed to --add_feat indicates additional features.
