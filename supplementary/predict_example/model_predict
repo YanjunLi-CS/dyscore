@@ -1,0 +1,43 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]
+then
+    echo "Usage: $0 input_CSV_file Weight_Dir"
+    exit 0
+fi
+if [ ! -e $1 ]
+then
+    echo "$1 not found"
+    exit 0
+fi
+if [ ! -e $2 ]
+then
+    echo "$2 not found"
+    exit 0
+fi
+input_abs=`readlink -f $1`
+output_abs=`dirname $input_abs`
+weight_abs=`readlink -f $2`
+path=`pwd`
+#check input type
+MF_flag=`grep ",Add_Heavy,Add_MW,Add_HA,Add_HD,Add_Charge,Add_RT,Add_Xlogp,FP2" $1|wc -l`
+if [ $MF_flag -gt 0 ]
+then
+    echo "--> Running MF Model"
+    cd ../../process/dyscore_model_mf
+    source activate dyscore3 
+    python pred_ml.py --input_file ${input_abs} --output_file ${output_abs}/predicted_mf.csv --weight_dir ${weight_abs}/wMF
+    cd $path
+    echo "Input features: ${input_abs}"
+    echo "Output prediction ${output_abs}/predicted_mf.csv"
+else
+    echo "--> Running Non-MF Model"
+    cd ../../process/
+    source activate dyscore3
+    python -m dyscore_model.predict  -i ${input_abs} -o ${output_abs}/predicted.csv -w ${weight_abs}/woMF
+    cd $path
+    echo "Input features: ${input_abs}"
+    echo "Output prediction ${output}/predicted.csv"
+fi
+
+echo "Done"
