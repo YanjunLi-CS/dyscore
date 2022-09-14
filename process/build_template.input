@@ -28,3 +28,13 @@ APPLY_STRUCTURE_MATCHING                YES
 APPLY_DEPTH_TENDENCY                    YES
 APPLY_COMPETITIVE_HBOND                 YES
 METAL_PRIORITY[]                        1
+#----------------------------------------------------------
+#   Optimize parameters
+#   --Optimization intensity
+#----------------------------------------------------------
+OPTIMIZE_PROBABLITY[]                   0.8
+OPTIMIZE_NUMBER[]                       50
+MAXIMAL_ADJUST_DISTANCE[]               0.3
+MAXIMAL_ADJUST_ROTATE[]                 3.0
+MAXIMAL_ADJUST_TORSION[]                5.0
+MAXIMAL_BUMP[]                          5
