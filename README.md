@@ -138,6 +138,9 @@ So compound example2 would be the best and compound example1 would be the worst.
 
 Detailed defination of all items in the CSV could be found in supplementary/experimental_data/README.md file.
 
+**Note: Due to the randomness in 3D conformation generation, molecular docking, and structure optimization, the prediction value for each compounds could change to a certain extent in each repeat runs. However, the statsitic of enrich factor would be stable in repeat runs.**
+
+
 ## Supplementary
 
 * experiment_data
@@ -151,6 +154,7 @@ The full flowchart of DyScore training is demonstrated in model_train.py
 * predict_example
 
 Example for using DyScore/DyScore-MF model with provided CSV file
+
 
 ## Citation
 If you use DyScore, please consider citing:
