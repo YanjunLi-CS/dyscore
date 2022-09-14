@@ -32,9 +32,9 @@ if __name__ == '__main__':
         field_num=29
         title="TITLE,Active,Score,Stable,LogP,HB,MT,HSPC,VDW,BUMP,HM,RT,Match,Heavy,Vina,RF3,NN,DSX,DSXA,Score2,Xscore,Add_Heavy,Add_MW,Add_HA,Add_HD,Add_Charge,Add_RT,Add_Xlogp,FP2"
                #  0     1     2     3      4   5  6   7   8   9    10 11  12    13   14   15  16  17  18  19      20      21        22   23     24     25           26     27      28
-    #ligbuilder
+    #build_dyscore
     #/ufrc/yaxia.yuan/yaxia.yuan/bear/pwwp1/ligand/bb_1028.mol2 Protein_1 Est 2.84 AEst 1.19 Score 5.18 AdjScore 5.30 AveScore 2.18 Stable 0.55 LogP 0.53 HB 0.00 MT 0.00 HSPC 1.69 VDW -135.50 BUMP 4.62 HM 2.60 RT 0.00 HM/HB 1.46 DeltaHM 1.10 Chemical -160.00 Match -4.33 Heavy    18 Weight   264 InnerVDW -3.68
-    data=loadfile(sys.argv[1]+"/record/ligbuilder.score")
+    data=loadfile(sys.argv[1]+"/record/build_dyscore.score")
     count=0
     for line in data:
         if line=="":
@@ -47,7 +47,7 @@ if __name__ == '__main__':
             result[name]=[name,"0",info[7],info[13],info[15],info[17],info[19],info[21],info[23],info[25],info[27],info[29],info[37],info[39],"NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA","NA"]
 
         count+=1
-    print "Lig count",count
+    print "DS count",count
 
     #vina
     data=loadfile(sys.argv[1]+"/record/vina.dat")

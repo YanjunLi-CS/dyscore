@@ -317,7 +317,7 @@ else    #detect mode
     echo "DETECT_MODE  0" >> $output/cavity.input 
     echo "--> Automatically binding site detection would take a while, please be patient..."
 fi
-cd process/LigBuilderV3/build
+cd process/build_dyscore/build
 ./cavity $output_abs/cavity.input >/dev/null 2>&1
 cd $path
 
@@ -382,9 +382,9 @@ cat ${output}/$listname | parallel --tag "process/xscore/xscore_nooutput -score 
 
 #Matching Score and Stability Score
 echo "--> Calculating Matching Score and Stability Score"
-cat ${output}/$listname | parallel -k echo {.} |awk '{print "'${output_abs}'/docked/"$1".mol2"}' >${output}/record/ligbuilder.list 2>/dev/null
+cat ${output}/$listname | parallel -k echo {.} |awk '{print "'${output_abs}'/docked/"$1".mol2"}' >${output}/record/build_dyscore.list 2>/dev/null
 cat process/build_template.input | sed '{s@OUTPUT_DIRECTORY@'$output_abs'@g}' >${output}/build.input 
-cd process/LigBuilderV3/build
+cd process/build_dyscore/build
 ./build_dyscore -Score ${output_abs}/build.input >/dev/null 2>&1
 cd $path
 

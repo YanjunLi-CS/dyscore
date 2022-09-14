@@ -1,9 +1,0 @@
-#----------------------------------------------------------
-#   Synthesieze
-#   --Use small custom prime to control memory consume
-#     use big prime to accelerate retro-synthesize
-#   --Prime list:104395301(800MB memory),86028157,67867979,
-#   49979693(400MB),32452867(300MB), 15485867(150MB, at least)
-#----------------------------------------------------------
-[Synthesize]CUSTOM_PRIME		104395301
-[Synthesize]MAX_AVERAGE_DEEP		2.00
