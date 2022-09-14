@@ -1,4 +1,4 @@
-Description of input CSV file generated from docked structure, as well as the output data from DyScore
+Description of input CSV file generated from docked structure, as well as the output data from DyScore and DyScore-MF
 
 **Due to the large sizes, the input and prediction files of the DUD-E, DEKIOS, LIT-PCBA dataset are store in a [Google Drive Folder](https://drive.google.com/drive/folders/1gVRrqpbNRd1_GuPjntVWhStcD8JgWEJn)**
 
