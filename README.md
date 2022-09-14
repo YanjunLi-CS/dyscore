@@ -92,6 +92,18 @@ they will receive the argument error.
 Although DyScore is designed for post-analysis for results from virtual screening, we also provide the molecular docking option, by default it is set as `True`. In this case, DyScore will automatically perform 3D conformation generation, protonation refinment, and molecular docking for input molecules. 
 If the input molecules are already docked to the protein binding site by user, just pass the argument `--no_dock` to disable the automatically docking. This will save a lot of time.
 
+For example,
+```
+python docker/run_docker.py \ 
+    --rec_file ./example/3p0g_protein.pdb \
+    --lig_dir ./example/ligand_docked \
+    --ref_file ./example/3p0g_ligand.mol2 \
+    --out_dir ./example_output \
+    --no_dock \
+    --weight_dir <DOWNLOAD_DIR>
+```
+
+
 ## Running DyScore-MF
 We also provide the fingerprint based version of DyScore, named DyScore-MF. The DyScore-MF could be activate by pass the argument `--mf`
 ```
@@ -118,9 +130,9 @@ The outputs will be saved in the directory provided via the `--out_dir` argument
 Example output of example_output/predicted.csv
 ```
 sampleID,prediction
-example2,0.14331836998462677
-example3,0.011925183236598969
-example1,0.006415208335965872
+example2,0.5071912407875061
+example3,0.011963260360062122
+example1,0.0024658674374222755
 ```
 So compound example2 would be the best and compound example1 would be the worst.
 
