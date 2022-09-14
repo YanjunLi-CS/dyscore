@@ -1,0 +1,361 @@
+This is an atom type definitions file from 'molecule_GN.cpp'
+
+<COMMENT>
+--> Everything in the COMMENT sections will NOT be read by the program (it's just comments).
+--> In the HEADER section the 'internal_set_type' and the 'total' value is mandatory
+    and should NEVER be changed by the user!
+--> The FLAGS section and the DEF section are the places where you can make your changes.
+--> Each line of the DEF sections that starts with a '*' is one definition. The string following the '*'
+    is the internal atom type. The next string seperated by a whitespace (or more) represents
+    the type the internal type will be set to for your purpose. The rest of the line will
+    be ignored (so you can make additional comments).
+
+--> A short explanation of the flags from the FLAGS section:
+    (Changes in the following explanations have no effect. Make your changes in the FLAGS section!)
+---------------------------------------------------
+Please use '0' for false and '1' for true. If you do not want to override values given
+in a function call to MOLECULE::get_atom_typing, please use '-1'
+
+protonate_acids 0     = acids with unknown protonation state will be typed charged
+                        (if they are protonated in the input molecule, they keep uncharged)
+protonate_guanidin 1  = guanidino groups will be typed protonated (charged)
+protonate_amidin 1    = amidino groups will be protonated (charged)
+protonate_amine -1    = protonation state for amines is used as given by the
+                        funtion call to get_atom_typing (e.g. if you specified
+                        protonation states in fconv using '--p' the specified
+                        value for amines will be used (while 0 or 1 would
+                        override your fconv settings).protonate_phosphate 0 = HxPOy will be typed charged
+protonate_sulfate 0   = HxSOy and SO2NH will be typed charged
+set_bonds 1           = bond types will be assigned
+max_ring_members 10   = A ring with more than this number of members will not be considered a ring
+
+--> A short explanation of the internal atom types: 
+---------------------------------------------------
+--> All elements having no type listed in the DEF section will be typed by the element name.
+--> The order of atom types also represents the priority if there is more than one
+    type possible (e.g. a guanidino N that is also bonded to a carbonyl group will be
+    set to a N.am type, because this type has a higher priority than N.gu types).
+--> Heteroaromatics with unknown protonation state will be typed in their neutral form.
+--> Enoles without explicitly set hydrogens will be typed as ketones.
+--> Currently there are: (here comes just the explanation, NOT the definition)
+H.ac   = acidic H (bonded to O.3ac, N.im, N.sam or N.ohac)
+H.onh  = amide NH
+H.n    = bonded to other nitrogens
+H.o    = bonded to other oxygens
+H.0    = all other hydrogens
+
+C.ar6p = sp2 carbon with a positive charged resonance structure in a protonated 6-membered heteroaromatic ring
+C.ar6x = sp2 carbon in a 6-membered heteroaromatic ring
+C.ar6  = sp2 carbon in a benzene ring
+C.arp  = sp2 carbon with a positive charged resonance structure in other protonated heteroaromatic rings
+C.arx  = sp2 carbon in other heteroaromatics
+C.ar   = sp2 carbon in other aromatics
+C.2r3o = carbonyl carbon in cyclopropanone or cyclopropenone
+C.2r3x = sp2 carbon in heterocyclic 3-membered rings
+C.2r3  = sp2 carbon in 3-membered rings
+C.3r3x = sp3 carbon in heterocyclic 3-membered rings
+C.3r3  = sp3 carbon in 3-membered rings
+C.1n   = sp carbon in cyano groups
+C.1p   = sp carbon with one heavy atom bonded
+C.1s   = sp carbon with two heavy atoms bonded
+C.co2h = sp2 carbon in explicitly protonated COOH groups
+C.co2  = sp2 carbon in COO-  groups (also set if protonation state is unknown)
+C.es   = carbonyl carbon in ester groups or anhydrides
+C.hal  = carbonyl carbon in acidhalogenides
+C.am   = carbonyl carbon in amides
+C.o    = other carbonyl carbon
+C.s    = thionyl carbon
+C.gu   = sp2 carbon in unprotonated guanidino groups
+C.guh  = sp2 carbon in protonated guanidino groups (also set if protonation state is unknown)
+C.mi   = sp2 carbon in unprotonated amidino groups
+C.mih  = sp2 carbon in protonated amidino groups (also set if protonation state is unknown)
+C.n    = sp2 carbon in imines
+C.2p   = other sp2 carbon with one heavy atom bonded
+C.2s   = other sp2 carbon with two heavy atoms bonded
+C.2t   = other sp2 carbon with 3 heavy atoms bonded
+C.et   = sp3 carbon in ethers
+C.ohp  = sp3 carbon in primary alcoholes
+C.ohs  = sp3 carbon in secondary alcoholes
+C.oht  = sp3 carbon in tertiary alcoholes
+C.3n   = other sp3 carbon bonded to nitrogen
+C.3p   = other sp3 carbon with one heavy atom bonded
+C.3s   = other sp3 carbon with two heavy atoms bonded
+C.3t   = other sp3 carbon with 3 heavy atoms bonded
+C.3q   = other sp3 carbon with 4 heavy atoms bonded
+
+N.ar6p = positive charged nitrogen in 6-membered aromatics (e.g. pyridinium or NAD+)
+N.ar6  = sp2 nitrogen in 6-membered aromatics
+N.arp  = sp2 nitrogen in protonated aromatics (e.g both nitrogens in protonated imidazole
+N.ar2  = sp2 nitrogen in aromatics with two bonded atoms (corresponding to sybyl type N.2)
+N.ar3  = sp2 nitrogen in aromatics with 3 heavy atoms (corresponding to sybyl type N.pl3)
+N.ar3h = sp2 nitrogen in aromatics with 2 heavy atoms and one hydrogen (corresponding to sybyl type N.pl3)
+N.r3   = sp3 in aziridine or azirene rings
+N.az   = middle nitrogen in azides
+N.1    = other sp nitrogen
+N.o2   = in nitro groups
+N.ohac = in hydroxamic acids
+N.oh   = in hydroxylamines
+N.ims  = imide nitrogen with two heavy atoms bonded
+N.imt  = imide nitrogen with 3 heavy atoms bonded
+N.amp  = carbon- or thionamide with one heavy atom bonded
+N.ams  = carbon- or thionamide with two heavy atoms bonded
+N.amt  = carbon- or thionamide with 3 heavy atoms bonded
+N.samp = sulfonamide with one heavy atom bonded
+N.sams = sulfonamide with two heavy atoms bonded
+N.samt = sulfonamide with 3 heavy atoms bonded
+N.gu1  = NH in unprotonated guanidino group (only if explicitly protonated)
+N.gu2  = NH2 in unprotonated guanidino group (only if explicitly protonated)
+N.guh  = nitrogen in protonated guanidino group (also set if protonation state is unknown)
+N.mi1  = NH in unprotonated amidino group (only if explicitly protonated)
+N.mi2  = NH2 in unprotonated amidino group (only if explicitly protonated)
+N.mih  = nitrogen in protonated amidino group (also set if protonation state is unknown)
+N.aap  = primary aromatic amine (hybridization can't be determined exactly)
+N.aas2 = sp2 hybridized secondary aromatic amine
+N.aas3 = sp3 hybridized secondary aromatic amine
+N.aat2 = sp2 hybridized tertiary aromatic amine
+N.aat3 = sp3 hybridized tertiary aromatic amine
+N.2n   = sp2 nitrogen bonded to another nitrogen
+N.2p   = other sp2 nitrogen with one heavy atom
+N.2s   = other sp2 nitrogen with two heavy atoms
+N.3n   = sp3 nitrogen bonded to another nitrogen
+N.3p   = sp3 nitrogen with one heavy atom bonded
+N.3s   = sp3 nitrogen with two heavy atoms bonded
+N.3t   = sp3 nitrogen with 3 heavy atoms bonded
+N.4q   = sp3 nitrogen with 4 bonded heavy atoms
+N.4h   = sp3 nitrogen with 4 bonded atoms (at least 1 hydrogen)
+
+O.ar   = aromatic oxygen
+O.r3   = in oxiran ring
+O.h2o  = water oxygen
+O.n    = oxygen in nitro groups
+O.noh  = sp3 oxygen in hydroxylamine or hydroxamic acid
+O.2co2 = sp2 oxygen in COOH (sp2 bonded to C.co2h)
+O.2es  = sp2 oxygen in esters or anhydrids
+O.2hal = sp2 oxygen in acidhalogenides
+O.am   = in carbonamides
+O.co2  = in COO-  or CSO-
+O.2po  = sp2 oxygen in P=O (non deprotonated groups)
+O.2so  = sp2 oxygen in S=O (non deprotonated groups)
+O.2p   = sp2 oxygen in OPO3H- or PO3H- or POO-
+O.2s   = sp2 oxygen in OSO3- or SO3- or POO- or deprotonated sulfonamides
+O.3po  = sp3 oxygen with 2 heavy atoms bonded to at least one phosphor
+O.3so  = sp3 oxygen with 2 heavy atoms bonded to at least one sulfur
+O.carb = in other carbonyl groups
+O.o    = in peroxo groups
+O.3ac  = OH in COOH, CSOH, POOHOH, POOH or SOOOH
+O.ph   = phenolic hydroxyl group
+O.3oh  = hydroxyl group
+O.3es  = sp3 oxygen in esters or anhydrids
+O.3eta = aromatic ether
+O.3et  = aliphatic ether
+
+S.ar   = aromatic sulfur
+S.r3   = in thiiran ring
+S.thi  = thionyl group
+S.o    = in SO
+S.o2h  = in protonated sulfonamide or other SO2
+S.o3h  = in SO3
+S.o4h  = in OSO3
+S.o2   = in SO2 or deprotonated sulfonamides (or unknown protonation state)
+S.o3   = in SO3- (or unknown protonation state)
+S.o4   = in OSO3- (or unknown protonation state)
+S.2    = in CSO-  COS-  or other sp2
+S.sh   = in SH groups
+S.s    = in S-S bonds
+S.3    = other sp3 sulfur
+
+P.r3   = in phosphiran rings
+P.o    = in PO
+P.o2h  = in not deprotonated PO2 groups
+P.o3h  = in not deprotonated PO3 groups
+P.o4h  = in not deprotonated PO4 groups
+P.o2   = in deprotonated PO2 groups (or unknown protonation state)
+P.o3   = in deprotonated PO3 groups (or unknown protonation state)
+P.o4   = in deprotonated PO4 groups (or unknown protonation state)
+P.3    = other sp3
+F.0    = bonded fluor
+F.i    = fluor ion
+Cl.0   = bonded chlorine
+Cl.i   = chlorine ion
+Br.0   = bonded bromine
+Br.i   = bromine ion
+I.0    = bonded iod
+I.i    = iod ion
+------------------------------------------------------------------------------------------------------------- 
+If you need more differentiation, another priority order or if you have just any other
+suggestions, please contact me:
+ Gerd Neudert
+ neudert@staff.uni-marburg.de
+
+<HEADER>
+internal_set_type 150211_1
+total 158
+
+<FLAGS>
+protonate_sulfate 0
+protonate_phosphate 0
+protonate_amine 1
+protonate_amidin 1
+set_bonds -1
+max_ring_members 10
+protonate_acids 0
+protonate_guanidin 1
+<DEF>
+* H.ac    X 
+* H.onh   X 
+* H.n     X 
+* H.o     X 
+* H.0     X 
+* C.ar6p  C.arp 
+* C.ar6x  C.ar6x 
+* C.ar6   C.ar6 
+* C.arp   C.arp 
+* C.arx   C.ar 
+* C.ar    C.ar 
+* C.2r3o  C.o 
+* C.2r3x  C.2 
+* C.3r3x  C.3 
+* C.2r3   C.2 
+* C.3r3   C.3 
+* C.1n    C.1 
+* C.1p    C.1 
+* C.1s    C.1 
+* C.co2h  C.co2h 
+* C.co2   C.co2 
+* C.es    C.o 
+* C.hal   C.o 
+* C.am    C.am 
+* C.o     C.o 
+* C.s     C.o 
+* C.gu    C.guh 
+* C.guh   C.guh 
+* C.mi    C.guh 
+* C.mih   C.guh 
+* C.n     C.2 
+* C.2p    C.2 
+* C.2s    C.2 
+* C.2t    C.2 
+* C.et    C.3 
+* C.ohp   C.3s 
+* C.ohs   C.3t 
+* C.oht   C.3q 
+* C.3n    C.3 
+* C.3p    C.3p 
+* C.3s    C.3s 
+* C.3t    C.3t 
+* C.3q    C.3q 
+* N.ar6p  N.arp 
+* N.ar6   N.ar6 
+* N.arp   N.arp 
+* N.ar2   N.ar2 
+* N.ar3   N.ar3 
+* N.ar3h  N.ar3h 
+* N.r3    N.3s 
+* N.az    N.1 
+* N.1     N.1 
+* N.o2    N.o2 
+* N.ohac  N.ams 
+* N.oh    N.oh 
+* N.ims   N.ams 
+* N.imt   N.amt 
+* N.amp   N.amp 
+* N.ams   N.ams 
+* N.amt   N.amt 
+* N.samp  N.sams 
+* N.sams  N.sams 
+* N.samt  N.amt 
+* N.gu1   N.guh 
+* N.gu2   N.guh 
+* N.guh   N.guh 
+* N.mi1   N.guh 
+* N.mi2   N.guh 
+* N.mih   N.guh 
+* N.aap   N.aa 
+* N.aas2  N.aa 
+* N.aas3  N.aa 
+* N.aat2  N.aat 
+* N.aat3  N.aat 
+* N.2n    N.2n 
+* N.2p    N.2p 
+* N.2s    N.2s 
+* N.3n    N.3n 
+* N.3p    N.3p 
+* N.3s    N.3s 
+* N.3t    N.3t 
+* N.4q    N.4q 
+* N.4h    N.4h 
+* O.ar    O.3et 
+* O.r3    O.3et 
+* O.h2o   O.h2o 
+* O.n     O.n 
+* O.noh   O.3ac 
+* O.2co2  O.2co2 
+* O.2es   O.carb 
+* O.2hal  O.carb 
+* O.am    O.carb 
+* O.co2   O.co2 
+* O.2po   O.carb 
+* O.2so   O.carb 
+* O.2p    O.co2 
+* O.2s    O.co2 
+* O.3po   O.3et 
+* O.3so   O.3et 
+* O.carb  O.carb 
+* O.o     O.o 
+* O.3ac   O.3ac 
+* O.ph    O.3oh 
+* O.3oh   O.3oh 
+* O.3es   O.3es 
+* O.3eta  O.3et 
+* O.3et   O.3et 
+* S.ar    S.3 
+* S.r3    S.3 
+* S.thi   S.2 
+* S.o     S.o 
+* S.o2h   S.o 
+* S.o3h   S.o 
+* S.o4h   S.o 
+* S.o2    S.o 
+* S.o3    S.o 
+* S.o4    S.o 
+* S.2     S.2 
+* S.sh    S.sh 
+* S.s     S.3 
+* S.3     S.3 
+* P.r3    P.3 
+* P.o     P.o 
+* P.o2h   P.o 
+* P.o3h   P.o 
+* P.o4h   P.o 
+* P.o2    P.o 
+* P.o3    P.o 
+* P.o4    P.o 
+* P.3     P.3 
+* F.0     F.0 
+* Cl.0    Cl.0 
+* Br.0    Br.0 
+* I.0     I.0 
+* F.i     F.i 
+* Cl.i    Cl.i 
+* Br.i    Br.i 
+* I.i     I.i 
+* Li      X 
+* Na      X 
+* Mg      Mg 
+* Al      X 
+* Si      X 
+* K       X 
+* Ca      Ca 
+* Cr.th   X 
+* Cr.oh   X 
+* Mn      X 
+* Fe      Fe 
+* Co      Co 
+* Cu      Cu 
+* Zn      Zn 
+* Se      X 
+* Mo      X 
+* Sn      X 
+* Ni      Ni 
+* Hg      X 
+* B       B 

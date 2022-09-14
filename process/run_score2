@@ -1,0 +1,2 @@
+#!/bin/bash
+ls $1/ligand/ |sed '{s/.pdbqt//}' | parallel -j $2 --tag "score2/score2 $1/receptor_addh_xscore.pdb $1/docked/{}.mol2" |grep Predicted |awk '{print $1,$5}'  >$1/score_score2.record

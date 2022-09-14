@@ -1,0 +1,2 @@
+#!/bin/bash
+ls $1/ligand/ |sed '{s/.pdbqt//}' | parallel -j $2 --tag "./DSXscore/dsxscore $1/receptor_addh.mol2 $1/docked/{}.mol2 $1/{}.DSXtmp" |grep none |awk '{print $1,$3,$4}'  >$1/score_DSXscore.record

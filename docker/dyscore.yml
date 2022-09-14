@@ -1,0 +1,5 @@
+name: dyscore
+channels:
+  - conda-forge
+dependencies:
+  - docker-py=5.0.3

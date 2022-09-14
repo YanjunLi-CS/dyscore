@@ -1,0 +1,431 @@
+#!/bin/bash
+usage(){
+    echo "Options:"
+    echo ""
+    echo "--rec receptor.pdb : Path of the target protein file [Required]"
+    echo "--lig directory_of_ligands : Path of the directory of ligands [Required]"
+    echo "--out directory_of_output :Path of the directory of outputs [Required]"
+    echo ""
+    echo "Binding sites definition, require one of --ref, --box, or --detect"
+    echo "--ref ligand.mol2 : Path of the docked or crystallized ligand for target protein"
+    echo "--box min_x,min_y,min_z,max_x,max_y,max_z : Coordination of the box for ligand binding site"
+    echo "--detect true/false : Automatically detect the most possible ligand binding site (Not recommend)"
+    echo ""
+    echo "Misc:"
+    echo "--dock true/false: Dock the input molecules (Default: true)"
+    echo "--mf true/false: Use DyScore-MF model (Default: false)"
+    echo "--weight directory_of_weight: Path of the directory of weight files [Required]"
+    echo "--help : Help message"
+    exit 1
+}
+
+help_flag=`echo $@ |grep -w "\-\-help" |wc -l`
+detect_flag="false"
+MF_flag="false"
+dock_flag="true"
+
+if [ $help_flag -eq 1 ] || [ $# -lt 1 ]
+then
+    usage
+fi
+
+
+ARGUMENT_LIST=(
+  "rec"
+  "ref"
+  "lig"
+  "out"
+  "box"
+  "detect"
+  "dock"
+  "mf"
+  "weight"
+)
+
+# read arguments
+if ! opts=$(getopt \
+  --longoptions "$(printf "%s:," "${ARGUMENT_LIST[@]}")" \
+  --name "$(basename "$0")" \
+  --options "" \
+  -- "$@"
+); 
+then
+    usage
+fi
+
+eval set --$opts
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --rec)
+      pdbname=$2
+      shift 2
+      ;;
+
+    --ref)
+      refername=$2
+      shift 2
+      ;;
+
+    --lig)
+      ligand=$2
+      shift 2
+      ;;
+    
+   --out)
+      output=$2
+      shift 2
+      ;;
+  
+  --box)
+      box=$2
+      shift 2
+      ;;
+  
+  --detect)
+      detect_flag=$2
+      shift 2
+      ;;
+  
+  --mf)
+      MF_flag=$2
+      shift 2
+      ;;
+  
+  --weight)
+      weight=$2
+      shift 2
+      ;;
+  
+  --dock)
+     dock_flag=$2
+      shift 2
+      ;;
+  *) 
+    break
+      ;;
+  esac
+done
+
+#parameter checking
+if [ -z $pdbname ]
+then
+    echo "Need receotpr file --rec"
+    exit 0
+elif [ ! -e $pdbname ]
+then
+    echo "Invalid receptor file $pdbname"
+    exit 0
+else
+    echo "--> Receptor File $pdbname"
+fi
+if [ -z $ligand ]
+then
+    echo "Need ligand directory --lig"
+    exit 0
+elif [ ! -e $ligand ]
+then
+    echo "Invalid ligand directory $ligand"
+    exit 0
+else
+    echo "--> Ligand Directory $ligand"
+fi
+if [ -z $output ]
+then
+    echo "Invalid output directory $output"
+    exit 0
+else
+    echo "--> Output Directory $output"
+    if  [ -e $output ]
+    then
+        echo "*Warning: The output directory $output is already existed. Files in the directory will be overwritten."
+    fi
+fi
+if [ -z $weight ]
+then
+    echo "Invalid weight directory $weight"
+    exit 0
+else
+    echo "--> Weight Directory $weight"
+    if  [ ! -e $weight ]
+    then
+        echo "Error: The weight directory $weight is not exists"
+        exit 0
+    fi
+fi
+if [ ! -z $refername ]
+then
+    if [ ! -e $refername ]
+    then
+        echo "Invalid refer molecule file $refername"
+        exit 0
+    fi
+    echo "--> Binding site : Defined by Input Molecule $refername"
+elif [ ! -z $box ] 
+then
+    echo "--> Binding site : Defined by Input Box Coordination $box"
+    #check box
+    box_split=`echo $box |tr "," " "`
+    box_check=`echo $box_split |awk '{if(NF!=6)print 0;else {if($4-$1<6||$5-$2<6||$6-$3<6)print 0;else print 1;}}'`
+    if [ $box_check -eq 0 ]
+    then
+        echo "Invalid Box information $box"
+        exit 0
+
+    fi
+elif [ $detect_flag == "true" ] 
+then
+    echo "--> Binding site : Automatically detection"
+else
+    echo "Need defination of binding site with either --ref, --box, or --detect"
+    exit 0
+fi
+if [ ! $dock_flag == "false" ] && [ ! $dock_flag == "true" ]
+then
+    echo "Invaild dock option $dock_flag"
+    exit 0
+else
+    echo "--> Dock : $dock_flag"
+fi
+if [ ! $MF_flag == "false" ] && [ ! $MF_flag == "true" ]
+then
+    echo "Invaild MF option $MF_flag"
+    exit 0
+else
+    echo "--> MF : $MF_flag"
+fi
+if [ ! $detect_flag == "false" ] && [ ! $detect_flag == "true" ]
+then
+    echo "Invaild detect option $detect_flag"
+    exit 0
+fi
+
+##openbabel test
+source activate dyscore3 >/dev/null 2>&1
+babel_check=`babel -v 2>/dev/null|grep "Open Babel 2"`
+if [ ! -z "$babel_check" ]
+then
+    echo "--> Babel Check: $babel_check"
+else
+    echo "Error: Could not find openbabel, please install it."
+    echo "Please make sure 'babel' command could be find in PATH"
+    exit 0
+fi
+
+#mgl test
+source activate dyscore2  >/dev/null 2>&1 
+pythonshpath=`which pythonsh`
+mglroot=`echo $pythonshpath |sed '{s/bin\/pythonsh//}'`
+mgl_check=`$pythonshpath $mglroot/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py |grep "Description of command"`
+if [ ! -z "$mgl_check" ]
+then
+    echo "--> MGL Check: Pass"
+else
+    echo "Error: Could not find MGLtools, please install it."
+    echo "Please make sure 'pythonsh' command could be find in PATH"
+    exit 0
+fi
+
+if [  -e ~/.parallel/will-cite ]
+then
+    echo "--> GNUParallel Check: Pass"
+else
+    echo "Error: Please install gnu parallel, and run parallel --citation first"
+    exit 0
+fi
+
+echo ""
+echo "--> Start"
+echo ""
+
+
+path=`pwd`
+mkdir -p $output 2>/dev/null
+output_abs=`readlink -f $output`
+weight_abs=`readlink -f $weight`
+
+
+listname=ligand.list
+ls $ligand/  >$output/$listname  2>/dev/null
+
+count=`wc -l $output/$listname  2>/dev/null|awk '{print $1}'`
+if [ $count -lt 1 ]
+then
+    echo "No avaiable molecules files in $ligand"
+    exit 0
+fi
+echo "--> Total $count molecules in $ligand"
+
+
+#prepare dir
+mkdir $output/ 2>/dev/null
+mkdir $output/tmp 2>/dev/null
+mkdir $output/docked  2>/dev/null
+mkdir $output/cavity  2>/dev/null
+mkdir $output/mol2  2>/dev/null
+mkdir $output/ph7  2>/dev/null
+mkdir $output/pdbqt  2>/dev/null
+mkdir $output/log  2>/dev/null
+mkdir $output/padel  2>/dev/null
+mkdir $output/record  2>/dev/null
+cp $pdbname $output/receptor_addh.pdb  2>/dev/null
+cp $pdbname $output/cavity/receptor.pdb  2>/dev/null
+
+
+#prepare inputfiles
+echo "--> Preparing receptor files"
+source activate dyscore3  >/dev/null 2>&1
+babel -h $pdbname  $output/receptor_addh.mol2 >/dev/null 2>&1
+ulimit -s unlimited  >/dev/null 2>&1
+export XSCORE_PARAMETER=$path/process/xscore/parameter
+export DSX_POTENTIALS=$path/process/DSXscore/pdb_pot_0511
+process/xscore/xscore  -fixpdb $output/receptor_addh.pdb $output/receptor_addh_xscore.pdb  >/dev/null 2>&1 
+
+#mgltools
+source activate dyscore2  >/dev/null 2>&1 
+pythonshpath=`which pythonsh`
+mglroot=`echo $pythonshpath |sed '{s/bin\/pythonsh//}'`
+$pythonshpath $mglroot/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py -r $pdbname -o $output/receptor.pdbqt -A bonds_hydrogens -U nphs_lps_waters_deleteAltB >/dev/null 2>&1
+#fixmetal
+sed -i '{s/0\.000 Ca$/2.000 Ca/}' $output/receptor.pdbqt
+sed -i '{s/0\.000 Mg$/2.000 Mg/}' $output/receptor.pdbqt
+sed -i '{s/0\.000 Mn$/2.000 Mn/}' $output/receptor.pdbqt
+sed -i '{s/0\.000 Zn$/2.000 Zn/}' $output/receptor.pdbqt
+sed -i '{s/0\.000 Na$/1.000 Na/}' $output/receptor.pdbqt
+sed -i '{s/0\.000 K/1.000 K/}' $output/receptor.pdbqt
+echo "receptor=$output/receptor.pdbqt" >$output/vina.conf
+
+
+#binding site analysis
+if [ ! -z $refername ]
+then
+    sed -n "/ATOM/,/BOND/p" $refername |awk '{if($1+1>1)print $0}'|awk 'BEGIN {minx=10000;miny=10000;minz=10000;maxx=-10000;maxy=-10000;maxz=-10000};{x+=$3;y+=$4;z+=$5;if($3>maxx)maxx=$3;if($3<minx)minx=$3;if($4>maxy)maxy=$4;if($4<miny)miny=$4;if($5>maxz)maxz=$5;if($5<minz)minz=$5;}; END{print "Center: x= "x/NR"\ty= "y/NR"\tz= "z/NR;print "Dim: x= "maxx-minx"\ty= "maxy-miny"\tz= "maxz-minz;}' |awk '{if(i==0){x=$3;y=$5;z=$7;i++}else {dx=$3;dy=$5;dz=$7}} END {print "center_x="x"\ncenter_y="y"\ncenter_z="z"\nsize_x="int(dx+15)"\nsize_y="int(dy+15)"\nsize_z="int(dz+15)"\nnum_modes=1\nenergy_range=10\ncpu=1"}' >>$output/vina.conf
+#echo "===============mglroot is done====================="
+elif [ ! -z $box ]
+then
+    echo $box |tr "," " " |awk '{print "Center: x= "($1+$4)/2"\ty= "($2+$5)/2"\tz= "($3+$6)/2;print "Dim: x= "$4-$1"\ty= "$5-$2"\tz= "$6-$3;}' |awk '{if(i==0){x=$3;y=$5;z=$7;i++}else {dx=$3;dy=$5;dz=$7}} END {print "center_x="x"\ncenter_y="y"\ncenter_z="z"\nsize_x="int(dx)"\nsize_y="int(dy)"\nsize_z="int(dz)"\nnum_modes=1\nenergy_range=10\ncpu=1"}' >>$output/vina.conf
+fi
+
+#prepare list
+echo "--> Binding Site Analysis"
+sed '{s@OUTPUT_DIRECTORY@'$output_abs'@g}' process/cavity_template.input >$output/cavity.input
+if [ ! -z $refername ] || [ ! -z $box ] 
+then
+cat $output/vina.conf | tr "=" " "| awk 'BEGIN {boundary=0} {if($1=="center_x")center_x=$2; if($1=="center_y")center_y=$2; if($1=="center_z")center_z=$2; if($1=="size_x")size_x=$2; if($1=="size_y")size_y=$2;  if($1=="size_z")size_z=$2; } END{ print "MIN_X\t"center_x-size_x/2-boundary;print "MAX_X\t"center_x+size_x/2+boundary;print "MIN_Y\t"center_y-size_y/2-boundary;print "MAX_Y\t"center_y+size_y/2+boundary;print "MIN_Z\t"center_z-size_z/2-boundary;print "MAX_Z\t"center_z+size_z/2+boundary;}' >> $output/cavity.input
+else    #detect mode
+    echo "DETECT_MODE  0" >> $output/cavity.input 
+    echo "--> Automatically binding site detection would take a while, please be patient..."
+fi
+cd process/LigBuilderV3/build
+./cavity $output_abs/cavity.input >/dev/null 2>&1
+cd $path
+
+if [ ! -e $output_abs/cavity/receptor_surface_1.pdb ]
+then
+    echo "Error: Binding site analysis failed."
+    echo "* for --ref options, please make sure the ligand is correctly posed in the binding site"
+    echo "* for --box options, please make sure the given coordination is correct"
+    echo "* for --detect options, please check the protein structure, or try to use --ref or --box instead"
+    exit 0
+fi
+
+if [ -z $refername ] && [  -z $box ]
+then
+    grep -A 5 "REMARK   3 Area :" example_output/cavity/receptor_surface_1.pdb  |awk '{i=i+1;if(i==3||i==5)printf("%s %s %s ",$3,$4,$5)}' awk '{print "Center: x= "($1+$4)/2"\ty= "($2+$5)/2"\tz= "($3+$6)/2;print "Dim: x= "$4-$1"\ty= "$5-$2"\tz= "$6-$3;}' |awk '{if(i==0){x=$3;y=$5;z=$7;i++}else {dx=$3;dy=$5;dz=$7}} END {print "center_x="x"\ncenter_y="y"\ncenter_z="z"\nsize_x="int(dx)"\nsize_y="int(dy)"\nsize_z="int(dz)"\nnum_modes=1\nenergy_range=10\ncpu=1"}' >>$output/vina.conf
+fi
+
+if [ $dock_flag == "false" ]
+then
+    echo "score_only" >>${output}/vina.conf
+fi
+
+#convert
+echo "--> Preparing ligands files"
+source activate dyscore3  >/dev/null 2>&1
+if [ $dock_flag == "true" ]
+then
+    cat ${output}/$listname | parallel "babel --gen3D ${ligand}/{} ${output}/mol2/{.}.mol2" >/dev/null 2>&1
+else
+    cat ${output}/$listname | parallel "babel ${ligand}/{} ${output}/mol2/{.}.mol2" >/dev/null 2>&1
+fi
+cat ${output}/$listname | parallel "babel -p 7 ${output}/mol2/{.}.mol2 ${output}/ph7/{.}.mol2" >/dev/null 2>&1
+cat ${output}/$listname | parallel "babel  ${output}/ph7/{.}.mol2 ${output}/pdbqt/{.}.pdbqt" >/dev/null 2>&1
+
+if [ $dock_flag == "true" ]
+then
+    echo "--> Docking"
+    #vina
+    cat ${output}/$listname | parallel --progress "process/vina_1.1.2 --config ${output}/vina.conf --ligand ${output}/pdbqt/{.}.pdbqt --out ${output}/docked/{.}.pdbqt  >/dev/null 2>&1" #>/dev/null 2>&1
+else
+    echo "--> Analyze docked file"
+fi
+cat ${output}/$listname | parallel --tag "grep 'VINA RESULT:' ${output}/docked/{.}.pdbqt" >$output/record/vina.dat 2>/dev/null 
+
+
+# convert back
+
+cat ${output}/$listname | parallel "babel -p 7 ${output}/docked/{.}.pdbqt ${output}/docked/{.}.mol2"  >/dev/null 2>&1
+
+
+#run
+source activate dyscore2  >/dev/null 2>&1
+echo "--> Calculating DSXscore" 
+cat ${output}/$listname | parallel --tag "process/DSXscore/dsxscore $output/receptor_addh.mol2 ${output}/docked/{.}.mol2 ${output}/tmp/{.}.DSXtmp" | grep none |awk '{print $1,$3,$4}'  > ${output}/record/DSXscore.dat  2>/dev/null  
+echo "--> Calculating NNscore" 
+cat ${output}/$listname | parallel --tag "pythonsh process/NNscore/NNScore2.01.py -receptor $output/receptor.pdbqt -ligand ${output}/docked/{.}.pdbqt" |grep "Average Score:" |grep "\.smi\|\.sdf\|\.mol2\|\.pdb" |awk '{print $1,$4}' > ${output}/record/NNscore.dat  2>/dev/null 
+echo "--> Calculating RF-Score3" 
+cat ${output}/$listname | parallel --tag "process/rf-score3/rf-score process/rf-score3/pdbbind-2015-refined.rf $output/receptor.pdbqt ${output}/docked/{.}.pdbqt"  |grep "\.smi\|\.sdf\|\.mol2\|\.pdb" >${output}/record/rf-score3.dat  2>/dev/null 
+echo "--> Calculating Score2" 
+cat ${output}/$listname | parallel --tag "process/score2/score2 $output/receptor_addh.pdb ${output}/docked/{.}.mol2" |grep Predicted |awk '{print $1,$5}'  >${output}/record/score2.dat  2>/dev/null 
+echo "--> Calculating Xscore" 
+cat ${output}/$listname | parallel --tag "process/xscore/xscore_nooutput -score $output/receptor_addh_xscore.pdb ${output}/docked/{.}.mol2" |grep "Predicted average" |awk '{print $1,$6}'  >${output}/record/xscore.dat  2>/dev/null 
+
+
+#Matching Score and Stability Score
+echo "--> Calculating Matching Score and Stability Score"
+cat ${output}/$listname | parallel -k echo {.} |awk '{print "'${output_abs}'/docked/"$1".mol2"}' >${output}/record/ligbuilder.list 2>/dev/null
+cat process/build_template.input | sed '{s@OUTPUT_DIRECTORY@'$output_abs'@g}' >${output}/build.input 
+cd process/LigBuilderV3/build
+./build_dyscore -Score ${output_abs}/build.input >/dev/null 2>&1
+cd $path
+
+#Calculate MF part
+#charge
+if [ $MF_flag == "true" ]
+then
+    source activate dyscore3  >/dev/null 2>&1
+    echo "--> Enable MF calculation"
+    echo "--> Calculating Formal Charge"
+    cat ${output}/$listname | parallel --tag "process/getcharge_mol2 ${output}/ph7/{.}.mol2"  >${output}/record/charge.dat  2>/dev/null 
+    echo "--> Calculating Molecular Property"
+    cat ${output}/$listname | parallel --tag "process/padel ${output}/ph7/{.}.mol2 ${output}/padel/{.}.csv"  >${output}/record/padel.dat  2>/dev/null 
+    echo "--> Calculating Fingerprint"
+    cat ${output}/$listname | parallel --tag "process/getFP2 ${output}/ph7/{.}.mol2"  >${output}/record/FP2.dat  2>/dev/null 
+fi
+
+echo "--> Collect features"
+pythonsh process/collect_dup.py $output $MF_flag  >/dev/null 2>&1
+
+if [ $MF_flag == "true" ]
+then
+    echo "--> Running MF Model"
+    cp  ${output}/record/collect_mf.csv ${output}/input_mf.csv
+    cd process/dyscore_model_mf
+    source activate dyscore3
+#    python -m dyscore_model_mf.predict  -i ${output_abs}/input_mf.csv -o ${output_abs}/predicted_mf.csv -w ${weight_abs}/woMF
+    python pred_ml.py --input_file ${output_abs}/input_mf.csv --output_file ${output_abs}/predicted_mf.csv --weight_dir ${weight_abs}/wMF
+    cd $path
+    echo "Input features: ${output}/input_mf.csv"
+    echo "Output prediction ${output}/predicted_mf.csv"
+else
+    echo "--> Running Non-MF Model"
+    cp  ${output}/record/collect.csv ${output}/input.csv
+    cd process/
+    source activate dyscore3
+    python -m dyscore_model.predict  -i ${output_abs}/input.csv -o ${output_abs}/predicted.csv -w ${weight_abs}/woMF
+    cd $path
+    echo "Input features: ${output}/input.csv"
+    echo "Output prediction ${output}/predicted.csv"
+fi
+
+echo "Done"

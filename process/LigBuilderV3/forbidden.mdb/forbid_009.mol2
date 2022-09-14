@@ -1,0 +1,35 @@
+#	Name:			HN-CO-OH
+#	Creating user name:	arthur
+#	Creation time:		Fri Jan  8 20:47:39 1999
+
+#	Modifying user name:	arthur
+#	Modification time:	Fri Jan  8 20:48:22 1999
+
+@<TRIPOS>MOLECULE
+HN-CO-OH
+    7     6     1     1     0
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 O1         -1.5899    3.4295   -4.0561 O.2       1 <1>         0.0000 
+      2 C2         -1.6577    4.4778   -3.4307 C.2       1 <1>         0.0000 
+      3 N3         -2.6133    5.4100   -3.6351 N.am      1 <1>         0.0000 
+      4 O4         -0.7780    4.7998   -2.4737 O.3       1 <1>         0.0000 
+      5 H1         -2.6331    6.2568   -3.1004 H         1 <1>         0.0000 
+      6 H2         -3.3157    5.2564   -4.3316 H         1 <1>         0.0000 
+      7 H3         -0.1099    4.1359   -2.3387 H         1 <1>         0.0000 
+@<TRIPOS>BOND
+     1    2    1 2    
+     2    2    3 am   
+     3    2    4 1    
+     4    3    5 1    
+     5    3    6 1    
+     6    4    7 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 ****        2 TEMP              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 0 0 0 0 0 0 0 0 0 0 0 0 0

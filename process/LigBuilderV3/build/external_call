@@ -1,0 +1,32 @@
+#!/bin/bash
+#Loading external program for estimating the priority of ligand
+#   
+#Format of output of this script:
+#----------------------------------------------------------------------
+#[DEFINE] Name Order Default Weight-Protein1 Weight-Protein2 ....
+#MoleName1 Value1
+#MoleName2 Value2
+#MoleName3 Value3
+#MoleName4 Value4
+#...
+#----------------------------------------------------------------------
+# --Order: DESCENDING:the higher the better, ASCENDING: reverse
+# --Default: default value if the record is missing
+# --Weight: Weight for ranking for each protein
+# --MoleNmae: MoleName read from the input file(mol2 format)
+# --Value: Value calculated by user's program
+#
+#Example of this script:
+#----------------------------------------------------------------------
+#echo "#External Call" >$2
+#echo "[DEFINE] ADMET ASCENDING 100.0 1.0 1.0" >>$2
+#./ADMET $1 2>/dev/null >>$2
+#echo "[DEFINE] BBB DESCENDING -5.0 1.0 1.0" >>$2
+#./BBB $1 2>/dev/null >>$2
+#----------------------------------------------------------------------
+#In this case, LigBuilder3 will output multiple compounds to $1 (mol2 format)
+#And then call the "./ADMET" file with the input paramter of $1
+#And also call the "./BBB" file with the input paramter of $1
+#Then all the output will be append to $2 which will be read by LigBuilder
+#User could use many external calls if you wish
+#

@@ -1,0 +1,19 @@
+#----------------------------------------------------------
+#   Genetic algorithm parameters
+#   --Single receptor need larger percent of parents
+#     suggest for single receptor:
+#     Exploring:7~12/500/50(GEN/POP/PAR)
+#     Growing:10~15/5000/500(GEN/POP/PAR)
+#     Linking:10~15/1000/100(GEN/POP/PAR)
+#     reduce POP/PAR numbers above for more diversity
+#----------------------------------------------------------
+NUMBER_OF_GENERATION			15
+NUMBER_OF_POPULATION			400
+NUMBER_OF_PARENTS			40
+[Growing]NUMBER_OF_GENERATION		15
+[Growing]NUMBER_OF_POPULATION		3000
+[Growing]NUMBER_OF_PARENTS		300
+[Linking]NUMBER_OF_GENERATION		15
+[Linking]NUMBER_OF_POPULATION		300
+[Linking]NUMBER_OF_PARENTS		30
+[Linking]ELITISM_RATIO			0.20

@@ -1,0 +1,136 @@
+############################################################
+#   Include section
+############################################################
+INCLUDE                                 usersettings.input
+############################################################
+#   Predefine section
+############################################################
+$TASK_NAME$				1db4
+$RESULT_DIR$				result
+############################################################
+#   Design section
+############################################################
+#----------------------------------------------------------
+#   Design Mode
+#   --0:Exploring mode
+#     1:Growing mode
+#     2:Linking mode
+#----------------------------------------------------------
+DESIGN_MODE				0
+#----------------------------------------------------------
+#   Requirments
+#----------------------------------------------------------
+MINIMAL_PKD[]                           5.0
+#----------------------------------------------------------
+#   Binding site information
+#   --Support multiply receptors (Max:10)
+#     Lead to multi-Target / multi-Mode
+#----------------------------------------------------------
+PROTEIN_NUM                             2
+POCKET_ATOM_FILE[1]			receptor/1db4_pocket_1.txt
+POCKET_GRID_FILE[1]			receptor/1db4_grid_1.txt
+PROTEIN_FILE[1] 			receptor/1db4.pdb
+MULTI_WEIGHT[1]                         1.0
+POCKET_ATOM_FILE[2]			receptor/1db4_pocket_1.txt
+POCKET_GRID_FILE[2]			receptor/1db4_grid_1.txt
+PROTEIN_FILE[2] 			receptor/1db4.pdb
+MULTI_WEIGHT[2]                         1.0
+#----------------------------------------------------------
+#   Ligand seed (optional)
+#   --Seed ligand list (Max:2000) 
+#   --Only needed in growing/linking mode
+#----------------------------------------------------------
+SEED_LIGAND_LIST			receptor/extract/INDEX
+ADD_HSPC                                YES
+#----------------------------------------------------------
+#   --Key interaction
+#     Define key interaction manually
+#     There is a template in ../default/key_interaction
+#   --Key interaction grid
+#     Extracted key interaction
+#----------------------------------------------------------
+APPLY_KEY_INTERACTION                   NO
+KEY_INTERACTION                         key_interaction
+KEY_INTERACTION_GRID                    receptor/key_grid_$TASK_NAME$
+KEY_INTERACTION_WEIGHT[]                1.0
+#----------------------------------------------------------
+#   External Data for Ranking
+#   -- Provide additional scores by external program 
+#----------------------------------------------------------
+APPLY_EXTERNAL_CALL                     NO
+EXTERNAL_CALL_FILE                      ./external_call
+############################################################
+#   Automatic section
+#   --Continue mode:
+#     YES : Continue with previous seeds and results
+#     No  : Overwrite results and regenerating seeds
+#   --Session number: the number of sessions you'll run
+#     suggestion: 50 at least, default 100, the more, the better.
+#     If your computing resource is limited, please
+#     apply speedup strategy, or ligbuilder may not
+#     finish your job within a reasonable time
+#   --Molecule number: stop condition
+#     Suggestion: 
+#     --Single target:
+#       Min pKd>4 : 100K at least, default 1M
+#       Min pKd>5 : 50K at least, default 500K
+#       Min pKd>6 : 10K at least, default 100K
+#     --Multi targets:
+#       Min pKd>4 : 20K at least, default 200K
+#       Min pKd>5 : 10K at least, default 100K
+#       Min pKd>6 : 2K at least, default 20K
+############################################################
+CONTINUE_MODE				YES
+SESSION_NUMBER				50
+MINIMAL_PROCESS_SESSION                 50
+START_STAGE                             1
+END_STAGE                               9
+MOLECULE_NUMBER				1000000
+[Growing]MOLECULE_NUMBER		100000
+[Linking]MOLECULE_NUMBER		50000
+############################################################
+#   Tools
+############################################################
+#----------------------------------------------------------
+#   Seed
+#   --Extract/Combine seed structure
+#     Extract seed for mimic design in growing/linking mode
+#     Combine seed for multi-target design
+#   --Extract file list: the mol2 list for extracting seed
+#     Recommend user to convert the mol2 files by I-interpret or Babel.
+#     List format:
+#     ReceptorId    Mol2Path
+#   --User seed list: the mol2 list for user's seed structures.
+#     All structures listed will be combinated with extracted
+#     structures(if existed) and them selves.
+#     Recommend user to convert the mol2 files by I-interpret or Babel.
+#     List format:
+#     ReceptorId    Mol2Path
+#   --Seed output directory: outputting seed structures
+#     listed in the INDEX file under this path
+#----------------------------------------------------------
+EXTRACT_FILE_LIST                       receptor/seed.list
+EXTRACT_MAXIMAL_NONH                    20
+EXTRACT_MINIMAL_NONH                    1
+EXTRACT_MINIMAL_AVER_PKD[]              0.03
+EXTRACT_MINIMAL_PKD[]                   0.3
+EXTRACT_OPTIMIZE[]                      NO
+USER_SEED_LIST                          none
+USER_SEED_OPTIMIZE[]                    YES
+USER_SEED_ADD_HSPC                      YES
+SEED_OUTPUT_DIRECTORY                   receptor/extract
+#----------------------------------------------------------
+#   Interaction
+#   --Extract key interaction from known structures
+#     Could be applied to each design mode
+#   --Extract list: the mol2 list for extracting structures
+#     Recommend user to convert the mol2 files by I-interpret or Babel.
+#     List format:
+#     ReceptorId    Mol2Path
+#   --Output: generate file for KEY_INTERACTION_GRID
+#----------------------------------------------------------
+EXTRACT_INTERACTION_LIST                key_interaction.list
+EXTRACT_INTERACTION_PKD[]               0.2
+EXTRACT_INTERACTION_RADIUS[]            1.5
+APPLY_INTERACTION_FREQUENCY             YES
+OUTPUT_EXTRACT_INTERACTION              receptor/key_grid_$TASK_NAME$

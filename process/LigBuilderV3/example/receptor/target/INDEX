@@ -1,0 +1,15 @@
+#
+# Fragment library used in LigBuilder               --- Arthur  Nov 1, 1998
+#
+# The 1st column: fragment ID
+# The 2nd column: fragment file name
+# The 3rd column: growing possibility
+# The 4th column: description
+#
+# Hydrocarbons
+#
+1	frag_01.mol2	1.00	methane
+2	frag_02.mol2	1.00	ethane
+3	frag_03.mol2	1.00	propane
+4	frag_04.mol2	1.00	ethylene
+5	frag_05.mol2	1.00	allyl group

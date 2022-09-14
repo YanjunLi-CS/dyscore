@@ -1,0 +1,21 @@
+#	Name:			<unnamed>
+#	Creating user name:	mdl
+#	Creation time:		Thu Nov 15 12:45:26 2007
+
+#	Modifying user name:	mdl
+#	Modification time:	Thu Nov 15 12:46:44 2007
+
+@<TRIPOS>MOLECULE
+****
+    2     1     1     0     0
+SMALL
+NO_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 C1         -1.5884   -1.3973   -2.1533 C.1       1 <1>         0.0000 
+      2 N2         -0.9528   -0.8787   -1.3359 N.1       1 <1>         0.0000 
+@<TRIPOS>BOND
+     1    2    1 3    
+@<TRIPOS>SUBSTRUCTURE
+     1 ****        2 TEMP              0 ****  ****    0 ROOT 

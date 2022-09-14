@@ -1,0 +1,2 @@
+#!/bin/bash
+ls $1/ligand/ |sed '{s/.pdbqt//}' | parallel -j $2 --tag "xscore_nooutput -score $1/receptor_addh_xscore.pdb $1/docked/{}.mol2" |grep "Predicted average" |awk '{print $1,$6}'  >$1/score_xscore.record

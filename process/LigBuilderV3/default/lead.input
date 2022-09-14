@@ -1,0 +1,25 @@
+#----------------------------------------------------------
+#   Chemical viability rules / Record results
+#   --Ghose et al,1999:
+#     logp -0.4~5.6 prefer 1.3~4.1
+#     wt 160~480 prefer 230~390
+#     atom number 20~70 prefer 30~55
+#   --Aver pkd: affinity/(heavy_atom_num^0.3)
+#     real drugs always greater than 2.5
+#     default 2.5
+#   --Maximal output results (exploring mode)
+#     set 0 for unlimited designation
+#----------------------------------------------------------
+APPLY_CHEMICAL_RULES			YES
+MAXIMAL_MOLECULAR_WEIGHT		300
+MINIMAL_MOLECULAR_WEIGHT		160
+MAXIMAL_LOGP				7.6
+MINIMAL_LOGP				-2.4
+MAXIMAL_HB_DONOR_ATOM			10
+MINIMAL_HB_DONOR_ATOM			1
+MAXIMAL_HB_ACCEPTOR_ATOM		10
+MINIMAL_HB_ACCEPTOR_ATOM		1	
+MAXIMAL_PKD				16.00
+MINIMAL_PKD				4.0
+MINIMAL_AVER_PKD			0.25
+MAXIMAL_RESULTS				1000000

@@ -1,0 +1,37 @@
+#----------------------------------------------------------
+#   Structure rules
+#   --Growing Seq: ABCDEFGHIJKLMNOPQ
+#     A:sulfur				
+#     B:phosphor			
+#     C:halogen				
+#     D:nitro				
+#     E:semisaturated ring	(ring num)
+#     F:hetero ring		(ring num)	
+#     G:unsaturated branch	(bond num)
+#     H:N-N,N-O,O-O branch	(bond num)
+#     I:aromatic link
+#     J:ring link
+#     K:ring number
+#     L:ring system number
+#     M:bigring branch
+#     N:bigaromatic branch
+#     O:smallring branch
+#     P:smallaromatic branch
+#     Q:phenolic hydroxyl
+#     Value: 0:forbiden/1~8:maximal num/9:allow
+#----------------------------------------------------------
+GROWING_SEQ				00000100014321331
+AROMATIC_LINK_PROBABILITY		0.00	
+RING_LINK_PROBABILITY			0.50	
+#----------------------------------------------------------
+#   Synthesize
+#----------------------------------------------------------
+PRINCIPLE_SYNTHESIZE			NO
+REACTION_SYNTHESIZE			NO
+KNOWLEDGE_SYNTHESIZE			YES
+[Synthesize]PRINCIPLE_SYNTHESIZE	YES
+[Synthesize]REACTION_SYNTHESIZE		YES
+#----------------------------------------------------------
+#   Filter
+#----------------------------------------------------------
+FILTER_SEQ				00000100014321331

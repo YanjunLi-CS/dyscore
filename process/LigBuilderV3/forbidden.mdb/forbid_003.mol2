@@ -1,0 +1,31 @@
+#	Name:			di-Br-methane
+#	Creating user name:	arthur
+#	Creation time:		Fri Jan  8 20:40:57 1999
+
+#	Modifying user name:	arthur
+#	Modification time:	Fri Jan  8 20:43:27 1999
+
+@<TRIPOS>MOLECULE
+di-Br-methane
+    5     4     1     1     0
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 Br1         0.1337    1.9987   -2.1948 Br        1 <1>         0.0000 
+      2 C2         -0.4569    3.7768   -1.6997 C.3       1 <1>         0.0000 
+      3 Br3        -2.3911    3.8626   -1.7854 Br        1 <1>         0.0000 
+      4 H1         -0.0262    4.5129   -2.3944 H         1 <1>         0.0000 
+      5 H2         -0.1251    4.0013   -0.6753 H         1 <1>         0.0000 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    2    3 1    
+     3    2    4 1    
+     4    2    5 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 ****        2 TEMP              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 0 0 0 0 0 0 0 0 0 0 0 0 0

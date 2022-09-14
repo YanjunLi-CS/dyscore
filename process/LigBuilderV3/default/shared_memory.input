@@ -1,0 +1,6 @@
+#----------------------------------------------------------
+#   --Apply shared memory
+#   --Shared memory size (MB)
+#----------------------------------------------------------
+SHARED_MEMORY                           YES
+SHARED_MEMORY_SIZE                      2048

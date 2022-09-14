@@ -1,0 +1,43 @@
+#
+# Forbidden substructure library used in LigBuilder   --- Arthur  Aug 29, 1999
+#
+# The 1st column: substructure ID
+# The 2nd column: substructure file name
+# The 3rd column: possibility of application
+# The 4th column: description
+# q sym:
+# 0:No ring
+# 1:Ring
+# 2:Both
+#
+#
+#
+1	forbid_001.mol2		0.00	di-F-methane
+2	forbid_002.mol2		1.00	di-Cl-methane
+3	forbid_003.mol2		1.00	di-Br-methane
+4	forbid_004.mol2		1.00	di-I-methane
+5	forbid_005.mol2		1.00	1-di-F-ethylene
+6	forbid_006.mol2		1.00	1-di-Cl-ethylene
+7	forbid_007.mol2		1.00	1-di-Br-ethylene
+8	forbid_008.mol2		1.00	1-di-Br-ethylene
+#
+9	forbid_009.mol2		1.00	HN-C(=O)-OH
+10	forbid_010.mol2		1.00	HO-C(=O)-OH
+11	forbid_011.mol2		1.00	H-C(=O)-C(=O)-H
+#
+12	forbid_012.mol2		1.00	Triangle
+13	forbid_013.mol2		1.00	Triangle
+14	forbid_014.mol2		1.00	Square
+15	forbid_015.mol2		1.00	Square
+16	forbid_016.mol2		1.00	N.ar-N.ar
+#
+#
+17	forbid_017.mol2		0.00	S.3
+18	forbid_018.mol2		1.00	C=C-OH
+19	forbid_019.mol2		1.00	C=N
+20	forbid_020.mol2		1.00	C#N
+21	forbid_021.mol2		1.00	N=N
+22	forbid_022.mol2		1.00	HO-C-OH
+23	forbid_023.mol2		1.00	CYCLE-C#C-C-C#C-C
+24	forbid_024.mol2		1.00	C=C-O
+#

@@ -1,0 +1,22 @@
+#----------------------------------------------------------
+#   Ligand seed (optional)
+#   ---Site rotate/optimize_seed only applied in manual mode
+#   ---Tolerate_bump: ignore vdw bumps caused by seed
+#      including intermolecule bump & intramolecule bump
+#   ---Tolerate_chemical:ignore chemical score of seed
+#----------------------------------------------------------
+ADD_HSPC				YES
+SITE_ROTATE				NO
+OPTIMIZE_SEED				NO
+TOLERATE_INTER_BUMP			YES
+TOLERATE_INTRA_BUMP			YES
+TOLERATE_CHEMICAL			YES
+#----------------------------------------------------------
+#   Optimize parameters
+#----------------------------------------------------------
+#INCLUDE                                 ../default/optimize_none.input
+INCLUDE                                 ../default/optimize_soft.input
+#----------------------------------------------------------
+#   Linking parameters
+#----------------------------------------------------------
+MINIMAL_LINKING_NUMBER			2

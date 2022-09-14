@@ -1,0 +1,2 @@
+#!/bin/bash
+obabel $1 -xhfFP2 -ofpt 2>/dev/null |sed -n '2,7p' | awk '{for(i=1;i<=NF;i++)printf("%s",$i)} END {print ""}'

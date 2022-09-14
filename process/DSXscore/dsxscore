@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ $# -gt 2 ]
+then
+    ./process/DSXscore/dsx_linux_64.lnx  -P $1 -L $2 -F $3 -s
+    cat $3 |grep "|  none" |awk '{print $5,$7,$11}'
+    \rm -rf $3
+fi

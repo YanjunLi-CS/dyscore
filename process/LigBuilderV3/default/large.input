@@ -1,0 +1,17 @@
+########################################################################
+#	Parameter section
+########################################################################
+#-----------------------------------------------------------------------
+#	Parameter for vacant/vacant-surface method
+#	-- Standard :8/1500/6000/2	//common cavity
+#	-- Peptides :4/1500/6000/4	//shallow cavity, e.g. piptides 
+#					  binding site, protein-protein interface
+#	-- Large    :8/2500/8000/2	//complex cavity, e.g. multi function
+#					  cavity, channel, nucleic acid site 
+#	-- Super    :8/5000/16000/2	//super sized cavity
+#-----------------------------------------------------------------------
+SEPARATE_MIN_DEPTH		8
+MAX_ABSTRACT_LIMIT_V		2500
+SEPARATE_MAX_LIMIT_V		8000
+MIN_ABSTRACT_DEPTH		2
+

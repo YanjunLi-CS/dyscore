@@ -1,0 +1,95 @@
+############################################################
+#   Include section
+############################################################
+INCLUDE                         ../default/default.input
+PARAMETER_DIRECTORY             ../parameter
+############################################################
+#   Predefine section
+############################################################
+$TASK_NAME$				test
+$RESULT_DIR$				result
+############################################################
+#   Design section
+############################################################
+#----------------------------------------------------------
+#   Design Mode
+#   --0:Exploring mode
+#     1:Growing mode
+#     2:Linking mode
+#----------------------------------------------------------
+DESIGN_MODE				0
+#RANDOM_SEED                             399305
+#----------------------------------------------------------
+#   Requirments
+#----------------------------------------------------------
+MINIMAL_PKD[]                           7.0
+MINIMAL_PKD[2-5]                        6.0
+#----------------------------------------------------------
+#   Binding site information
+#   --Support multiply receptors (Max:10)
+#     Lead to multi-Target / multi-Mode
+#----------------------------------------------------------
+PROTEIN_NUM                             1
+POCKET_ATOM_FILE[1]			OUTPUT_DIRECTORY/cavity/receptor_pocket_1.txt
+POCKET_GRID_FILE[1]			OUTPUT_DIRECTORY/cavity/receptor_grid_1.txt
+PROTEIN_FILE[1] 			OUTPUT_DIRECTORY/cavity/receptor.pdb
+MULTI_WEIGHT[1]                         1.0
+#----------------------------------------------------------
+#   --Key interaction
+#     Define key interaction
+#----------------------------------------------------------
+KEY_INTERACTION                         none
+KEY_INTERACTION_GRID                    none
+KEY_INTERACTION_WEIGHT[1]               1.0
+APPLY_KEY_INTERACTION                   NO
+SHARED_MEMORY_SIZE                      2048
+#----------------------------------------------------------
+#   Ligand seed (optional)
+#   --Seed ligand list (Max:2000) 
+#   --Only needed in growing/linking mode
+#----------------------------------------------------------
+#SEED_LIGAND_LIST			mol2/seed.list
+SCORE_LIST			        OUTPUT_DIRECTORY/record/ligbuilder.list
+SCORE_LOG			        OUTPUT_DIRECTORY/record/ligbuilder.score
+SCORE_OPTIMIZE                          YES
+SEED_DIAGNOSE                           YES
+EC_DIAGNOSE                           YES
+BUILDING_BLOCK_DIAGNOSE                 NO
+BUILDING_BLOCK_MODE			100
+PRINCIPLE_SYNTHESIZE                    NO
+REACTION_SYNTHESIZE                     NO
+KNOWLEDGE_SYNTHESIZE                    NO
+SHARED_MEMORY                           YES
+SHARED_MEMORY_SIZE                      4096
+SHARED_MEMORY_SIZE                      2048
+MAX_AVERAGE_DEEP                        0.5
+REPORT_FIGURE_TYPE                      0
+############################################################
+#   Automatic section
+#   --Continue mode:
+#     YES : Continue with previous seeds and results
+#     No  : Overwrite results and regenerating seeds
+#   --Session number: the number of sessions you'll run
+#     suggestion: 50 at least, default 100, the more, the better.
+#     If your computing resource is limited, please
+#     apply speedup strategy, or ligbuilder may not
+#     finish your job within a reasonable time
+#   --Molecule number: stop condition
+#     Suggestion: 
+#     --Single target:
+#       Min pKd>6 : 100K at least, default 1M
+#       Min pKd>7 : 50K at least, default 500K
+#       Min pKd>8 : 10K at least, default 100K
+#     --Multi targets:
+#       Min pKd>6 : 20K at least, default 200K
+#       Min pKd>7 : 10K at least, default 100K
+#       Min pKd>8 : 2K at least, default 20K
+############################################################
+CONTINUE_MODE				YES
+SESSION_NUMBER				5
+MINIMAL_PROCESS_SESSION                 4
+START_STAGE                             8
+END_STAGE                               9
+MOLECULE_NUMBER				1000000
+[2-5]MOLECULE_NUMBER			200000
+[Growing][3]MOLECULE_NUMBER		100000

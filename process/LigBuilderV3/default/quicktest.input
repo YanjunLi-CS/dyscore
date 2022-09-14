@@ -1,0 +1,213 @@
+############################################################
+#   Author Tag
+#   --You can assign the project author name here
+############################################################
+AUTHOR_TAG				LigBuilder V3 User
+############################################################
+#   Default section
+#   --Global parameters
+############################################################
+#----------------------------------------------------------
+#   Deafult parameters
+#----------------------------------------------------------
+INCLUDE                                 ../default/default.input
+#----------------------------------------------------------
+#   Path parameters
+#   --Output path and directory
+#----------------------------------------------------------
+INCLUDE                                 ../default/path.input
+############################################################
+#   Design section
+############################################################
+#----------------------------------------------------------
+#   Diversity parameters
+#   --Molecules diversity, default:druglike
+#   --Uncomment your choice and comment out others
+#----------------------------------------------------------
+#INCLUDE                                 ../default/diversity_druglike.input
+INCLUDE                                 ../default/diversity_low.input
+#INCLUDE                                 ../default/diversity_moderate.input
+#INCLUDE                                 ../default/diversity_high.input
+#----------------------------------------------------------
+#   Synthesize parameters
+#   --Balance between rapid and accurate, default:rapid
+#   --farther speed up: knowledge
+#   --Uncomment your choice and comment out others
+#----------------------------------------------------------
+INCLUDE                                 ../default/synthesize_knowledge.input
+#INCLUDE                                 ../default/synthesize_rapid.input
+#INCLUDE                                 ../default/synthesize_moderate.input
+#INCLUDE                                 ../default/synthesize_accurate.input
+#----------------------------------------------------------
+#   Optimize parameters
+#   --Optimization intensity, default: Exploring:intense
+#   --Growing, Linking :soft
+#   --Uncomment your choice and comment out others
+#----------------------------------------------------------
+INCLUDE                                 ../default/optimize_none.input
+#INCLUDE                                 ../default/optimize_soft.input
+#INCLUDE                                 ../default/optimize_moderate.input
+#INCLUDE                                 ../default/optimize_intense.input
+############################################################
+#  Analysis section
+############################################################
+#----------------------------------------------------------
+#   Recommend parameters
+#   --Balance between inclusiveness and exactness, default:moderate
+#     Inclusiveness will increase false positive
+#     Strongly recommend to apply exactness parameters if possible!
+#     redock: Recommend molecules from re-dock process
+#   --Uncomment your choice and comment out others
+#----------------------------------------------------------
+#INCLUDE                                 ../default/recommend_redock.input
+#INCLUDE                                 ../default/recommend_inclusiveness.input
+INCLUDE                                 ../default/recommend_moderate.input
+#INCLUDE                                 ../default/recommend_exactness.input
+#----------------------------------------------------------
+#  Synthesize analysis parameters
+#   --Balance between rapid and accurate, default:accurate
+#----------------------------------------------------------
+INCLUDE                                 ../default/analysis_rapid.input
+#INCLUDE                                 ../default/analysis_moderate.input
+#INCLUDE                                 ../default/analysis_accurate.input
+############################################################
+#  Diagnose section
+############################################################
+#----------------------------------------------------------
+#  Diagnose parameters
+#   --Apply to diagnose the problem of building blocks and seed structures
+#----------------------------------------------------------
+#INCLUDE                                 ../default/diagnose_building_block.input
+#INCLUDE                                 ../default/diagnose_seed.input
+############################################################
+#  Strategy section
+############################################################
+#----------------------------------------------------------
+#   Lead design
+#   --Lead design: Design lead compounds
+#     Please include recommend_lead.input as well
+#   --Uncomment BOTH lines following to apply lead design
+#     comment out BOTH lines to apply full design
+#----------------------------------------------------------
+#INCLUDE                                 ../default/lead.input
+#INCLUDE                                 ../default/recommend_lead.input
+#----------------------------------------------------------
+#   Mimic design
+#   --Mimic design: Design mimic compounds
+#     Please include recommend_inclusiveness.input as well
+#     Please edit the extract.input to assign the inhibitor files
+#   --Please extract some seed structure from known inhibitor first
+#   --Mimic design is only run under growing/linking mode
+#   --Uncomment all lines following in this section to apply mimic design
+#     comment out to apply full design
+#----------------------------------------------------------
+#INCLUDE				 ../default/extract.input
+#INCLUDE                                 ../default/recommend_inclusiveness.input
+#INCLUDE                                 ../default/mimic.input
+#----------------------------------------------------------
+#  Speed Up Strategy
+#   --Attention:
+#     If you have limited computing resources or you
+#     want this work finished as soon as possible, 
+#     we strongly recommend you to use speedup strategy.
+#     This strategy will lead to explore a smaller
+#     chemical space, so it is much more efficent.
+#     AND, this strategy has approimate design quality
+#     but less diversity comparing with normal strategy 
+#   --Default: normal strategy
+#   --Uncomment to apply speedup strategy, 
+#     comment out to apply normal strategy
+#----------------------------------------------------------
+#INCLUDE                                 ../default/speedup.input
+############################################################
+#   Memory section
+############################################################
+#----------------------------------------------------------
+#   Memory parameters(Shared memory)
+#   --Applying shared memory, default 1G/per system
+#   --Uncomment to apply
+#----------------------------------------------------------
+INCLUDE                                 ../default/shared_memory.input
+#----------------------------------------------------------
+#   Memory parameters(Design)
+#   --Low memory may lower the design speed of linking mode
+#   -- 1G is sufficent for exploring and growing
+#   --Suggestion: Exploring 1G/Growing 1G/Linking 1.5~2.5G /per session
+#   --Uncomment your choice and comment out others
+#----------------------------------------------------------
+INCLUDE                                 ../default/design-memory_1G.input
+#INCLUDE                                 ../default/design-memory_1.5G.input
+#INCLUDE                                 ../default/design-memory_2.5G.input
+#----------------------------------------------------------
+#   Memory parameters(Synthesize)
+#   --Low memory may lower the synthesize speed, default 1G/per session
+#   --Uncomment your choice and comment out others
+#----------------------------------------------------------
+#INCLUDE                                 ../default/synthesize-memory_600M.input
+INCLUDE                                 ../default/synthesize-memory_1G.input
+#INCLUDE                                 ../default/synthesize-memory_2G.input
+#----------------------------------------------------------
+#   Memory parameters(Synthesize analysis)
+#   --Low memory may lose the material information, default 2G/per session
+#   --Uncomment your choice and comment out others
+#----------------------------------------------------------
+#INCLUDE                                 ../default/analysis-memory_1G.input
+INCLUDE                                 ../default/analysis-memory_2G.input
+#INCLUDE                                 ../default/analysis-memory_unlimited.input
+############################################################
+#  Speed Up Strategy
+#   --Attention:
+#     If you have limited computing resources or you
+#     want this work finished as soon as possible, 
+#     we strongly recommend you to use speedup strategy.
+#     This strategy will lead to explore a smaller
+#     chemical space, so it is much more efficent.
+#     AND, this strategy has approimate design quality
+#     but less diversity comparing with normal strategy 
+#   --Default: normal strategy
+#   --Uncomment to apply speedup strategy, 
+#     comment out to apply normal strategy
+############################################################
+INCLUDE                                 ../default/speedup.input
+#QUICKTEST
+MAXIMAL_MOLECULAR_WEIGHT		500
+MINIMAL_MOLECULAR_WEIGHT		100
+MAXIMAL_LOGP				6
+MINIMAL_LOGP				-2
+MAXIMAL_HB_DONOR_ATOM			10
+MINIMAL_HB_DONOR_ATOM			1
+MAXIMAL_HB_ACCEPTOR_ATOM		10
+MINIMAL_HB_ACCEPTOR_ATOM		1
+MAXIMAL_PKD				16.00
+MINIMAL_PKD				1.00
+MINIMAL_AVER_PKD			0.0
+MAXIMAL_RESULTS				1000
+MAXIMAL_BUMP				15
+MAXIMAL_NORING				10
+MAXIMAL_BRANCHPERCENT			90
+MAXIMAL_SINGLEBRANCH			9
+MAXIMAL_HMVSHB				5
+MINIMAL_STRUCTURE_SCORE			-20
+MINIMAL_CHEMICAL_SCORE			-200
+NUMBER_OF_GENERATION			7
+NUMBER_OF_POPULATION			200
+NUMBER_OF_PARENTS			20
+ELITISM_RATIO				0.10
+SIMILARITY_CUTOFF			0.90
+CYCLE_TURN				5
+MULTI_COUNT				10
+MAXIMAL_COUNT				50
+MULTI_SEED_DESIGN			5
+SEED_GENERATOR				1
+BUILDING_BLOCK_MODE			100
+RECOMMEND_NUMBER			10
+RECOMMEND_SCORE				4.0
+RECOMMEND_STABLE			0.0
+RECOMMEND_BUMP				20
+RECOMMEND_RT				20
+RECOMMEND_HMHB				10
+RECOMMEND_DHM				-5	
+RECOMMEND_IVDW				3
+RECOMMEND_MATCH				-20.0
+RECOMMEND_CHEMICAL			-200
+MINIMAL_OUTPUT_PKD			2.0

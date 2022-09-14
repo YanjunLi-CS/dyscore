@@ -1,0 +1,511 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title>User manual for LigBuilder V3</title>
+<style type="text/css">
+.red {
+	color: #F00;
+}
+.blue {
+	color: #00F;
+}
+.rd {	color: #F00;
+}
+</style>
+</head>
+
+<body background="background.gif" bgcolor="#FFFFFF">
+
+<p align="center"><img src="title.gif"
+alt="title.gif (27521 bytes)" width="480" height="160"></p>
+
+<h2 align="center">Advanced Skills</h2>
+
+<hr>
+
+<ol>
+    <li><a href="#subject_1">How to build the &quot;seed&quot;
+        structure?</a></li>
+    <li><a href="#subject_2">How to set the chemical viability
+        rules in the parameter file?</a></li>
+    <li><a href="#subject_3">How to edit the building-block
+        fragment library?</a></li>
+    <li><a href="#subject_4">How to edit the forbidden
+        substructure library?</a></li>
+    <li><a href="#subject_5">How to edit the toxic substructure
+        library? </a></li>
+    <li><a href="#subject_6">How to resume a former job?</a></li>
+    <li><a href="#subject_7">How to design good molecules?</a></li>
+    <li><a href="#subject_8">How to design lead structure?</a></li>
+    <li><a href="#subject_9">How to optimize existed molecule and lead structure?</a></li>
+    <li><a href="#subject_10">How to design mimic inhibitor?</a></li>
+    <li><a href="#subject_11">How to use  multi-target design?</a></li>
+    <li><a href="#subject_12">How to build own synthetic material database?</a></li>
+    <li><a href="#subject_13">Go deep into the control of design</a></li>
+</ol>
+
+<hr>
+
+<h4><a name="subject_1"><font color="#0000FF">1. How to build the
+&quot;seed&quot; structure?</font></a></h4>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Either Growing mode or Linking mode needs seed
+structures as the starting point for building up ligand molecules.
+Although LigBuilder V3 provide an automatic extractor to generate seed from known inhibitors, it is important to check these seed structure carefully. Besides, user may create your own seed structure, which introduces much
+flexibility into the application of LigBuilder V3. Then we described how to build a seed structure manually fisrt.</p>
+<p>&nbsp;&nbsp;&nbsp; Choosing a proper seed structure is very
+  important because all the resultant molecules are the derivatives
+  of the seed structure. Therefore, it will be ideal if the seed
+  structure holds the key feature of the prospective ligands. For
+  example, it may form significant interactions with the target
+  protein; or it is a proper spatial framework; or it is a good
+  starting point for organic synthesis. There could be so many
+  smart ways to choose one seed structure. For example, you may
+  start form a relevant X-ray crystal complex structure. There must
+  be some chemical groups on the ligand which exhibit important
+  interactions with the protein. You can extract them as the seed
+  structure. Or you can use the popular fragment based technique to obtain small fragments binding to the binding site. Or if you have got a lead compound without known binding conformation, you can
+  dock it into the binding pocket and tailor it as the seed
+  structure. Or you can dock some small groups, such as ammonia,
+  formaldehyde, benzene, and etc., into the binding pocket as the
+  seed structure. The seed structure could be as large as a
+  &quot;common&quot; molecule or, in principle, as small as just
+one heavy atom, such as methane.&nbsp;&nbsp;&nbsp;</p>
+
+<p>&nbsp;&nbsp;&nbsp; The seed structure is presented in a Mol2
+file. <span class="red">Please notice that all the valences on the seed structure
+must be fulfilled, and hydrogen atoms should be added.</span> <span class="red">Please check the atom type and bond type of your structures carefully, since these information may lost or changed during format converting</span>. (Here we suggested users to use openbabel(free) or openeye(free for academic) to convert molecules come from PDB file or other formats.) You are
+assumed to label &quot;<font color="#0000FF">growing sites</font>&quot;
+on the seed structure by simply change the atom type of the
+corresponding hydrogen atoms from &quot;<font color="#0000FF">H</font>&quot;
+to &quot;<font color="#0000FF">H.spc</font>&quot;. You can do
+this in the molecular editing software (e.g. Sybyl)  or edit the Mol2 file
+manually. Build will take all the special hydrogen atoms,
+i.e. &quot;<font color="#000000">H.spc</font>&quot;, on the seed
+structure as growing sites. Fragments will be added to these
+growing sites to generate new molecules. Labeling growing sites on each fragment will increase the chance
+of successful linking. Alternatively, if you do not conern about which hydrogens should be used as growhing site, you could simply set &quot;<span class="blue">ADD_HSPC</span>&quot; parameter &quot;<span class="red">YES</span>&quot; to treat  all hydrogen atoms to growing site, without any editing on the Mol2 files. You should set &quot;<span class="blue">ADD_HSPC</span>&quot; parameter to &quot;<span class="red">NO</span>&quot; if you want to label the growing site by yourself. Attention:&nbsp; The seed structure for running Build is
+assumed to contain only one piece of chemical fragment.  And please make sure that the seed structure is
+  positioned at the right place inside the binding pocket.
+  LigBuilder V3 only perform a slightly optimization on the
+seed structure.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;These concepts may confuse you
+  especially when you are using LigBuilder V3 for the first time. You
+  are suggested to study the sample seed structures &quot;<span class="blue">seed.mol2</span>&quot; included in the
+directory &quot;<font color="#0000FF">LigBuilderV3/example/receptor</font>&quot;.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Besides, the automatic extractor is very easy to use, user may simply run the &quot;Seed&quot; function when tell the program the list of known inhibitors. Similar to  creating seed structure manully, the provided inhibitors  for extracting should be positioned according to the coordinates of receptor. That is, you should align all other X-ray crystal complex structures to the selected receptor structure before extracting the ligands from complexes, or you should dock these molecules to the selected receptor first if you don't know the binding conformation. <span class="red">Please notice that all the valences on these structures
+must be fulfilled, and hydrogen atoms should be added.</span> <span class="red">Please check the atom type and bond type of your structures carefully, since these information may lost or changed during format converting</span>. (Here we suggested users to use openbabel or openeye to convert molecules come from PDB file or other formats.) The extractor will assign the growing sites according to the cutting mode during extracting, and user may change these marks by editing the outputting seed structures as mentioned above. Moreover, the &quot;Seed&quot; function will also read user defined seed structure, and combined them with the extracted fragments. This is required for multi-target design, because all the input seed structure for multi-target design should be mapped (pairwised) first.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Here is an example of running automatic extractor, you may study the &quot;Seed&quot; section in &quot;<span class="blue">build-just-example.input</span>&quot; in the directory &quot;<font color="#0000FF">LigBuilderV3/example</font>&quot;:</p>
+<p><span class="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cd LigBuilderV3/example<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;./build -Extract build-just-example.input</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Since the automatic extractor is best suited for mimic design, users may find the corresponding parameter sets in the mimic design section of the &quot;<span class="blue">LigBuilderV3/default/usersettings.input</span>&quot;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<hr>
+
+<h4><font color="#0000FF">2</font><a name="subject_2"><font
+color="#0000FF">. How to set the chemical viability rules in the
+parameter file?</font></a></h4>
+
+<p>&nbsp;&nbsp;&nbsp; In recent years, some empirical rules for
+evaluating the &quot;drug-likeness&quot; of a compound have been
+proposed. Maybe the most popular approach is the so-called
+Lipinski rules (<em>Adv. Drug. Delivery. Rev. 1997, 23, 3-25</em>).
+According to the Lipinski rules, poor absorption or permeation
+are more likely when: </p>
+
+<ul>
+    <li>Molecular weight is over 500.</li>
+    <li>LogP is over 5.</li>
+    <li>There are more than 5 H-bond donors (the sum of OHs and
+        NHs).</li>
+    <li>There are more than 10 H-bond acceptors (the sum of Os
+        and Ns).</li>
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp; Thus if a molecule violates the above
+rules, it is not likely to be a successful lead compound. In
+LigBuilder V3, we have set similar parameters to control the
+chemical viability of the generated molecules. You are encouraged
+to edit these chemical rules to meet your own purpose. The
+following key words will appear in the parameter file for GROW or
+LINK.</p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MAXIMAL_MOLECULAR_WEIGHT</font>&quot;:
+maximal molecular weight.</p>
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MINIMAL_MOLECULAR_WEIGHT</font>&quot;:
+minimal molecular weight.</p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MAXIMAL_LOGP</font>&quot;:
+maximal LogP value. </p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MINIMAL_LOGP</font>&quot;:
+minimal LogP value.</p>
+
+<p>&nbsp;&nbsp;&nbsp; LigBuilder V3 calculates LogP values using the
+<font color="#FF0000">XLOGP V3</font> algorithm. For more
+detailed description of this algorithm, please refer to: <a
+href="xlogp2.pdf">Wang, R.; Gao, Y.; Lai, L. &quot;Calculating
+partition coefficient by atom-additive method&quot;, <em>Perspectives
+in Drug Design and Discovery</em>, <strong>2000</strong>, <em>19</em>,
+47-66</a>.</p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MAXIMAL_HB_DONOR_ATOM</font>&quot;:
+maximal number of H-bond donor atoms. Here, a donor atom refers
+to any nitrogen or oxygen atom with at least one hydrogen atom
+attached, i.e. -OHs or -NHs.</p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MINIMAL_HB_DONOR_ATOM</font>&quot;:
+minimal number of H-bond donor atoms. </p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MAXIMAL_HB_ACCEPTOR_ATOM</font>&quot;:
+maximal number of H-bond acceptor atoms. Here an acceptor atom
+refers to any nitrogen or oxygen atom with at least one lone
+pair.</p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MINIMAL_HB_ACCEPTOR_ATOM</font>&quot;:
+minimal number of H-bond acceptor atoms. </p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MAXIMAL_PKD</font>&quot;:
+maximal binding affinity to the target protein. It is presented
+in pKd unit.</p>
+
+<p>&nbsp;&nbsp;&nbsp; &quot;<font color="#0000FF">MINIMAL_PKD</font>&quot;:
+minimal binding affinity to the target protein.</p>
+
+<p>&nbsp;&nbsp;&nbsp; LigBuilder V3 estimates binding affinities
+using the <font color="#FF0000">SCORE v4.0 </font>algorithm. It is inherit from SCORE V3.For
+more detailed description of this algorithm, please refer to: Score V3:<a
+href="score.pdf">Wang, R.; Liu, L.; Lai, L.; Tang, Y.
+&quot;SCORE: A new empirical method for estimating the binding
+affinity of a protein-ligand complex&quot;, <em>J.Mol.Model</em>.,
+<strong>1998</strong>, <em>4</em>, 379-394.</a></p>
+<p>&nbsp;&nbsp;&nbsp; To be frank, a &quot;proper&quot; set of
+  these chemical rules will depend on the project you are working
+  on. But a &quot;general&quot; set could be like this: <span class="red">molecular
+  weight: 160~500 LogP: -0.4~5.6; Donors: 2~10; Acceptors: 2~10;
+predicted pKd: 6~12.</span></p>
+
+<hr>
+
+<h4><font color="#0000FF">3</font><a name="subject_3"><font
+color="#0000FF">. How to edit the building-block fragment
+library?</font></a></h4>
+
+<p>&nbsp;&nbsp;&nbsp; As mentioned in the <em>Introduction</em>
+section, LigBuilder V3 uses molecular fragments as building-blocks
+to build ligands. The default building-block fragment library
+employed by LigBuilder V3 is stored in the directory &quot;<font
+color="#0000FF">fragment.mdb</font>&quot;. This library contains
+nearly 180 fragments, including most of the common chemical groups
+and ring frameworks observed in organic compounds. Each fragment
+is presented in a Mol2 file. All the fragments have been
+pre-minimized.</p>
+
+<p>&nbsp;&nbsp;&nbsp; There is a file named as &quot;<font
+color="#0000FF">INDEX</font>&quot; in that directory listing the
+contents of the building block library. You can edit this file to
+determine which fragment will be used in the ligand construction
+and which will not. The format of &quot;<font color="#000000">INDEX</font>&quot;
+is like this:</p>
+
+<p><font size="2" face="Courier New">&nbsp;&nbsp;&nbsp;
+1&nbsp;&nbsp;&nbsp; frag_01.mol2&nbsp;&nbsp;&nbsp; 1.00
+&nbsp;&nbsp;&nbsp; methane<br>
+&nbsp;&nbsp;&nbsp; 2&nbsp;&nbsp;&nbsp;
+frag_02.mol2&nbsp;&nbsp;&nbsp; 0.50 &nbsp;&nbsp;&nbsp; ethane<br>
+&nbsp;&nbsp;&nbsp; 3&nbsp;&nbsp;&nbsp;
+frag_03.mol2&nbsp;&nbsp;&nbsp; 0.00 &nbsp;&nbsp;&nbsp; propane<br>
+</font>&nbsp;&nbsp;&nbsp; ......</p>
+
+<p>&nbsp;&nbsp;&nbsp; Here each line describes one fragment. The
+first column is the ID of the fragment. Each fragment must have
+its unique ID number. The second column is the name of the
+corresponding Mol2 file. The third column is the &quot;<font
+color="#000000">acceptability</font>&quot; of the fragment. The
+last column is the name of the fragment.</p>
+
+<p>&nbsp;&nbsp;&nbsp; The funny part is the &quot;<font
+color="#0000FF">acceptability</font>&quot;. This value should be
+between 0 and 1. If it is set to 1.00, the fragment is fully
+accepted for the ligand construction; if it is set to 0.00, the
+fragment is fully rejected. So what if the value is between 0 and
+1? In fact, every time when LigBuilder V3 tries to extract a certain
+fragment, the program will generate a random number between 0 and
+1 and compare this number with the acceptability of that
+fragment. If the random number is smaller than the acceptability,
+the fragment will be extracted. Otherwise, it will be rejected.
+Thus you can control the occurrence of a certain fragment in the
+generated molecules simply by modifying its acceptability.</p>
+
+<p>&nbsp;&nbsp;&nbsp; Although the default building-block library
+contains various fragments, according to our own experience, in
+most cases you do not need all of them. In another word, please
+use only necessary fragments to build your molecules. This will
+save computational time and make the resultant molecules less
+&quot;fancy&quot;. You can let the program to neglect the
+unwanted fragments by setting their acceptability to 0 in the
+INDEX file. </p>
+
+<p>&nbsp;&nbsp;&nbsp; Of course you are not limited in using the
+default building-block library. You can also add new fragments to
+the library. What you need to do is: (i) build the fragment and
+save it in a Mol2 file; (ii) copy the file into the directory
+&quot;<font color="#000000">fragment.mdb</font>&quot;; (iii) add
+a new line in file &quot;<font color="#000000">INDEX</font>&quot;
+to define the fragment. A more ambitious attempt is to build your
+own fragment library. This might be helpful when you try to
+design a special combinatorial library. In this case, what you
+need to do is simply assembling all your fragments into a
+directory and creates the &quot;<font color="#000000">INDEX</font>&quot;
+file under that directory.</p>
+
+<p>&nbsp;&nbsp;&nbsp; While building your own fragment, please
+notice that the fragment must be presented as a complete
+molecule: <font color="#FF0000">all valences should be filled and
+hydrogen atoms should be added.</font>  <span class="red">Please check the atom type and bond type of your structures carefully, since these information may lost or changed during format converting</span>.The geometry of the
+fragment should be minimized because LigBuilder V3 will not do this.
+It will be ideal if the fragment is rigid. If you have to include
+rotatable single bonds in the fragment, please provide the
+&quot;typical&quot; conformation of that fragment. But if you
+like, you can also save several conformations of the same
+fragment in different Mol2 files and label them as different
+fragments.</p>
+
+<p>&nbsp;&nbsp;&nbsp; Do not forget to set at least one <font
+color="#000000">growing site</font> on the fragment. You can do
+it by changing the atom type of the corresponding hydrogen atom
+from &quot;<font color="#0000FF">H</font>&quot; to &quot;<font
+color="#0000FF">H.spc</font>&quot;. The simplest way is to set
+all the hydrogen atoms on the fragment as growing sites. You can
+also choose to assign only some of the hydrogen atoms as growing
+sites. By doing so, you can add your expertise of organic
+synthesis to the ligand construction. </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Besides, LigBuilder V3 provides two functions to build fragment library automatically. The &quot;ExtLibrary&quot; function will help user to build a fragments library with rigid conformation, and the &quot;RotLibrary&quot; function will build library with multi-conformation fragments. These function will select fragments according to their frequency of occurrence, so the  target molecule database should be large enough. LigBuilder V3 has already prepared two multi-conformation fragments library, one is generated based on the compounds from bio-active compounds library CHEMBL, drug-like compounds library DrugBank, WDI, and SuperDrug, which is named as &quot;Bio-Like&quot; fragments library. Another one is generated based on DrugBank, WDI, and SuperDrug, which is named as &quot;Drug-Like&quot; fragments library. The deafult is<span class="blue"> Bio-200 library</span>, which means that only fragments that with more than 200 occurancy in Bio-Like compounds are used. User may change this setting by <span class="blue">BUILDING_BLOCK_LIBRARY_ROTATABLE</span> parameter. You could also generarte  your own ExtLibrary (-ExtLibrary function) or RotLibrary (-RotLibrary function), please refer to the &quot;Building Database&quot; section in &quot;<span class="blue">LigBuilderV3/default/default.input</span>&quot;.</p>
+<p>&nbsp;&nbsp;&nbsp; Another special note should be addressed
+  here. Actually each fragment in the building-block library is
+  treated not as a &quot;specific&quot; fragment but rather a
+  template. While building the ligand molecules, LigBuilder V3 will
+  perform mutations on the structure whenever it is necessary to
+  improve the binding affinity. Carbon, nitrogen and oxygen atoms
+  with the same hybridization state are allowed to mutate to each
+  other. For example, the &quot;benzene&quot; in the library
+  actually represents benzene itself and other hetero-substituted
+  six-membered aromatic rings. This strategy frees the user from
+employing numerous fragments to represent chemical structures.</p>
+
+<p align="center"><font size="3"><img src="mutate.gif"
+width="285" height="165"></font></p>
+
+<p align="center"><font color="#0000A0">Each fragment in the
+building-block library is actually a template</font></p>
+
+<p>&nbsp;&nbsp;&nbsp; We will highly appreciate it if you have
+developed your own building-block fragment library and are
+willing to share it with other LigBuilder V3 users. Please send us a
+copy of your library and we will add it to the LigBuilder V3 package
+and distribute it to the public.</p>
+
+<hr>
+
+<h4><font color="#0000FF">4</font><a name="subject_4"><font
+color="#0000FF">. How to edit the forbidden substructure library?</font></a></h4>
+
+<p>&nbsp;&nbsp;&nbsp; While building up the molecules, LigBuilder
+V3 has some built-in rules to avoid &quot;bad structures&quot;, such
+as -O-O-, -N-O-, -N-N-, and etc. But this may not be enough for
+generating reasonable lead compounds. Therefore, LigBuilder V3 could
+also use a built-out, user-maintainable fragment library as a
+supplement. We call it &quot;<font color="#0000FF">forbidden
+substructure library</font>&quot;. While building up the ligand
+molecules, the program will check each molecule to judge whether
+it contains any substructure defined in the forbidden
+substructure library. If so, this molecule will be rejected. </p>
+
+<p>&nbsp;&nbsp;&nbsp; The parameter &quot;<font color="#0000FF">APPLY_FORBIDDEN_STRUCTURE_CHECK</font>&quot;
+in the parameter file  determines whether to
+apply such checking. It could be &quot;<font color="#0000FF" class="red">YES</font>&quot;
+or &quot;<font color="#0000FF" class="red">NO</font>&quot;. </p>
+
+<p><font color="#0000FF">&nbsp;&nbsp;&nbsp; </font>LigBuilder V3 has
+provided a default forbidden substructure library. This library
+is stored at directory &quot;<font color="#0000FF">forbidden.mdb</font>&quot;.
+Each substructure is presented in a Mol2 file. There is also a
+file named &quot;<font color="#0000FF">INDEX</font>&quot; under
+that directory which lists the contents of the library. The
+format of the index file is just the same as the one for &quot;<font
+color="#0000FF">fragment.mdb</font>&quot;. You can edit that file
+to determine which substructure will be used in forbidden
+substructure checking and which will not. Please notice that if
+the <font color="#0000FF">acceptability</font> of a certain
+structure is set to 1.00, it means that this structure will be
+used in checking and thus is fully forbidden in the resultant
+molecules. On the contrary, if the acceptability is set to 0.00,
+it means that the structure will not be used in checking and thus
+could exist in the generated molecules. Here we do not recommend
+you to set an acceptability between 0 and 1 because it is rather
+weird (what does it mean if you do so?).</p>
+
+<p>&nbsp;&nbsp;&nbsp; You will find that the default forbidden
+substructure library contains only a dozen of structures because
+we believe it should be left open to you (you may have much more
+brilliant ideas than we do). You are encouraged to add new
+forbidden substructures to the library. To do so, firstly you
+should build the structure and save it in a Mol2 file. Then
+please copy it to the directory storing the library and add a
+line in the &quot;<font color="#000000">INDEX</font>&quot; file
+to define this new structure. This process is the same as the one
+for adding a fragment to the building-block fragment library. Of
+course this time you do not have to assign growing sites on your
+molecules.</p>
+
+<p>&nbsp;&nbsp;&nbsp; We will highly appreciate it if you have
+developed your own forbidden substructure library and are willing
+to share it with other LigBuilder V3 users. Please send us a copy of
+your library and we will add it to the LigBuilder V3 package and
+distribute it to the public.</p>
+
+<hr>
+
+<h4><font color="#0000FF">5</font><a name="subject_5"><font
+color="#0000FF">. How to edit the toxic substructure library? </font></a></h4>
+
+<p>&nbsp;&nbsp;&nbsp; One of the on-going projects in our lab is
+studying the structure-toxicity relationship of the organic
+compounds. We have analyzed the<font color="#000000"> Registry of
+Toxic Effects of Chemical Substances (RTECS, C2 96-4)</font>
+database and derived nearly 80 chemical structures which tend to
+be toxic. For more detailed description of this work, please
+refer to: <a href="toxic.pdf">Wang, J.; Lai, L.; Tang, Y.
+&quot;Structural features of toxic chemical for specific
+toxicity&quot;, <em>J.Chem.Inf.Comput.Sci.</em>, <strong>1999</strong>,
+<em>39</em>, 1173-1189.</a></p>
+
+<p>&nbsp;&nbsp;&nbsp; These structures have been summarized as the
+&quot;<font color="#0000FF">toxic substructure library</font>&quot;.
+It is saved in the directory &quot;<font color="#0000FF">toxicity.mdb</font>&quot;.
+The parameter &quot;<font color="#0000FF">APPLY_TOXIC_STRUCTURE_CHECK</font>&quot;
+in the parameter file (for GROW and LINK) determines whether to
+apply toxic substructure checking. It could be &quot;<font
+color="#0000FF" class="red">YES</font>&quot; or &quot;<font color="#0000FF" class="red">NO</font>&quot;.
+If it is switched on, those molecules containing any toxic
+substructures will not be collected in the resultant virtual
+library.</p>
+
+<p>&nbsp;&nbsp;&nbsp; Of course you are also free to edit this
+library. Each structure is presented in a Mol2 file. There is
+also a file named &quot;<font color="#0000FF">INDEX</font>&quot;
+under that directory which lists the contents of the library. The
+format of the index file is just the same as the one for &quot;<font
+color="#0000FF">fragment.mdb</font>&quot; or &quot;<font
+color="#0000FF">forbidden.mdb</font>&quot;. You can edit that
+file to determine which structure will be used in toxic
+substructure checking and which will not. Please notice that if
+the <font color="#0000FF">acceptability</font> of a certain
+structure is set to 1.00, it means that this structure will be
+used in checking and thus is fully forbidden in the resultant
+molecules. On the contrary, if the acceptability is set to 0.00,
+it means that the structure is not used in checking and thus
+could exist in the resultant molecules. Here we do not recommend
+you to set the acceptability between 0 and 1.</p>
+
+<p>&nbsp;&nbsp;&nbsp; You can also add new structures to this
+library. To do so, firstly you should build the structure and
+save it in a Mol2 file. Then please copy it to the directory
+storing the library and add a line in the &quot;<font
+color="#000000">INDEX</font>&quot; file to define this new
+structure. In fact, you are not restricted in considering only
+toxicity. Other properties which are important for lead
+discovery, such as chemical stability, can also been counted. You
+just add anything that you think is not proper for a potential
+lead compound to this library.</p>
+
+<p>&nbsp;&nbsp;&nbsp; We will highly appreciate it if you have
+developed your own library and are willing to share it with other
+LigBuilder V3 users. Please send us a copy of your fragment library
+and we will add it to the LigBuilder V3 package and distribute it to
+the public. </p>
+
+<hr>
+
+<h4><font color="#0000FF">6</font><a name="subject_6"><font
+color="#0000FF">. How to resume a former job?</font></a></h4>
+
+<p>&nbsp;&nbsp;&nbsp; After each generation of Build process, the program will save the current seed library to a file specified by the
+keyword &quot;<font color="#0000FF">SEED_RECORD_FILE</font>&quot;
+in the parameter file. This file is in Mol2 format. If
+you want to resume your former job, you can simply run the program with &quot;<span class="blue">Continue</span>&quot; or &quot;<span class="blue">DContinue</span>&quot; mode to resume with the seed library. This is not necessary for &quot;Automatic&quot; mode.</p>
+<hr>
+<h4><a name="subject_7" id="subject_7"><font color="#0000FF">7. How to design good molecules?</font></a></h4>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binding site:</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binding site is the base of the whole design process, users should   survey  the target receptor carefully before carrying out a design process. The  key structure information, i.e. mutation, ligand complex effects, flexibility, conformational change, metal iron, uncertain atoms around binding site, should be considered in determining the receptor. In most cases, the receptor complexed with an potent inhibitor with high resolution will be fine. </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then Cavity module will give a detection result of the receptor. Please indentify which potential site outputted is the right one manually. If the detection result is not good enough, users may change the detection parameter of Cavity and try again until the detection site could present the desired design area accurately. However, sometimes you may could not try out an appropriate parameters for Cavity, then you can simply set &quot;<span class="blue">ONLY_GENERATE_GRID</span>&quot; parameter to &quot;<span class="red">YES</span>&quot;, which force Cavity generate grid files for LigBuilder. In this case, it is better to use &quot;<span class="blue">DETECT_MODE</span>&quot; to <span class="red">2</span> or <span class="red">1</span>, which helps to locate the binding site and reduce the size of grid box, otherwise, the computational efficiency will signifcantly decrease. Anyway, force Cavity to generate grid is not recommended, it is just the last choice.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cavity will report a predicted pKd of the sites which indicates the maximal binding affinity expectation of molecules binding to it. <span class="rd">If it is less than 6.0(1uM), you may adjust the detection parameter to increase the estimation, or, imply that this binding-site may be not a suitable drug design target.</span></p>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Molecule diversity and synthesis accessibility:</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generally speaking, high diversity of the molecule is disadvantage because the  chemical structure space is extremely large and it is not difficult to find simply structure with high binding affinity, and high diversity of molecules will decrease the synthesis accessibility. But sometimes increase the diversity will help us to find novel scaffold and exert the binding affinity, so user may determine the design diversity depends on the purpose.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We suggest that  user do not change the parameter of the synthesis module at will, since we had already balanced the analysis accuracy and time consuming carefully. User may load preset parameter sets instead.</p>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp; Binding affinity:</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The default outputting pKd limit is 6.0(1uM), and user may change this according to the predicted pKd of Cavity.</p>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bioactivity:</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The false-positve ratio of de novo design process is far more important compared with virtual screening, since the expensive cost of synthesizing a new compound. LigBuilderV3 provides a &quot;recommender&quot; that applied a statistical algorithm to enhance the enrichment factor, and the recommend accuracy will increase with the increasing of number of molecules designed. So it is very important to design a huge number of molecules, the more , the better.</p>
+<hr>
+<h4><a name="subject_8" id="subject_8"><font color="#0000FF">8</font><font color="#0000FF">. How to design lead structure?</font></a></h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lead structure could be used for step-by-step design and chemical derivation. LigBuilderV3 could design lead structure with low weight and high atom efficiency.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User can enable lead design by loading the preset in the lead discovery section of  &quot;<span class="blue">LigBuilderV3/default/usersettings.input</span>&quot;. The lead design mode will limit the weight between 160~300 Da and extend the range of LogP to -2.4~7.6, besides, the minimal output pKd is 4.0(100M). Notice: It is better to use lead design strategy in Exploring mode.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then user can run the Exploring mode of Build as the same as normal design process.</p>
+<hr>
+<h4><a name="subject_9" id="subject_9"><font color="#0000FF">9. How to optimize existed molecule and lead structure?</font></a></h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build could optimize molecules based-on the starting structure derive from existed molecules and lead structures. Starting structure will be used as  seed structure of Growing mode. User should make sure that these molecules are positioned well, otherwise, user should dock them into the receptor first.<span class="red"> Please notice that all the valences on the structure
+must be fulfilled, and hydrogen atoms should be added.</span> <span class="red">Please check the atom type and bond type of your structures carefully, since these information may lost or changed during format converting</span>. You can assign the &quot;growing site&quot; following &quot;<a href="#subject_1">How to build the &quot;seed&quot;
+structure</a>&quot; or simply set &quot;<span class="blue">ADD_HSPC</span>&quot;  to &quot;<span class="rd">YES</span>&quot; to change all the hydrogen atoms to &quot;growing site&quot;.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then user can run the Growing mode of Build as the same as normal design process.</p>
+<hr>
+<h4><a name="subject_10" id="subject_10"><font color="#0000FF">10</font><font color="#0000FF">. How to design mimic inhibitor?</font></a></h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Design mimic inhibitor has many advantage above the de novo design process, it would help users to make use of the known inhibitors, bioactive nature products, even inhibitors that short of improvement   potential. As we known, active molecules implies the important interaction mode and key interaction group, hence the fragments of  active molecules are potential binding anchors. Build could  extract these anchors and try to recombine them into new molecules. Evidently molecules designed by this strategy are more reliable. In addition, the extractor tends to find important interaction rather than scaffold. Build will try to link these interaction groups by new structures, so this strategy is not likely to drag the novelty of scaffold. And of course, user should provide enough inhibitors with different binding mode to enhance the diversity. </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After extracting the known structures (Please refer to &quot;<a href="#subject_1">How to build the &quot;seed&quot;
+  structure</a>&quot;), we suggest user to check these fragments to discard irrational structures. And user may add other key fragments manually. </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Besides, user could extracting the interaction information from known structures, and user also could set special restraints based on knowledge (Please refer to &quot;<a href="#subject_13">Go deep into the control of design</a>&quot;)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User can enable mimic design by loading the preset in the mimic design section of  &quot;<span class="blue">LigBuilderV3/default/usersettings.input</span>&quot;. Notice: It is better to use mimic design strategy in Linking mode (if seed structure&gt;5), Growing mode(if seed structure &lt;=5). User may increase the &quot;<span class="blue">MINIMAL_LINKING_NUMBER</span>&quot; if you have   sufficient extracting fragments(seed structre &gt;100). Default is 2, that is, Build will output molecules that content two seed fragments.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then user can run the Growing/Linking mode of Build as the same as normal design process.&nbsp;&nbsp;</p>
+<hr>
+<h4><a name="subject_11" id="subject_3"><font color="#0000FF">11. How to use multi-target design?</font></a></h4>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>The flow of performing multi-target design (<span class="blue">PROTEIN_NUM</span>&gt;1) is very similar to performing single-target design(<span class="blue">PROTEIN_NUM</span>=1). Simply, user should run Cavity for each target, and collect known inhibitors (if exists) and prepare seed strctures for each target separately. Everything you should do is same with single-target design except that you need to repeat the preparation steps for each target (special requirment for growing or linking mode: common seed structures for each targets are needed). But, it should be noticed that multi-target design may be impossible to achevie high binding affinity due to more restraints from multiple targets, so all the requirment should be carefully revised. User could run it with default parameters, and then check the &quot;<span class="blue">active_TaskName.list</span>&quot; (e.g. active_1db4.list) to inspect the status of design for adjusting parameters. </p>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>The weight of each target could be different in design, user could set <span class="blue">MULTI_WEIGHT</span> parameters for individual targets. For example, if you want to perform a 3 targets design, however, the target 2 is not as important as the other two, then you can set <span class="blue">MULTI_WEIGHT[2]</span> to 0.5 whereas <span class="blue">MULTI_WEIGHT[1]</span> and <span class="blue">MULTI_WEIGHT[3]</span> to 1.0, which will lead LigBuilder to pay more attention to target 1 and 3 in design.</p>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>Multi-target design also could be done in single target, to be precise, it is a multi-conformation design algorithm. User could design a ligand that binding to different binding site of a target, or design a ligand that binding to a ligand binding site with different conformation. This is a promising way of design lead compounds, because multiple possible binding conformation may increase the binding affinity, and decrease the risky of &quot;false positive&quot;. This is also useful for design compounds <span class="red">targeting multi-conformation proteins or even disordered proteins</span>.</p>
+<hr>
+<h4><a name="subject_12" id="subject_2"><font color="#0000FF">12. How to build own synthetic material database?</font></a></h4>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#000000" size="3"> LigBuilder has already provided two material databases in the package, including Sigma Building Block (</font><span class="blue">LigBuilderV3/synthesize.mdb/MATERIAL-SIGMA-BB.INDEX</span>) and ZINC&amp;ACD (<span class="blue">LigBuilderV3/synthesize.mdb/MATERIAL-ZINC-ACD.INDEX</span>).<font
+color="#000000" size="3"> User may copy the selected database to <span class="blue">LigBuilderV3/synthesize.mdb/MATERIAL.INDEX</span> to take effect. (Default is Sigma building block) User could also obtain other commercial available molecules database as the material library of LigBuilder V3, e.g. ACD, ZINC, SPECS or other databases which user may gain these entities for synthesis.</font> If material library is absence, LigBuilder will judge the material by some simple experiential rules.</p>
+<p><font color="#000000">&nbsp;</font><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	If you would like to construct your own database, please convert your material library file to <span class="red">Mol2 format </span>and set to the corresponding path of the parameter<span class="blue"> SYNTHESIZE_MATBUILD</span></font>. Please notice: user should <span class="red">assign the source or name of the molecule as the title of molecule </span>(e.g. ZINC00018471) <span class="red">if the current title is not   recognizable</span> , as LigBuilder V3 will use the title to indentify where the material molecule come from. All the valences on these structures
+must be fulfilled, and <span class="red">hydrogen atoms should be added</span>. Please check the atom types and bond types of your structures carefully, as these information may be lost or changed during format converting. <font color="#000000">&nbsp;Entering the working directory and build database by following commands (default input path is &quot;<span class="blue">LigBuilderV3/build/material.mol2</span>&quot;):</font></p>
+<p align="left"><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#FF0000" size="3"> cd LigBuilderV3/build</font><br>
+<font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#FF0000" size="3"> ./build -MatDatabase material.input</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="red">&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+<hr>
+<h4><a name="subject_13" id="subject_"><font color="#0000FF">13. Go deep into the control of design</font></a></h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drug design is a very complex and delicate work, we should not expect that there is an universal strategy for every drug target. Although LigBuilder V3 could work with very little human intervention, any knowledge from users should help a lot for the design. LigBuilder V3 also provide many  paramters for controling the design process and relizing the user's intention.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Defined interactions: </strong>It is feasbile for user to define the hot spot or custom the design process by defining key interactions. User could define detailed interactions between protein and ligand to custom the design of desired interactions or block undesired interactions. Set &quot;<span class="blue">APPLY_KEY_INTERACTION</span>&quot; to &quot;<span class="red">YES</span>&quot; to enable this function. Please refer to &quot;<span class="blue">LigBuilderV3/example/key_interaction</span>&quot; to learn how to describe the interaction. </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Baised scoring function:</strong> LigBuilder V3 could use fragments from known inhibitors, however, it could use only a little of information from known inhibitors in this way. Alternatively, LigBuilder V3 could construct a baised scoring function based on the known inhibitors, which could help to use more information from known inhibitor to guide the design. User could use &quot;-Interaction&quot; function to extract interaction grid, and set &quot;<span class="blue">APPLY_KEY_INTERACTION</span>&quot; to &quot;<span class="red">YES</span>&quot; to enable it.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>External call:</strong> LigBuilder V3 has many built-in modules for estimatinge the priority of ligand during the design process, however, you may have you own idea in prioritizing ligand for your target. Ligbuilder V3 provides a interface for incoprating user's software into design process. Set &quot;<span class="blue">APPLY_EXTERNAL_CALL</span>&quot; to &quot;<span class="red">YES</span>&quot; and  to enable this function. Please refer to &quot;<span class="blue">LigBuilderV3/example/external_call</span>&quot; to learn how to use this function. User may use any external algorithm, such as ADMET, BBB model, other scoring functions, similarity search. I also suggest user to use synthetic complexity score (e.g. scscore: <a href="https://github.com/connorcoley/scscore">https://github.com/connorcoley/scscore</a>) in design, it will helps to generate more rational results. But it should be noticed that external call will drag the performance if it is too slow.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Structure settings</strong>: </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">GROWING_SEQ</span>: The most important structural control parameters which determined the maximal number of specific fragments in the designed compounds. Please refer to &quot;<span class="blue">LigBuilderV3/default/default.input</span>&quot; for details. <span class="blue">FILTER_SEQ</span> is usually same with &nbsp;<span class="blue">GROWING_SEQ</span>, however, if user changed the requirement during design process, user may change <span class="blue">FILTER_SEQ</span> to removed undesired ligands in filter stage.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">WINS_BINDING_SCORE_ADJUST, WINS_BINDING_SCORE_AVERAGE, WINS_STRUCTURE_SCORE, WINS_SYNTHESIZE_SCORE, WINS_CHEMICAL_SCORE</span>: Weight of binding score, average binding score (bindscore/number of heavy atoms), structure score (Key-lock maching score), synthesis score, chemical score..</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">MAXIMAL_NORING:</span> maximal heavy atom number if no ring structure exist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">MAXIMAL_BRANCHPERCENT:</span> maximal heavy atom number percent of all branches<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">MAXIMAL_SINGLEBRANCH:</span> maximal heavy atom number of a single branch<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">MAXIMAL_HMVSHB:</span> maximal ratio of hydrophobic interaction vs hydrogen bond</p>
+<hr>
+
+<p align="center"><a href="index.html">[Content]</a> <a
+href="intro.html">[Introduction]</a> <a href="download.html">[Download]</a>
+<a href="install.html">[Install]</a> <a href="overview.html">[Overview]</a>
+<a href="cavity.html">[Cavity]</a> <a href="build.html">[Build]</a> [Skills] <a href="faq.html">[FAQs]</a></p>
+
+<p align="center"><font size="2"><em>(These web pages are edited
+by Yaxia Yuan. Latest update: Oct., 2019)</em></font></p>
+</body>
+</html>

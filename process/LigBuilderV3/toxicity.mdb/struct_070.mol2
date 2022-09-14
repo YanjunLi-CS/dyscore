@@ -1,0 +1,72 @@
+#	Name:			struct_081
+#	Creating user name:	arthur
+#	Creation time:		Fri Jan  1 21:45:32 1999
+
+#	Modifying user name:	arthur
+#	Modification time:	Fri Jan  1 21:46:46 1999
+
+@<TRIPOS>MOLECULE
+struct_081
+   24    25     2     1     0
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 N1         -0.0637    0.3717    0.6680 N.ar      1 PHENYL      0.0000 
+      2 C           1.2749    0.3369    0.8280 C.ar      1 PHENYL      0.0000 
+      3 C           2.0796    1.2136    0.0947 C.ar      1 PHENYL      0.0000 
+      4 N4          1.5106    2.0834   -0.7642 N.ar      1 PHENYL      0.0000 
+      5 C           0.1719    2.1177   -0.9239 C.ar      1 PHENYL      0.0000 
+      6 C          -0.6338    1.2417   -0.1907 C.ar      1 PHENYL      0.0000 
+      7 N7          3.4856    1.1966    0.2457 N.3       2 CYCLOHEXYL    0.0000 
+      8 C2          4.2301    0.0402   -0.2973 C.3       2 CYCLOHEXYL    0.0000 
+      9 C3          5.7219    0.4093   -0.4877 C.3       2 CYCLOHEXYL    0.0000 
+     10 N10         6.2924    0.9118    0.7794 N.3       2 CYCLOHEXYL    0.0000 
+     11 C5          5.5491    2.0735    1.3098 C.3       2 CYCLOHEXYL    0.0000 
+     12 C6          4.0564    1.7126    1.5084 C.3       2 CYCLOHEXYL    0.0000 
+     13 H1          1.7164   -0.3688    1.5224 H         1 PHENYL      0.0000 
+     14 H2         -0.2699    2.8235   -1.6189 H         1 PHENYL      0.0000 
+     15 H3         -1.7121    1.2558   -0.3066 H         1 PHENYL      0.0000 
+     16 H4          3.8033   -0.2523   -1.2708 H         2 CYCLOHEXYL    0.0000 
+     17 H5          4.1377   -0.8150    0.3916 H         2 CYCLOHEXYL    0.0000 
+     18 H6          6.2921   -0.4687   -0.8338 H         2 CYCLOHEXYL    0.0000 
+     19 H7          5.8098    1.1950   -1.2554 H         2 CYCLOHEXYL    0.0000 
+     20 H8          6.3327    0.1189    1.5173 H         2 CYCLOHEXYL    0.0000 
+     21 H9          5.9942    2.3995    2.2646 H         2 CYCLOHEXYL    0.0000 
+     22 H10         5.6324    2.9077    0.5945 H         2 CYCLOHEXYL    0.0000 
+     23 H11         3.9539    0.9511    2.2983 H         2 CYCLOHEXYL    0.0000 
+     24 H12         3.5057    2.6141    1.8236 H         2 CYCLOHEXYL    0.0000 
+@<TRIPOS>BOND
+     1    1    2 ar   
+     2    1    6 ar   
+     3    6    5 ar   
+     4    5    4 ar   
+     5    4    3 ar   
+     6    3    2 ar   
+     7    7    8 1    
+     8    7   12 1    
+     9   12   11 1    
+    10   11   10 1    
+    11   10    9 1    
+    12    9    8 1    
+    13    3    7 1    
+    14    2   13 1    
+    15    5   14 1    
+    16    6   15 1    
+    17    8   16 1    
+    18    8   17 1    
+    19    9   18 1    
+    20    9   19 1    
+    21   10   20 1    
+    22   11   21 1    
+    23   11   22 1    
+    24   12   23 1    
+    25   12   24 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 PHENYL      1 PERM              0 ****  ****    1 ROOT 
+     2 CYCLOHEXYL     7 PERM              0 ****  ****    1  
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 0 0 0 0 0 0 0 0 0 0 0 0 0

@@ -1,0 +1,113 @@
+#
+# Forbidden substructure library used in LigBuilder   --- Arthur  Mar 29, 1999
+#
+# The 1st column: substructure ID
+# The 2nd column: substructure file name
+# The 3rd column: possibility of application
+#
+#
+# Abnormalities:
+#
+1	struct_001.mol2		1.00
+2	struct_002.mol2		1.00
+3	struct_003.mol2		1.00
+4	struct_004.mol2		1.00
+5	struct_005.mol2		1.00
+6	struct_006.mol2		1.00
+7	struct_007.mol2		1.00
+8	struct_008.mol2		1.00
+9	struct_009.mol2		1.00
+#
+# Autonomic nervois system
+#
+10	struct_010.mol2		1.00
+11	struct_011.mol2		1.00
+12	struct_012.mol2		1.00
+13	struct_013.mol2		1.00
+14	struct_014.mol2		1.00
+15	struct_015.mol2		1.00
+16	struct_016.mol2		1.00
+17	struct_017.mol2		1.00
+18	struct_018.mol2		1.00
+#
+# Blood
+#
+19	struct_019.mol2		1.00
+20	struct_020.mol2		1.00
+21	struct_021.mol2		1.00
+#
+# Brain and covering/CNS
+#
+22	struct_022.mol2		1.00
+23	struct_023.mol2		1.00
+24	struct_024.mol2		1.00
+25	struct_025.mol2		1.00
+26	struct_026.mol2		1.00
+27	struct_027.mol2		1.00
+28	struct_028.mol2		1.00
+29	struct_029.mol2		1.00
+30	struct_030.mol2		1.00
+31	struct_031.mol2		1.00
+32	struct_032.mol2		1.00
+33	struct_033.mol2		1.00
+34	struct_034.mol2		1.00
+#
+# Gastroinstestinal
+#
+35	struct_035.mol2		1.00
+36	struct_036.mol2		1.00
+37	struct_037.mol2		1.00
+38	struct_038.mol2		1.00
+#
+# Glands
+#
+39	struct_039.mol2		1.00
+40	struct_040.mol2		1.00
+#
+# Kidney, ureter, bladder, liver, and lung
+#
+41	struct_041.mol2		1.00
+42	struct_042.mol2		1.00
+43	struct_043.mol2		1.00
+44	struct_044.mol2		1.00
+#
+# Mutation
+#
+45	struct_045.mol2		1.00
+46	struct_046.mol2		1.00
+47	struct_047.mol2		1.00
+48	struct_048.mol2		1.00
+49	struct_049.mol2		1.00
+50	struct_050.mol2		1.00
+51	struct_051.mol2		1.00
+#
+# Skin
+#
+52	struct_052.mol2		1.00
+53	struct_053.mol2		1.00
+54	struct_054.mol2		1.00
+#
+# Tumor
+#
+55	struct_055.mol2		1.00
+56	struct_056.mol2		1.00
+57	struct_057.mol2		1.00
+58	struct_058.mol2		1.00
+59      struct_059.mol2		1.00
+60      struct_060.mol2		1.00
+61      struct_061.mol2		1.00
+62      struct_062.mol2		1.00
+63      struct_063.mol2		1.00
+64      struct_064.mol2		1.00
+#
+# Vascular
+#
+65      struct_065.mol2		1.00
+66      struct_066.mol2		1.00
+67      struct_067.mol2		1.00
+68      struct_068.mol2		1.00
+69      struct_069.mol2		1.00
+70      struct_070.mol2		1.00
+71      struct_071.mol2		1.00
+72      struct_072.mol2		1.00
+#

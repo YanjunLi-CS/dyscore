@@ -1,0 +1,908 @@
+############################################################
+#   Author Tag
+#   --Project author name
+############################################################
+#AUTHOR_TAG				User
+############################################################
+#   Include section
+#   --Include other parameters files
+############################################################
+#INCLUDE                                 ./default/default.input
+############################################################
+#   Predefine section
+#   --User can define other parameter as:
+#     $NAME$				content
+#    -Predefine name affact all parameters of each include section
+#    -Redefinable
+############################################################
+#$TASK_NAME$				1db4
+#$CAVITY_ID$				1
+#$RECEPTOR_DIR$				1db4
+#$RESULT_DIR$				result
+############################################################
+#   Avaliable function tag
+#   --[Process]: -Process Function
+#   --[Filter]: -Filter Function
+#   --[Score]: -Score Function
+#   --[Recommend]: -Recommend Function
+#   --[Cluster]: -Cluster Function
+#   --[ReportCls]: -ReportCls Function
+#   --[Synthesize]: -Synthesize Function
+#   --[ReportSyn]: -ReportSyn Function
+#   --[Seed]: -Extract/Combine Function
+#   --[Interaction]: -Extract Interaction Function
+#   --[Derivation]: -Derivation Function
+#   --[ExtLibrary]: -ExtLibrary Function
+#   --[RotLibrary]: -RotLibrary Function
+#   --[SynDatabase]: -SynDatabase Function
+#   --[MetDatabase]: -MetDatabase Function
+#   --[Exploring]: DESIGN_MODE = 0
+#   --[Growing]: DESIGN_MODE = 1
+#   --[Linking]: DESIGN_MODE = 2
+############################################################
+#   Avaliable multi tag
+#   --PARAMETER[] or PARAMETER (no tag):  Default for all targets
+#   --PARAMETER[n]: Only valid for protein id n (n=1~10)
+#   --PARAMETER[n-m]: Valid for protein id is among n-m (n,m=1~10)
+#   --[n]PARAMETER:Only valid when target num is n (n=1~10)
+#   --[n-m]PARAMETER:Valid when target num is among n-m (n,m=1~10)
+############################################################
+#   Automatic section
+#   --Continue mode:
+#     YES : Continue with previous seeds and results
+#     No  : Overwrite results and regenerating seeds
+#   --Session number: the number of sessions you'll run
+#     suggestion: 50 at least, default 100, the more, the better.
+#     If your computing resource is limited, please
+#     apply speedup strategy, or ligbuilder may not
+#     finish your job within a reasonable time
+#   --Molecule number: stop condition
+#     Suggestion: 
+#     --Single target:
+#       Min pKd>4 : 100K at least, default 1M
+#       Min pKd>5 : 50K at least, default 500K
+#       Min pKd>6 : 10K at least, default 100K
+#     --Multi targets:
+#       Min pKd>4 : 20K at least, default 200K
+#       Min pKd>5 : 10K at least, default 100K
+#       Min pKd>6 : 2K at least, default 20K
+#   --Runlist: 
+#     please run commands in this files in your cluster manually!
+#   --Activelist:
+#     Id of active/nonactive rounties,
+#     User may restart nonactive session manually
+#   --Execute sequence (Stage ID):
+#     -Daemon mode(Continue:No)/DContinue mode(Continue:Yes) (1)
+#     -Process (2)
+#     -Filter (3)
+#     -Score (4)
+#     -Recommend (5,Single CPU)
+#     -Cluster (6,Sinlge CPU)
+#     -ReportCls (7,Single CPU)
+#     -Synthesize (8)
+#     -ReportSyn (9,Single CPU)
+#     (Single CPU: Only the automatic server needed)
+#     Output final report to "REPORT_HTML"
+#   --Attention:
+#     All output directory and files may be cleaned up
+#   --Load: HardDisk load control
+############################################################
+CONTINUE_MODE				YES
+SESSION_NUMBER				50
+MOLECULE_NUMBER				1000000
+RUN_LIST				run_$TASK_NAME$.list
+ACTIVE_LIST				active_$TASK_NAME$.list
+START_STAGE                             1
+END_STAGE                               9
+MINIMAL_PROCESS_SESSION                 50
+HD_LOAD_PROCESS                         3
+HD_LOAD_SCORE                           3
+HD_LOAD_FILTER                          1.5
+MAXIMAL_LOAD                            200
+OCCUPY_MEMORY                           0
+############################################################
+#   Design section
+############################################################
+############################################################
+#   Input section
+############################################################
+#----------------------------------------------------------
+#   Ligand seed (optional)
+#   ---Mol2 seeds list (Max:2000) 
+#   ---Optimize_seed: optimize binding conformation
+#   ---Tolerate_bump: ignore vdw bumps caused by seed
+#      including intermolecule bump & intramolecule bump
+#   ---Tolerate_chemical:ignore chemical score of seed
+#   ---Seed diagnose:  YES: Output details
+#----------------------------------------------------------
+SEED_LIGAND_LIST			receptor/extract/INDEX
+ADD_HSPC				NO
+OPTIMIZE_SEED[] 			NO
+TOLERATE_INTER_BUMP[]    		NO
+TOLERATE_INTRA_BUMP[]	        	NO
+TOLERATE_CHEMICAL[]	        	NO
+SEED_DIAGNOSE                           NO
+[Growing]ADD_HSPC			YES
+[Growing]TOLERATE_INTER_BUMP[]		YES
+[Growing]TOLERATE_CHEMICAL[]	        YES
+[Linking]ADD_HSPC			YES
+[Linking]TOLERATE_INTER_BUMP[]		YES
+[Linking]TOLERATE_CHEMICAL[]	        YES
+#----------------------------------------------------------
+#   Binding site information
+#   --Support multiply receptors (Max:10)
+#     Lead to multi-Target / multi-Mode
+#   --Read protein hydrogen
+#     YES: Keep the hydrogen in the protein file
+#     NO:  Assign hydrogen by LigBuilder
+#   --Protein file: receptor file,in PDB format
+#     Not necessary when READ_PROTEIN_HYDROGEN is NO and
+#     REPORT_FIGURE_TYPE is 0
+#----------------------------------------------------------
+PROTEIN_NUM                            1
+#POCKET_ATOM_FILE[1]			1db4/1db4_pocket_1.txt
+#POCKET_GRID_FILE[1]			1db4/1db4_grid_1.txt
+#PROTEIN_FILE[1]			1db4/1db4.pdb
+MULTI_WEIGHT[1]                        1.0
+READ_PROTEIN_HYDROGEN[]                 NO
+#----------------------------------------------------------
+#   --Key interaction
+#     Define key interaction manually
+#     There is a template in ../default/key_interaction
+#   --Key interaction grid
+#     Extracted key interaction
+#----------------------------------------------------------
+APPLY_KEY_INTERACTION                   NO
+KEY_INTERACTION                         none
+KEY_INTERACTION_GRID                    none
+KEY_INTERACTION_WEIGHT[]                0.5
+#----------------------------------------------------------
+#   Target design
+#   --Target Directory : mdb format(INDEX)
+#----------------------------------------------------------
+APPLY_TARGET_DESIGN			NO
+TARGET_DIRECTORY 			example/inhibitor-fragments/
+TARGET_CUTOFF				0.5
+############################################################
+#   Output section
+############################################################
+LIGAND_COLLECTION_FILE			$RESULT_DIR$/output_$TASK_NAME$/ligand.lig
+LEAD_OUTPUT			        NO
+LEAD_COLLECTION_FILE			$RESULT_DIR$/output_$TASK_NAME$/lead.lig
+SEED_RECORD_FILE			$RESULT_DIR$/output_$TASK_NAME$/seed.lig
+CONTROL_FILE				$RESULT_DIR$/output_$TASK_NAME$/control.lig
+STATUS_FILE				$RESULT_DIR$/output_$TASK_NAME$/status.lig
+############################################################
+#   Control section
+#   --Random seed number: set random seed
+#     Natural number: Manually assignment 
+#     -1: Time dependent seed(default)
+#     -2: Id dependent seed (Id needed)
+#   --Notice:
+#     -Time dependent seed is intrinsic random and
+#            it is impossible to be repeated in individual
+#             runs even if they are executed in the extactly
+#            same environments and starting time.
+#     -Id dependent will be repeatable with same id.
+#     -Natural number seed will be repeatable with same number.
+############################################################
+RANDOM_SEED					-1
+############################################################
+#   Molecule parameter section
+############################################################
+#----------------------------------------------------------
+#   Chemical viability rules / Record results
+#   --Ghose et al,1999:
+#     logp -0.4~5.6 prefer 1.3~4.1
+#     wt 160~480 prefer 230~390
+#     atom number 20~70 prefer 30~55
+#   --Aver pkd: affinity/(heavy_atom_num)
+#     real drugs always greater than 0.22   (0.3/1.37)
+#     set 0.22(single)/0.20(multi) for balance
+#   --Maximal output results (exploring mode)
+#     set 0 for unlimited designation
+#----------------------------------------------------------
+APPLY_CHEMICAL_RULES			YES
+MAXIMAL_MOLECULAR_WEIGHT		500
+MINIMAL_MOLECULAR_WEIGHT		160
+MAXIMAL_LOGP				5.6
+MINIMAL_LOGP				-0.4
+MAXIMAL_HB_DONOR_ATOM			10
+MINIMAL_HB_DONOR_ATOM			2
+MAXIMAL_HB_ACCEPTOR_ATOM		10
+MINIMAL_HB_ACCEPTOR_ATOM		2	
+MAXIMAL_PKD				16.00
+MINIMAL_PKD[]	        		4
+MINIMAL_AVER_PKD[]			0.18
+[2-10]MINIMAL_AVER_PKD[]		0.16
+[Growing]MINIMAL_AVER_PKD[]		0.18
+[Linking]MINIMAL_AVER_PKD[]		0.18
+[Growing][2-10]MINIMAL_AVER_PKD[]	0.16
+[Linking][2-10]MINIMAL_AVER_PKD[]	0.16
+MAXIMAL_RESULTS				10000000
+#----------------------------------------------------------
+#   Structure rules
+#   --Growing Seq: ABCDEFGHIJKLMNOPQ
+#     A:sulfur				
+#     B:phosphor			
+#     C:halogen				
+#     D:nitro				
+#     E:semisaturated ring	(ring num)
+#     F:hetero ring		(ring num)	
+#     G:unsaturated branch	(bond num)
+#     H:e-link branch    	(bond num)
+#     I:aromatic link
+#     J:ring link
+#     K:ring number
+#     L:ring system number
+#     M:bigring branch          (max for each ring)
+#     N:bigaromatic branch      (max for each ring)
+#     O:smallring branch        (max for each ring)
+#     P:smallaromatic branch    (max for each ring)
+#     Q:phenolic hydroxyl       (max for each ring)
+#     Value: 0:forbiden/1~8:maximal num/9:allow
+#   --HMVSHB: suggest less than 1.25
+#   --ChemicalScore: greater than -200
+#----------------------------------------------------------
+APPLY_FORBIDDEN_STRUCTURE_CHECK		YES
+APPLY_TOXIC_STRUCTURE_CHECK		YES
+APPLY_FINAL_STRUCTURE_CHECK		YES
+APPLY_SYNTHESIZE_CHECK			YES
+APPLY_ADMET_RULES			YES
+APPLY_DEFAULT_PARAMETER			NO
+#GROWING_SEQ MARK                       ABCDEFGHIJKLMNOPQ
+GROWING_SEQ				00201310114321331
+AROMATIC_LINK_PROBABILITY		0.20	
+RING_LINK_PROBABILITY			0.50
+#SMALL_FRAGMENTS_PROBABILITY             0.50	
+#SMALL_FRAGMENTS_MAX_NONH                6
+[Linking]SMALL_FRAGMENTS_PROBABILITY    0.70
+[Linking]SMALL_FRAGMENTS_MAX_NONH       4
+MAXIMAL_BUMP[]				5
+MAXIMAL_NORING				8
+MAXIMAL_BRANCHPERCENT			70
+MAXIMAL_SINGLEBRANCH			8
+MAXIMAL_HMVSHB[]			1.25
+MINIMAL_STRUCTURE_SCORE[]		0
+MINIMAL_CHEMICAL_SCORE[]		-200
+[Growing]MAXIMAL_BUMP[]			7
+[Growing]MAXIMAL_NORING			9
+[Growing]MAXIMAL_BRANCHPERCENT		80
+[Growing]MAXIMAL_SINGLEBRANCH		8
+[Growing]MAXIMAL_HMVSHB[]		1.7
+[Growing]MINIMAL_CHEMICAL_SCORE[]	-300
+[Linking]MAXIMAL_BUMP[]			7
+[Linking]MAXIMAL_NORING			9
+[Linking]MAXIMAL_BRANCHPERCENT		80
+[Linking]MAXIMAL_SINGLEBRANCH		8
+[Linking]MAXIMAL_HMVSHB[]		1.7
+[Linking]MINIMAL_CHEMICAL_SCORE[]	-400
+############################################################
+#   Design parameter section
+############################################################
+#----------------------------------------------------------
+#   Design Mode
+#   --0:Exploring mode
+#     1:Growing mode
+#     2:Linking mode
+#----------------------------------------------------------
+DESIGN_MODE				0
+#----------------------------------------------------------
+#   Genetic algorithm parameters
+#   --Single receptor need larger percent of parents
+#     suggest for single receptor:
+#     Exploring:7~12/500/50(GEN/POP/PAR)
+#     Growing:10~15/5000/500(GEN/POP/PAR)
+#     Linking:10~15/1000/100(GEN/POP/PAR)
+#     suggest for multi receptors:
+#     Exploring:7~12/300/60(GEN/POP/PAR)
+#     Growing:10~15/3000/600(GEN/POP/PAR)
+#     Linking:10~15/600/120(GEN/POP/PAR)
+#     reduce POP/PAR numbers above for more diversity
+#   --Cycle turn : empty growing robust level
+#     suggest for single receptor 5 
+#     suggest for multi receptors 10~20
+#   --Single receptor need larger multi count
+#     multi_count counts the similiar 2D structure for each protein
+#     sim_count counts the similiar 3D structure for each protein
+#     suggest single receptor: 10/5(MC/SC)
+#     suggest multi receptors: 10/5(MC/SC) 
+#   --Multi_count 0 :unlimited multi combine
+#   --Suggest maximal_count 50(single receptor)
+#             maximal_count 30(multi receptors)
+#----------------------------------------------------------
+[1]POPULATION_POOL 			10
+[2]POPULATION_POOL 			5
+[3]POPULATION_POOL 			4
+[4]POPULATION_POOL 			3
+[5]POPULATION_POOL 			2
+[6-10]POPULATION_POOL 			1
+NUMBER_OF_GENERATION			15
+NUMBER_OF_POPULATION			500
+NUMBER_OF_PARENTS			50
+ELITISM_RATIO				0.10
+SIMILARITY_CUTOFF			0.90
+CYCLE_TURN				5
+MULTI_COUNT				10
+SIM_COUNT				5
+MAXIMAL_COUNT				50
+[2-10]MAXIMAL_COUNT			30
+MULTI_SEED_DESIGN			3
+[Growing]NUMBER_OF_GENERATION		15
+[Growing]NUMBER_OF_POPULATION		5000
+[Growing]NUMBER_OF_PARENTS		500
+[Growing]MULTI_SEED_DESIGN		5
+[Growing]CYCLE_TURN			20
+[Growing][2-10]CYCLE_TURN		50
+[Linking]NUMBER_OF_GENERATION		15
+[Linking]NUMBER_OF_POPULATION		1000
+[Linking]NUMBER_OF_PARENTS		100
+[Linking]MULTI_SEED_DESIGN		10
+[Linking]CYCLE_TURN			50
+[Linking][2-10]CYCLE_TURN		70
+#----------------------------------------------------------
+#   Linking mode parameters
+#----------------------------------------------------------
+MAXIMAL_LINKING_NUMBER			7
+MINIMAL_LINKING_NUMBER			2
+LINKING_PRIORITY			0.5
+LINK_BIT_LEVEL                          1
+LINK_ENERGY_CUTOFF                      0.5
+ATOM_OVERLAP_RANGE_LINK                 0.8
+ANGLE_OVERLAP_RANGE_JOIN                15.0
+ANGLE_OVERLAP_RANGE_BRIDGE              15.0
+#----------------------------------------------------------
+#   Structural construction parameters
+#----------------------------------------------------------
+GROWING_PROBABILITY			1.00
+LINKING_PROBABILITY			1.00
+MUTATION_PROBABILITY			0.00
+GREEDY_GROWING				NO
+BUILD_WATER_BRIDGE			NO
+APPLY_COMPETITIVE_HBOND			YES
+METAL_PRIORITY[]			1
+#----------------------------------------------------------
+#   External Data for Ranking
+#   -- Provide additional scores by external program 
+#----------------------------------------------------------
+#APPLY_EXTERNAL_CALL                     NO
+#EXTERNAL_CALL_FILE                      none
+#EXTERNAL_CALL_TEST_FILE                 ../default/external_call_test_file.mol2
+#EXTERNAL_INPUT_FILE           		$RESULT_DIR$/output_$TASK_NAME$/external.mol2
+#EXTERNAL_OUTPUT_FILE           		$RESULT_DIR$/output_$TASK_NAME$/external.dat
+#----------------------------------------------------------
+#   Wins balance
+#   --Weight of each estimation iteams
+#   --Lower score average for multi-target
+#     eg: 0.8
+#----------------------------------------------------------
+WINS_BINDING_SCORE_ADJUST[]		1.0
+WINS_BINDING_SCORE_AVERAGE[]		1.0
+WINS_STRUCTURE_SCORE[]			0.7
+WINS_SYNTHESIZE_SCORE[]			1.0
+WINS_CHEMICAL_SCORE[]			0.5
+#----------------------------------------------------------
+#   Optimize parameters
+#   --Optimization intensity
+#----------------------------------------------------------
+OPTIMIZE_PROBABLITY[]			0.8
+OPTIMIZE_NUMBER[]			50
+MAXIMAL_ADJUST_DISTANCE[]		0.3
+MAXIMAL_ADJUST_ROTATE[]			3.0
+MAXIMAL_ADJUST_TORSION[]		5.0
+#----------------------------------------------------------
+#   Stable estimate
+#----------------------------------------------------------
+APPLY_STABLE_ESTIMATE			YES
+#----------------------------------------------------------
+#   Structure lock-key matching
+#----------------------------------------------------------
+APPLY_STRUCTURE_MATCHING		YES
+#----------------------------------------------------------
+#   Depth tendency
+#----------------------------------------------------------
+APPLY_DEPTH_TENDENCY			YES
+#----------------------------------------------------------
+#   Skip seed file vdw  bumps
+#----------------------------------------------------------
+SKIP_SEED_BUMPS				NO
+#----------------------------------------------------------
+#   Parallel parameter
+#   --Internal duplication number (NOT MultiCore or Threads)
+#     Set 1 unless special application
+#----------------------------------------------------------
+PARALLEL_NUM				1
+#----------------------------------------------------------
+#   Seed libirary
+#   --Seed generator: initilize seed library
+#     suggest for single receptor 10 (full rotate lib)
+#     suggest for multi receptor 30 (full rotate lib)
+#   --Average pkd: affinity/heavy_atom_num
+#   --Single receptor need larger multi/single count
+#     multi_count counts the 2D similiar structures
+#     sim_count counts the 3D similiar strucutres
+#     suggest for single receptor 10/5/10/5(SMC/SSC/SCMC/SCSC)
+#     suggest for multi receptors 10/3/5/2(SMC/SSC/SCMC/SCSC)
+#   --Life: seed life time
+#     multi target need long seed life
+#     suggest for single 3 multi 10
+#----------------------------------------------------------
+SEED_GENERATOR				10
+SEED_LIB				2000
+SEED_CHAIN				50000
+SEED_AVER_PKD[]				0.1
+SEED_LIFE				3
+SEED_LOCKTIME				30
+SEED_EXTEND_PROBABILITY			0.00
+SEED_MULTI_COUNT			10
+SEED_SIM_COUNT  			5
+SEED_CHAIN_MULTI_COUNT			10
+SEED_CHAIN_SIM_COUNT			5
+[2-10]SEED_MULTI_COUNT			10
+[2-10]SEED_SIM_COUNT  			3
+[2-10]SEED_CHAIN_MULTI_COUNT	        5
+[2-10]SEED_CHAIN_SIM_COUNT		2
+[Seed]SEED_LIB	        		500000
+[Seed]SEED_CHAIN			10000000
+[Seed]SEED_MULTI_COUNT			1000
+[Seed]SEED_SIM_COUNT  			100
+[Seed]SEED_CHAIN_MULTI_COUNT		2000
+[Seed]SEED_CHAIN_SIM_COUNT		200
+[Seed]SIMILARITY_CUTOFF	        	0.99
+[Linking]SEED_LIB	       		500000
+[Linking]SEED_CHAIN			5000000
+[Linking]SEED_MULTI_COUNT		500
+[Linking]SEED_SIM_COUNT  		50
+[Linking]SEED_CHAIN_MULTI_COUNT		500
+[Linking]SEED_CHAIN_SIM_COUNT		50
+[Linking]SIMILARITY_CUTOFF        	0.99
+[ExtLibrary]SEED_LIB			50000000
+[ExtLibrary]SIMILARITY_CUTOFF		0.99
+#----------------------------------------------------------
+#   Synthesieze
+#   --Use small custom prime to control memory consume
+#     use big prime to accelerate retro-synthesize
+#   --Prime list:104395301(800MB memory),86028157,67867979,
+#   49979693(400MB),32452867(300MB), 15485867(150MB, at least)
+#   --Search mode 0 :  accept guesstimate
+#     search mode 1 :  reject guesstimate
+#     search mode 2 :  use guesstimate only in rank
+#     search mode 3 :  YES/NO mode
+#   --Limit searh 0 :  disabled
+#     limit searh 1 :  stop if meet reaction num
+#     limit searh 2 :  stop if meet cost
+#     limit searh 3 :  stop if meet 1 or 2
+#     limit searh 4 :  stop if meet both 1 and 2
+#     limit searh 5 :  stop if meet 1 while 2
+#   --Default material cost: default value if not assigned
+#   --Default material nonh: 6~12
+#   --Strategy 0~2, default 1.0
+#   --Shared memory size (MB)
+#----------------------------------------------------------
+SHARED_MEMORY                           YES
+SHARED_MEMORY_SIZE                      2048
+PRINCIPLE_SYNTHESIZE			YES
+REACTION_SYNTHESIZE			YES
+KNOWLEDGE_SYNTHESIZE			NO
+CUSTOM_PRIME				32452867
+MAX_AVERAGE_DEEP			0.15
+MAXIMAL_COST				15
+DEFAULT_MATERIAL_COST			1.0
+MAXIMAL_MATERIAL_WEIGHT			500
+MAXIMAL_MATERIAL_NONH			50
+DEFAULT_MATERIAL_NONH			10
+LIMIT_REACTION_NUM			7
+LIMIT_REACTION_COST			15.0
+UNSYNTHESIZABLE_PENALTY			1.0
+MAXIMAL_SYNTHESIZE_STEP			3
+SYNTHESIZE_STRATEGY			1.0
+SYNTHESIZE_YIELD			NO
+SYNTHESIZE_SIDEREACTION			NO
+SEARCH_MODE				2
+LIMIT_SEARCH				1
+ACCURATE_SEARCH				NO
+[Synthesize]CUSTOM_PRIME		104395301
+[Synthesize]MAXIMAL_COST		10
+[Synthesize]DEFAULT_MATERIAL_COST	1.0
+[Synthesize]MAXIMAL_MATERIAL_WEIGHT	600
+[Synthesize]MAXIMAL_MATERIAL_NONH	60
+[Synthesize]DEFAULT_MATERIAL_NONH	6
+[Synthesize]LIMIT_REACTION_NUM		4
+[Synthesize]LIMIT_REACTION_COST		15.0
+[Synthesize]UNSYNTHESIZABLE_PENALTY	1.0
+[Synthesize]MAXIMAL_SYNTHESIZE_STEP	4
+[Synthesize]SYNTHESIZE_STRATEGY		1.3
+[Synthesize]SYNTHESIZE_YIELD		NO
+[Synthesize]SYNTHESIZE_SIDEREACTION	YES
+[Synthesize]SEARCH_MODE			0
+[Synthesize]LIMIT_SEARCH		1
+[Synthesize]ACCURATE_SEARCH		YES
+############################################################
+#   Libraries section
+############################################################
+#----------------------------------------------------------
+#   Force field directory
+#----------------------------------------------------------
+PARAMETER_DIRECTORY             	../parameter/
+#----------------------------------------------------------
+#   Fragment libraries
+#   --Building block mode format:       XYZ
+#     X: default library 	1:on,0:off
+#     Y: extend library 	1:on,0:off
+#     Z: rotatable library 	1:on,0:off
+#   --Building block diagnose:  YES: Output details
+#   --BUILDING_BLOCK_LIBRARY: most simple fragments
+#   --BUILDING_BLOCK_LIBRARY_EXTEND: extracted fragments
+#   --BUILDING_BLOCK_LIBRARY_ROTATABLE: refined additional fragments
+#   --The three database library are treated equally
+#   --Built-in building block library: 
+#       --Default (Essential):
+#       ../fragment.mdb/                    (177 fragments)
+#
+#       --Rotatable (ZINC)
+#       ../fragment.mdb/rotate/             (1232 fragments)
+#
+#       --Rotatable (Drug-like)
+#       ../fragment.mdb/rotate_drug_5/      (2751 fragments)
+#       ../fragment.mdb/rotate_drug_10/     (1506 fragments)
+#       ../fragment.mdb/rotate_drug_20/     (748 fragments)
+#       ../fragment.mdb/rotate_drug_40/     (412 fragments)
+#       ../fragment.mdb/rotate_drug_80/     (239 fragments)
+#       5/10/xx: min occurrence in 49K drug-like compounds
+#
+#       --Rotatable (Bio-like)
+#       ../fragment.mdb/rotate_bio_25/      (12924 fragments)
+#       ../fragment.mdb/rotate_bio_50/      (7622 fragments)
+#       ../fragment.mdb/rotate_bio_100/     (4370 fragments)
+#       ../fragment.mdb/rotate_bio_200/     (2459 fragments)
+#       ../fragment.mdb/rotate_bio_400/     (1355 fragments)
+#       ../fragment.mdb/rotate_bio_800/     (735 fragments)
+#       ../fragment.mdb/rotate_bio_1600/    (406 fragments)
+#       ../fragment.mdb/rotate_bio_3200/    (237 fragments)
+#       25/50/xx: min occurrence in 1.73M bio-active compounds
+#       ATTENTION: bio_25 will consume about 10GB memory
+#
+#       drug_5 and bio_200 indicates 1 occurrence per 10K compounds
+#       Suggest use bio_200 for high diversity design
+#                   bio_1600/drug_40 for normal design
+#----------------------------------------------------------
+BUILDING_BLOCK_MODE			101
+BUILDING_BLOCK_LIBRARY			../fragment.mdb/
+BUILDING_BLOCK_LIBRARY_EXTEND		../fragment.mdb/extend/
+BUILDING_BLOCK_LIBRARY_ROTATABLE	../fragment.mdb/rotate_bio_200/
+[Growing]BUILDING_BLOCK_LIBRARY_ROTATABLE	../fragment.mdb/rotate_bio_200/
+[Linking]BUILDING_BLOCK_LIBRARY_ROTATABLE	../fragment.mdb/rotate_bio_1600/
+BUILDING_BLOCK_DIAGNOSE                 NO
+#----------------------------------------------------------
+#   Forbidden structure library
+#----------------------------------------------------------
+FORBIDDEN_STRUCTURE_LIBRARY		../forbidden.mdb/
+#----------------------------------------------------------
+#   Toxic structure library
+#----------------------------------------------------------
+TOXIC_STRUCTURE_LIBRARY			../toxicity.mdb/
+#----------------------------------------------------------
+#   Finalcheck structure library
+#----------------------------------------------------------
+FINALCHECK_STRUCTURE_LIBRARY		../finalcheck.mdb/
+#----------------------------------------------------------
+#   Synthesize library
+#----------------------------------------------------------
+SYNTHESIZE_LIBRARY			../synthesize.mdb/
+############################################################
+#   Function section
+############################################################
+############################################################
+#   Process Results
+############################################################
+#----------------------------------------------------------
+#   Process
+#   --Process appendtoexist: YES: append records, NO:overwrite
+#----------------------------------------------------------
+PROCESS_FILE                  		$RESULT_DIR$/output_$TASK_NAME$/ligand.lig
+MINIMAL_OUTPUT_PKD[]			3.0
+PROCESS_OUTPUT_DIRECTORY                $RESULT_DIR$/process_$TASK_NAME$/
+PROCESS_APPENDTOEXIST			NO
+#----------------------------------------------------------
+#   Filter
+#   --Filter Seq: ABCDEFGHIJKLMNOPQ
+#     A:sulfur				
+#     B:phosphor			
+#     C:halogen				
+#     D:nitro				
+#     E:semisaturated ring	(ring num)
+#     F:hetero ring		(ring num)	
+#     G:unsaturated branch	(bond num)
+#     H:e-link branch   	(bond num)
+#     I:aromatic link
+#     J:ring link
+#     K:ring number
+#     L:ring system number
+#     M:bigring branch
+#     N:bigaromatic branch
+#     O:smallring branch
+#     P:smallaromatic branch
+#     Q:phenolic hydroxyl
+#     Value: 0:forbiden/1~8:maximal num/9:allow
+#   --Filter library
+#     user assignment filter structures
+#   --Filter center file : override center coordinates if not none 
+#     Filter center coordinates: x y z 
+#   --Filter distance: 
+#     filter results far from center/centerfile
+#     for specific site design
+#     applying distance filter unless the value is zero
+#----------------------------------------------------------
+FILTER_LIST				$RESULT_DIR$/process_$TASK_NAME$/INDEX
+FILTER_LOG				$RESULT_DIR$/process_$TASK_NAME$/INDEX.filter
+FILTER_LIBRARY				../filter.mdb/
+#FILTER_SEQ MARK                        ABCDEFGHIJKLMNOPQ
+FILTER_SEQ				00201310114321331
+FILTER_CENTERFILE[]			example/center.mol2
+FILTER_CENTER[]				0.0 0.0 0.0
+FILTER_DISTANCE[]			0
+FILTER_DIAGNOSE                         NO
+#----------------------------------------------------------
+#   Score
+#   --Optimize: Optimize molecules conformation in Score 
+#               fields before calculation
+#   --Apply key interaction:
+#     Yes: apply the defined priority to score
+#----------------------------------------------------------
+SCORE_LIST				$RESULT_DIR$/process_$TASK_NAME$/INDEX.filter
+SCORE_LOG				$RESULT_DIR$/process_$TASK_NAME$/INDEX.score
+SCORE_OPTIMIZE				NO
+APPLY_SCORE_KEY_INTERACTION             NO
+#----------------------------------------------------------
+#   Recommend
+#   -- Score :6.0~8.0
+#   -- Stable : open cavity>0.3, closed cavity>0.4
+#   -- Bump: 3~5
+#   -- Rt: for dock 7, for design 10
+#   -- Hmhb: specific 1.25~1.7
+#   -- Dhm: DeltaHm 0~2
+#   -- Ivdw: 0~-1
+#   -- Chemical: -300~-100
+#   -- Adaptive: YES: Adaptive recommend
+#----------------------------------------------------------
+RECOMMEND_LIST				$RESULT_DIR$/process_$TASK_NAME$/INDEX.score
+RECOMMEND_LOG				$RESULT_DIR$/process_$TASK_NAME$/INDEX.recommend
+RECOMMEND_NUMBER			1000
+RECOMMEND_SCORE[]			7.0
+RECOMMEND_STABLE[]			0.3
+RECOMMEND_BUMP[]			5
+RECOMMEND_RT[]				10
+RECOMMEND_HMHB[]			1.25
+RECOMMEND_DHM[]				1.5	
+RECOMMEND_IVDW[]			0.0
+RECOMMEND_MATCH[]			2.0
+RECOMMEND_CHEMICAL[]			-200
+RECOMMEND_W_STABLE[]			2.5
+RECOMMEND_W_MATCH[]			2.0
+RECOMMEND_W_CHEMICAL[]			1.5
+RECOMMEND_W_HMHB[]			0.5
+RECOMMEND_W_DHM[]			2.0
+RECOMMEND_ADAPTIVE                      YES
+ADAPTIVE_FACTOR                         0.2
+#----------------------------------------------------------
+#   Cluster
+#   --Cluster type: 0:fast 1:all 2:most similarity
+#   --Cluster method: 
+#     (3D) 0:heavy atoms 1:carbon atoms 2:backbone atoms
+#     (2D) 3:fingerprint
+#   --Rank method: 0:original 1:ligscore 2:average est
+#     3:binding score 4:adjust binding score
+#     5:average binding score 6:stable 7:RecScore 8:Wins
+#     -0:user custom rank
+#     -1:default rank
+#     -7:default rank(for small sets)
+#   --Cluster only: No: collect all sub-cluster files
+#   		    YES: only collect cluster files
+#----------------------------------------------------------
+CLUSTER_LIST                            $RESULT_DIR$/process_$TASK_NAME$/INDEX.recommend
+CLUSTER_SIMILARITY_CUTOFF               0.70
+CLUSTER_DISTANCE_CUTOFF                 0.50
+CLUSTER_TYPE                            2
+CLUSTER_METHOD                          3
+RANK_METHOD				1
+CLUSTER_ONLY                            NO
+NUMBER_OF_OUTPUT_CLUSTERS               200000
+MIN_CLUSTER_MEMBERS                     1
+CLUSTER_OUTPUT_DIRECTORY                $RESULT_DIR$/cluster_$TASK_NAME$/
+#----------------------------------------------------------
+#   Report/Cluster
+#   --List: input Cluster INDEX
+#   --Html: report html
+#     the 'images' directory is under the same path of report_html
+#   --Output_mol2: for synthesize analysis
+#   --Figure:   0: No interaction image
+#               1: LigPlot interaction image
+#               2: PoseView interaction
+#
+#   Report/Synthesize
+#   --Synthesize_log:  the log file from synthesize analysis
+#----------------------------------------------------------
+REPORT_LIST				$RESULT_DIR$/cluster_$TASK_NAME$/INDEX
+REPORT_HTML				$RESULT_DIR$/report_$TASK_NAME$/report.html
+REPORT_FIGURE_TYPE			0
+REPORT_OUTPUT_MOL2			$RESULT_DIR$/cluster_$TASK_NAME$/total.mol2
+REPORT_SYNTHESIZE_LOG			$RESULT_DIR$/synthesize_$TASK_NAME$/synthesize.log
+############################################################
+#   Tools
+############################################################
+#----------------------------------------------------------
+#   Seed
+#   --Extract/Combine seed structure
+#     Extract seed for mimic design in growing/linking mode
+#     Combine seed for multi-target design
+#   --Extract file list: the mol2 list for extracting seed
+#     Recommend user to convert the mol2 files by I-interpret or Babel.
+#     List format:
+#     ReceptorId    Mol2Path
+#   --User seed list: the mol2 list for user's seed structures.
+#     All structures listed will be combinated with extracted
+#     structures(if existed) and them selves.
+#     Recommend user to convert the mol2 files by I-interpret or Babel.
+#     List format:
+#     ReceptorId    Mol2Path
+#   --E/C diagnose:  YES: Output details
+#   --Seed output directory: outputting seed structures
+#     listed in the INDEX file under this path
+#----------------------------------------------------------
+EXTRACT_FILE_LIST			receptor/seed.list
+EXTRACT_MAXIMAL_NONH			20
+EXTRACT_MINIMAL_NONH			1
+EXTRACT_MINIMAL_AVER_PKD[]		0.03
+EXTRACT_MINIMAL_PKD[]			0.3
+EXTRACT_OPTIMIZE[]			YES
+EXTRACT_ADD_HSPC			YES
+USER_SEED_LIST                          receptor/user.list
+USER_SEED_OPTIMIZE[]			YES
+USER_SEED_ADD_HSPC			YES
+#HSPC_SITE_ROTATE                        YES
+EC_DIAGNOSE                             NO
+SEED_OUTPUT_DIRECTORY		        receptor/extract
+#----------------------------------------------------------
+#   Interaction
+#   --Extract key interaction from known structures
+#     Could be applied to each design mode
+#   --Extract list: the mol2 list for extracting structures
+#     Recommend user to convert the mol2 files by I-interpret or Babel.
+#     List format:
+#     ReceptorId    Mol2Path
+#   --Output: generate file for KEY_INTERACTION_GRID
+#----------------------------------------------------------
+EXTRACT_INTERACTION_LIST                key_interaction.list
+EXTRACT_INTERACTION_PKD[]               0.2
+EXTRACT_INTERACTION_RADIUS[]            1.5
+OUTPUT_EXTRACT_INTERACTION              key_interaction_grid
+APPLY_INTERACTION_FREQUENCY             YES
+#----------------------------------------------------------
+#   Result Derivation
+#   -- LIBRARY :mdb format (INDEX)
+#   -- Hydrogens will be removed in this procedure
+#   -- Derivation Angle Limit:
+#      YES to forbid the derivation of different atom angle
+#----------------------------------------------------------
+DERIVATION_LIBRARY                      ../derivation.mdb/
+DERIVATION_LIST                         ltest/INDEX
+DERIVATION_OUTPUT_DIRECTORY             ltest.der/
+DERIVATION_ANGLE_LIMIT                  NO
+############################################################
+#   Analysis
+############################################################
+#----------------------------------------------------------
+#   SScore
+#   --Calculate binding affinity of single molecule
+#----------------------------------------------------------
+SSCORE_FILE				example/score/testscore.mol2	
+#----------------------------------------------------------
+#   Target search
+#   --Search Directory : mdb format(INDEX)
+#----------------------------------------------------------
+TARGET_SEARCH_DIRECTORY			example/target/molecules/
+TARGET_SEARCH_LIST			example/target/query.list
+TARGET_SEARCH_LOG			example/target/target.log
+#----------------------------------------------------------
+#   Similarity Search
+#   --Find structures which are similar with known inhibitors
+#   --Search List: the list of designed structures
+#     List format(supporting multi-target structure):
+#     Mol2Path
+#   --Target List: the list of known inhibitors
+#     List format:
+#     ReceptorId    Mol2Path
+#   --Search Log: the similarity log
+#----------------------------------------------------------
+SIMILARITY_SEARCH_LIST                 example/INDEX
+SIMILARITY_TARGET_LIST                 example/known.list
+SIMILARITY_SEARCH_LOG                  example/similarity.log
+SIMILARITY_SEARCH_CUTOFF               0.1
+#SIMILARITY_SPLIT_UNIT                  10000
+#----------------------------------------------------------
+#   Synthesize result anysis(final analysis)
+#   --Search mode is 0 as default
+#   --Input file: multi-mol2 files
+#   --Output directory:
+#     CARE: This directory will be deleted if already existed!
+#----------------------------------------------------------
+ANALYSIS_INPUT_FILE			$RESULT_DIR$/cluster_$TASK_NAME$/total.mol2
+ANALYSIS_LOG_FILE			$RESULT_DIR$/synthesize_$TASK_NAME$/synthesize.log
+ANALYSIS_REACTION_NUM			0
+ANALYSIS_OUTPUT_DIRECTORY		$RESULT_DIR$/synthesize_$TASK_NAME$
+ANALYSIS_SPLIT_RATIO                    10
+#ANALYSIS_SPLIT_UNIT			20
+############################################################
+#   Build Database
+############################################################
+#----------------------------------------------------------
+#   Build extend growing fragments library
+#   --Automatic extracting fragments from user's molecules set
+#   --Minimal occurrence: minimal fragments occur times
+#     for filtering uncommon fragments
+#     set a smaller value for small molecules set
+#   --only get one conformation for each fragments
+#   --so it is better to generate rotate library based 
+#     on the extend library
+#----------------------------------------------------------
+BUILD_EXTEND_LIBRARY			extend.mol2
+MAXIMAL_FRAGMENT_NONH			15
+MINIMAL_OCCURRENCE			1
+GROW_ON_ALL_HYDROGEN_EXTEND		YES
+EXTEND_LIBRARY_REBUILD			YES
+#----------------------------------------------------------
+#   Build rotatable(flexible) growing fragments library
+#   --Source of input fragments:
+#       1. Ligbuilder -ExtLibrary function extract fragment
+#          from prepared database
+#       2. Or manually collect
+#   --Build_Rotatable_Library:
+#       multi_conformation_input yes : file list for moleclue
+#       (Ligbuilder will do conformation sampling for connection sites)
+#       multi_conformation_input no : single mol2 file
+#       (Ligbuilder will do conformation sampling for rotatable bonds
+#       and connection sites)
+#   --Conformation Sampling (optional, but recommend)
+#     Balloon useage:
+#     1.Build extend library or collect fragment
+#     2.Replace H(H.spc) and refine by I-interpret or babel
+#       I-interpret -d ori.mol2 obj.mol2
+#       I-interpret -a ori.mol2 obj.mol2
+#       (or)
+#       babel -h -imol2 ori.mol2 -omol2 obj.mol2 (no H.spc)
+#     3.Balloon
+#       ./balloon -f MMFF94.mf -b -H --strict -c 500 
+#           --fullforce --maxtime 500 --nGenerations 50 
+#	    --stripSalts --rebuildGeometry ori.mol2 obj.mol2
+#     4.Refine bond
+#       I-interpret -d ori.mol2 obj.mol2
+#       I-interpret -a ori.mol2 obj.mol2
+#       (or)
+#       babel -h -imol2 ori.mol2 -omol2 obj.mol2 (no H.spc)
+#     5.Put the path of all mol2 to the list
+#     Other choices: obconformer of openbabel
+#                   omega2 of openeye (omega_dense or omega2)
+#       (eg: omega2 -in ori.mol2 -out obj.mol2 -maxconfs 50 -flipper true
+#       -enumRing true -sampleHydrogens true -enumNitrogen true)
+# ---REBUILD YES will overwrite old records
+#    REBUILD NO will append new records
+#----------------------------------------------------------
+BUILD_ROTATABLE_LIBRARY			fragmets/input.list
+#MULTI_CONFOMATION_INPUT			YES
+MAXIMAL_INTERNAL_ENERGY			3
+GROW_ON_ALL_HYDROGEN_ROTATE		YES
+ADD_ORIGINAL_CONFORMATION		YES
+ROTATABLE_LIBRARY_REBUILD		NO
+#----------------------------------------------------------
+# Build synthesize database
+#----------------------------------------------------------
+SYNTHESIZE_LIBBUILD			default/reaction.syn
+#----------------------------------------------------------
+# Build material database
+# ---REBUILD YES will overwrite old records
+#    REBUILD NO will append new records
+#----------------------------------------------------------
+#SYNTHESIZE_MATBUILD			example/meterial/material.mol2
+SYNTHESIZE_MATBUILD			material.mol2
+MATERIAL_DATABASE_REBUILD		NO
+MAX_MATERIAL_COST			1000

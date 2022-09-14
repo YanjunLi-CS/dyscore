@@ -1,0 +1,44 @@
+#
+# This file is create by LigBuilder/Pocket
+# It lists the pharmacophore features detected
+# Creation time: Fri Mar 19 16:08:31 2021
+#
+# The 1st column: feature ID number
+# The 2nd column: feature property
+# The 3rd column: feature symbol
+# The 4th column: X coordinate
+# The 5th column: Y coordinate
+# The 6th column: Z coordinate
+# The 7th column: average score
+# The 8th column: neighboring grids around this feature
+# The 9th column: Depth of the feature
+#
+<Start>
+<Feature_description>
+ 1  H-bond_donor_site      D     11.50    37.00    85.50    53.32  77  13
+ 2  H-bond_donor_site      D     16.00    34.00    79.50    69.55  102  6
+ 3  H-bond_donor_site      D     24.00    37.00    92.50    85.04  127  9
+ 4  H-bond_donor_site      D      7.00    44.00    94.50    71.20  107  5
+ 5  H-bond_donor_site      D      6.00    32.50    89.00    42.50  64  8
+ 6  H-bond_donor_site      D     14.00    33.00    96.00    32.89  50  23
+ 7  H-bond_donor_site      D     14.00    39.00    96.00    84.79  129  18
+ 8  H-bond_donor_site      D     33.50    43.00    99.00    67.37  105  4
+ 9  H-bond_donor_site      D     17.50    36.50    94.50    80.73  126  21
+10  H-bond_donor_site      D     30.00    43.00    97.50    44.26  71  7
+11  H-bond_donor_site      D     20.50    36.50    87.00    45.36  73  10
+12  H-bond_donor_site      D     30.50    38.00   101.50    71.61  117  3
+<Feature_internal_distance>
+        1      2      3      4      5      6      7      8      9     10     11     12  
+ 1  -----   8.08  14.33  12.26   7.92  11.51  10.98  26.50  10.83  22.85   9.14  24.86  
+ 2   8.08  -----  15.56  20.15  13.87  16.65  17.36  27.70  15.28  24.52   9.10  26.65  
+ 3  14.33  15.56  -----  18.49  18.88  11.32  10.78  12.98   6.82   9.85   6.54  11.15  
+ 4  12.26  20.15  18.49  -----  12.79  13.12   8.73  26.90  12.90  23.22  17.17  25.24  
+ 5   7.92  13.87  18.88  12.79  -----  10.64  12.46  31.09  13.36  27.54  15.17  28.05  
+ 6  11.51  16.65  11.32  13.12  10.64  -----   6.00  22.12   5.17  18.93  11.64  18.10  
+ 7  10.98  17.36  10.78   8.73  12.46   6.00  -----  20.13   4.56  16.56  11.38  17.42  
+ 8  26.50  27.70  12.98  26.90  31.09  22.12  20.13  -----  17.85   3.81  18.85   6.34  
+ 9  10.83  15.28   6.82  12.90  13.36   5.17   4.56  17.85  -----  14.40   8.08  14.84  
+10  22.85  24.52   9.85  23.22  27.54  18.93  16.56   3.81  14.40  -----  15.58   6.42  
+11   9.14   9.10   6.54  17.17  15.17  11.64  11.38  18.85   8.08  15.58  -----  17.68  
+12  24.86  26.65  11.15  25.24  28.05  18.10  17.42   6.34  14.84   6.42  17.68  -----  
+<End>

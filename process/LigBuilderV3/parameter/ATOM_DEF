@@ -1,0 +1,42 @@
+# Data cited from the Tripos force field as implemented in SYBYL 6.3
+# The 1st column: numeric ID
+# The 2nd column: atom type symbol
+# The 3rd column: van der Waals radius
+# The 4th column: van der Walls epsilon value
+# The 5th column: atomic weight
+# The 6th column: description
+#
+1	C.3	1.70	0.107	12	0.000   carbon sp3
+2	C.2	1.70	0.107	12	0.000   carbon sp2
+3	C.1	1.70	0.107	12	0.000   carbon sp
+4	C.cat	1.70	0.107	12	1.000   carbocation (C+) used in guadinium
+5	C.ar	1.70	0.107	12	0.000   carbon aromatic
+6	H	1.20	0.042	1	0.000   hydrogen
+7	N.4	1.55	0.095	14	1.000   nitrogen sp3 positively charged
+8	N.3	1.55	0.095	14	0.000   nitrogen sp3
+9	N.2	1.55	0.095	14	0.000   nitrogen sp2
+10	N.1	1.55	0.095	14	0.000   nitrogen sp
+11	N.ar	1.55	0.095	14	0.000   nitrogen aromatic
+12	N.pl3	1.55	0.095	14	0.000   nitrogen trigonal planar
+13	N.am	1.55	0.095	14	0.000   nitrogen amide
+14	O.3	1.52	0.116	16	0.000   oxygen sp3	
+15	O.2	1.52	0.116	16	0.000   oxygen sp2
+16	O.co2	1.52	0.116	16     -0.500   oxygen in carboxylate and phosphate
+17	P.3	1.80	0.314	31	0.000   phosphorous sp3
+18	S.3	1.80	0.314	32	0.000   sulfur sp3
+19	S.2	1.80	0.314	32	0.000   sulfur sp2
+20	S.o	1.70	0.314	32	0.000   sulfoxide sulfur
+21	S.o2	1.70	0.314	32	0.000   sulfone sulfur
+22	F	1.47	0.109	19	0.000   fluorine
+23	Cl	1.75	0.314	35	0.000   chlorine
+24	Br	1.85	0.434	80	0.000   bromine
+25	I	1.98	0.623	127	0.000   iodine
+26	Du	0	0.000	0	0.000   dummy atom
+27	Un	0	0.000	0	0.000   unknown atom
+28	H.spc	1.20	0.042	1	0.000   seed hydrogen
+29      B       1.92    0.050   11      0.000   boron  __add__
+#
+# Notice: the VDW radius of hydrogen has been changed from original 1.2 to 
+# current 1.0 to reproduce reasonable conformations
+# now 1.2 applied
+#

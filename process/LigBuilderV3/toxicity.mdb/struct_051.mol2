@@ -1,0 +1,66 @@
+#	Name:			struct_059
+#	Creating user name:	arthur
+#	Creation time:		Fri Jan  1 20:43:43 1999
+
+#	Modifying user name:	arthur
+#	Modification time:	Fri Jan  1 20:45:04 1999
+
+@<TRIPOS>MOLECULE
+struct_059
+   21    23     1     1     0
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 C          -0.2137    0.0693    0.5958 C.ar      1 PHENYL      0.0000 
+      2 C           1.1757    0.1028    0.7533 C.ar      1 PHENYL      0.0000 
+      3 C           1.8513    1.3251    0.8141 C.ar      1 PHENYL      0.0000 
+      4 C           1.1352    2.5208    0.7163 C.ar      1 PHENYL      0.0000 
+      5 C          -0.2526    2.4766    0.5589 C.ar      1 PHENYL      0.0000 
+      6 C          -0.9476    1.2580    0.4964 C.ar      1 PHENYL      0.0000 
+      7 C7         -2.3469    1.2272    0.3381 C.ar      1 PHENYL      0.0000 
+      8 C8         -3.1091    2.4002    0.2354 C.ar      1 PHENYL      0.0000 
+      9 C9         -2.4060    3.6011    0.2986 C.ar      1 PHENYL      0.0000 
+     10 C10        -1.0301    3.6276    0.4545 C.ar      1 PHENYL      0.0000 
+     11 N11        -0.7157    4.9304    0.4721 N.2       1 PHENYL      0.0000 
+     12 C12        -1.7647    5.6342    0.3431 C.2       1 PHENYL      0.0000 
+     13 N13        -2.8295    4.8852    0.2325 N.pl3     1 PHENYL      0.0000 
+     14 H1         -0.7163   -0.8922    0.5514 H         1 PHENYL      0.0000 
+     15 H2          1.7335   -0.8257    0.8290 H         1 PHENYL      0.0000 
+     16 H3          2.9298    1.3456    0.9371 H         1 PHENYL      0.0000 
+     17 H4          1.6539    3.4732    0.7624 H         1 PHENYL      0.0000 
+     18 H5         -2.8636    0.2735    0.2925 H         1 PHENYL      0.0000 
+     19 H6         -4.1868    2.3799    0.1135 H         1 PHENYL      0.0000 
+     20 H7         -1.7647    6.7238    0.3279 H         1 PHENYL      0.0000 
+     21 H8         -3.8020    5.2075    0.1175 H         1 PHENYL      0.0000 
+@<TRIPOS>BOND
+     1    1    2 ar   
+     2    1    6 ar   
+     3    6    5 ar   
+     4    5    4 ar   
+     5    4    3 ar   
+     6    3    2 ar   
+     7    6    7 ar   
+     8    7    8 ar   
+     9    8    9 ar   
+    10    9   10 ar   
+    11    5   10 ar   
+    12   10   11 1    
+    13   11   12 2    
+    14   12   13 1    
+    15    9   13 1    
+    16    1   14 1    
+    17    2   15 1    
+    18    3   16 1    
+    19    4   17 1    
+    20    7   18 1    
+    21    8   19 1    
+    22   12   20 1    
+    23   13   21 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 PHENYL      1 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 0 0 0 0 0 0 0 0 0 0 0 0 0

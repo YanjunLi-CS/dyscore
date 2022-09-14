@@ -1,0 +1,94 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title>User manual for LigBuilder V3</title>
+<style type="text/css">
+.blue {
+	color: #00F;
+}
+.red {
+	color: #F00;
+}
+</style>
+</head>
+
+<body background="background.gif" bgcolor="#FFFFFF">
+
+<p align="center"><img src="title.gif"
+alt="title.gif (27521 bytes)" width="480" height="160"></p>
+
+<h2 align="center">How to install LigBuilder V3?</h2>
+
+<hr>
+
+<p>&nbsp;&nbsp;&nbsp; LigBuilder V3 is  written in C++ language and
+has been tested on LINUX platforms. </p>
+<p><font color="#000000">&nbsp;&nbsp;&nbsp; <strong>Program dependency</strong>:</font></p>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#000000" size="3"> Please install OpenBabel version 2.3.0 or later first, and make sure the path of babel was added to the system executive path</font>. OpenBabel is not an essential part of the design process, but four functions will be affected if OpenBabel was absence. (Automatic mode, 2D-Clustering, Clustering Reporter, Synthesis Reporter)</p>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#FF0000" size="3">  <a href="http://openbabel.org/wiki/Main_Page">Click here to go to OpenBabel website</a></font><a href="http://openbabel.org/wiki/Main_Page">.</a></p>
+<p><font color="#000000">&nbsp;&nbsp;&nbsp; <strong>Environment Setting:</strong></font></p>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#000000" size="3"> Add following line into ~/.bashrc or ~/.cshrc or ~/.tcshrc.(According to you shell)</font></p>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#FF0000" size="3">  ulimit -s unlimited</font></p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(As the program will call the &quot;babel&quot; and &quot;obabel&quot; directly, please also add the path of OpenBabel to the
+  enviroment variable if &quot;babel&quot; is not executable in the working directory. This step could be skipped if the OpenBabel is installed with root permission.)</p>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#000000" size="3">  NOTICE: This would NOT take effect </font>in  shells opened so far. </p>
+<p><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font> Please relogin current shell before next step.</p>
+<p><font color="#000000">&nbsp;&nbsp;&nbsp; <strong>Installation of LigBuilder V3:</strong></font></p>
+<p><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Unpack the package in a LINUX shell like this:</font></p>
+<p align="left"><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#FF0000" size="3"> tar&nbsp; -xvf &nbsp;LigBuilderV3.tar.gz</font></p>
+<p align="left">	<font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#FF0000" size="3"> </font>Try to relinking the binary:</p>
+<p align="left"><font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#FF0000" size="3"> </font><font color=red>cd LigBuilderV3</font><br>
+<font color="#FF0000" size="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font
+color="#FF0000" size="3"> </font><font color=red>./configure</font></p>
+<p align="left"><font color="#000000">&nbsp;&nbsp;&nbsp; Now a directory named
+  &quot;</font><font color="#0000FF">LigBuilderV3</font><font
+color="#000000">&quot; has been created in your working
+    directory. Under that directory, there are following
+subdirectories: </font></p>
+
+<ul>
+    <li><font size="2" face="Courier New">README&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description
+    text</font></li>
+    <li><font size="2" face="Courier New">COPYING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;license</font></li>
+    <li><font size="2" face="Courier New">configure&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;installing file</font></li>
+    <li><font size="2" face="Courier New">bin/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executive binaries</font></li>
+    <li><font size="2" face="Courier New">build/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;working directory</font></li>
+    <li><font size="2" face="Courier New">example/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test examples</font></li>
+    <li><font size="2" face="Courier New">manual/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user manual in HTML</font></li>
+    <li><font size="2" face="Courier New">default/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default parameter sets</font></li>
+    <li><font size="2" face="Courier New">parameter/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;necessary parameters</font></li>
+    <li><font size="2" face="Courier New">fragment.mdb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;building-block fragment library</font></li>
+    <li><font size="2" face="Courier New">forbidden.mdb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forbidden substructure library</font></li>
+    <li><font size="2" face="Courier New">toxicity.mdb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toxic substructure library</font></li>
+    <li><font size="2" face="Courier New">filter.mdb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;custom filter library</font></li>
+    <li><font size="2" face="Courier New">finalcheck.mdb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;custom final check library</font></li>
+    <li><font size="2" face="Courier New">toxicity.mdb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toxic substructure library</font></li>
+    <li><font size="2" face="Courier New">synthesize.mdb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synthesis library</font></li>
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp; LigBuilder V3 has two executive modules, i.e.
+Cavity(LigBuilderV3/bin/cavity), Build(LigBuilderV3/bin/build).</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Now LigBuilder V3 is ready, Good luck!</p>
+<hr>
+
+<p align="center"><a href="index.html">[Content]</a> <a
+href="intro.html">[Introduction]</a> <a href="download.html">[Download]</a>
+[Install] <a href="overview.html">[Overview]</a> <a
+href="cavity.html">[CAVITY]</a> <a href="build.html">[BUILD]</a> <a
+href="skill.html">[Skills]</a> <a href="faq.html">[FAQs]</a></p>
+
+<p align="center"><font size="2"><em>(These web pages are edited
+by Yaxia Yuan. Latest update: Oct., 2019)</em></font></p>
+</body>
+</html>

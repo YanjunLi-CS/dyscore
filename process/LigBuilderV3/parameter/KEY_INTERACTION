@@ -1,0 +1,269 @@
+#################################################################
+# Key Interaction Defination used in LigBuilder                 #
+#################################################################
+#================================================================
+# Supported Symbol: DEFINE, RECEPTOR, PRIORITY, OR, AND, NOT,ATOM,CENTER
+#================================================================
+# Group Defination:
+# DEFINE (GroupName)    MinLogP MaxLogP
+# {
+#   Tripos Atom Type
+# }
+# p.s. LogP is calculated by XLogP
+#----------------------------------------------------------------
+# example:
+# DEFINE (StrongHydrophobic)  0.5 3.0       // C.ar,C.1,I whose logP among 0.5~3.0 are defined as StrongHydrophobic group
+# {
+#       C.ar
+#       C.1
+#       I
+# }
+#================================================================
+# Key Interaction Defination:
+# RECEPTOR Id
+# {
+#   {
+#       Condition String (ATOM ID MinDistance MaxDistance Type)
+#       Condition String (CENTER X Y Z Distance Type)
+#   }
+#   AND/OR
+#   [NOT]
+#   {
+#       Condition String
+#   }
+# }
+# PRIORITY Value Scale
+#
+# Here,
+# RECEPTOR Id: The id of receptor, default is 1 for single receptor
+#
+# PRIORITY Value: Positive to encourage, negative to penalize
+# PRIORITY Scale: More than 1 to encourage, Less than 1 to penalize
+#
+# Condition String (Atom locate): (ATOM ID MinDistance MaxDistance Type)
+# The 1st column: Tag: ATOM
+# The 2nd column: Receptor Atom ID
+# The 3rd column: Min Distance 
+# The 4th column: Max Distance
+# The 5th column: Ligand Atom Type
+#
+# Condition String (Center locate): (CENTER X Y Z Distance Type)
+# The 1st column: Tag: CENTER
+# The 2nd column: X of Center Point
+# The 3rd column: Y of Center Point
+# The 4th column: Z of Center Point
+# The 5nd column: Max Distance
+# The 6th column: Ligand Atom Type
+#
+# Ligand Atom Type:
+#                 (XXX):Group XXX defined by user,e.g.: (A)
+#                 Type:Tripos Atom Type, e.g. : C.ar
+#
+# Predefined groups:
+#                 (A):Acceptor  
+#                 (D):Donor
+#                 (P):Polar
+#                 (H):Hydrophobic
+#                 (Any):Any
+#                 (Heavy):Heavy atoms
+#
+# AND/OR/NOT: Logical operator
+#----------------------------------------------------------------
+# example:
+# RECEPTOR 1                  //For Receptor 1
+# {   
+#     {
+#         ATOM 101 3.0 7.2 (D)     //A donor atom(defined by group D) of the ligand is near the atom 101 of receptor(3.0~7.2 Angstrom)
+#     }
+#     OR
+#     NOT
+#     {
+#         ATOM 103 4.1 6.2 C.ar    //An atom(C.ar type) of the ligand is NOT near the atom 103 of receptor(4.1~6.2 Angstrom)
+#     {
+# }
+# PRIORITY +0.8 1.1               //If the first condition is TRUE OR the second conditions is NOT TRUE for receptor 1, add 0.8 priority and scale up 10%
+#
+#
+# RECEPTOR 1                  //Another group of condition strings  for receptor 1
+# {
+#     NOT
+#     {
+#         ATOM 55 2.5 3.5 (Heavy)
+#         CENTER 0.0 10.5 20.5 5.6 (Any)
+        
+#     }
+# }
+# PRIORITY -0.5 0.9               //If the conditions are NOT TRUE, minus 0.5 priority and scale down 10%
+# 
+# RECEPTOR 2                  //For Receptor 2
+# {
+#     {
+#         ATOM 106 3.5 5.4 (P)
+#     }
+#     AND
+#     NOT
+#     {
+#        {
+#            ATOM 158 2.2 6.3 (Any)
+#        }
+#        AND
+#        {
+#            CENTER 1.8 56.7 38.2 6.0 O.3
+#        }
+#     {
+# }
+# PRIORITY -1.2 1.0            //If the first condition is TURE AND both the second AND the third conditions are NOT TRUE for receptor 2, minus 1.2 priority, no scale
+#================================================================
+# Because the key interaction defination will influence the results significantly,
+# please retype the pocket files to avoid the negligence (Need to be consistent with input parameter file)
+# Format:
+# POCKET_ATOM_FILE   ReceptorId   XXXX/XXXX_POCKET_X.TXT
+# POCKET_ATOM_FILE   ReceptorId   XXXX/XXXX_POCKET_X.TXT
+# ......
+#----------------------------------------------------------------
+# example:
+# POCKET_ATOM_FILE   1   receptor/1db4_pocket_1.txt
+# POCKET_ATOM_FILE   2   receptor/1pxx_pocket_1.txt
+#================================================================
+# Avaliable Atom Type : Please refer to group "DEFINE (Any)"
+#================================================================
+###############################
+#   Group Defination          #
+###############################
+DEFINE (Any)    -10.0 10.0
+{
+    C.3  
+    C.2  
+    C.1  
+    C.cat
+    C.ar 
+    H    
+    N.4  
+    N.3  
+    N.2  
+    N.1  
+    N.ar 
+    N.pl3
+    N.am 
+    O.3  
+    O.2  
+    O.co2
+    P.3  
+    S.3  
+    S.2  
+    S.o  
+    S.o2 
+    F    
+    Cl   
+    Br   
+    I    
+    Du   
+    Un   
+    H.spc
+}
+
+DEFINE (Heavy)  -10.0   10.0
+{
+    C.3  
+    C.2  
+    C.1  
+    C.cat
+    C.ar 
+    N.4  
+    N.3  
+    N.2  
+    N.1  
+    N.ar 
+    N.pl3
+    N.am 
+    O.3  
+    O.2  
+    O.co2
+    P.3  
+    S.3  
+    S.2  
+    S.o  
+    S.o2 
+    F    
+    Cl   
+    Br   
+    I    
+}
+DEFINE (P) -10.0  10.0
+{
+    N.4
+    N.3
+    N.2
+    N.1
+    N.pl3
+    N.am
+    O.3
+    O.2
+    O.co2
+    C.cat
+    S.2
+    S.o
+    S.o2
+    P.3
+}
+DEFINE (D)  -10.0   10.0
+{
+    N.4
+    N.3
+    N.2
+    N.pl3
+    N.am
+    O.3
+}
+DEFINE (A)  -10.0   10.0
+{
+    N.3
+    N.2
+    N.1
+    O.3
+    O.2
+    O.co2
+}
+DEFINE (H)  0.2     10.0
+{
+    C.3  
+    C.2  
+    C.1  
+    C.ar 
+    N.4  
+    N.3  
+    N.2  
+    N.1  
+    N.ar 
+    N.pl3
+    N.am 
+    O.3  
+    O.2  
+    O.co2
+    P.3  
+    S.3  
+    S.2  
+    S.o  
+    S.o2 
+    F    
+    Cl   
+    Br   
+    I   
+}
+###############################
+#   Key Interaction           #
+###############################
+# Consistent Checking
+#------------------------------
+POCKET_ATOM_FILE   1   receptor/1db4_pocket_1.txt
+#------------------------------
+# Condition String
+#------------------------------
+# Define your string here
+#RECEPTOR 1
+#{
+#    ATOM 280 1 5 C.ar
+#    ATOM 280 1 5 C.ar
+#}
+#PRIORITY 0.0 1.0
+#

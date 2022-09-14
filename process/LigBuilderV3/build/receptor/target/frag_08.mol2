@@ -1,0 +1,48 @@
+#	Name:			dimethylamine
+#	Creating user name:	tang
+#	Creation time:		Tue Aug 27 07:58:48 1996
+
+#	Modifying user name:	arthur
+#	Modification time:	Thu Jan 15 21:44:45 1998
+
+@<TRIPOS>MOLECULE
+dimethylamine
+   11    10     1     1     2
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 C1          1.3516    0.6478   -0.1984 C.3       1 TRIMETHYLAMINE   -0.0133 
+      2 N2          0.0525    0.0080    0.1234 N.4       1 TRIMETHYLAMINE   -0.3114 
+      3 C3         -0.3946   -0.9530   -0.9144 C.3       1 TRIMETHYLAMINE   -0.0133 
+      4 H1          0.1272   -0.5006    1.0783 H.spc     1 TRIMETHYLAMINE    0.0000 
+      5 H5          1.6444    1.3522    0.5976 H.spc     1 TRIMETHYLAMINE    0.0390 
+      6 H6          2.1461   -0.1095   -0.2954 H.spc     1 TRIMETHYLAMINE    0.0390 
+      7 H7          1.2869    1.2078   -1.1451 H.spc     1 TRIMETHYLAMINE    0.0390 
+      8 H8         -1.3613   -1.4032   -0.6349 H.spc     1 TRIMETHYLAMINE    0.0390 
+      9 H9          0.3398   -1.7654   -1.0361 H.spc     1 TRIMETHYLAMINE    0.0390 
+     10 H10        -0.5194   -0.4481   -1.8858 H.spc     1 TRIMETHYLAMINE    0.0390 
+     11 H2         -0.7039    0.7737    0.2564 H.spc     1 TRIMETHYLAMINE    0.0000 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    2    3 1    
+     3    2    4 1    
+     4    1    5 1    
+     5    1    6 1    
+     6    1    7 1    
+     7    3    8 1    
+     8    3    9 1    
+     9    3   10 1    
+    10    2   11 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 TRIMETHYLAMINE     2 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>SET
+ATOM$BY_TYPE    STATIC     ATOMS    COLORGROUP SYSTEM 
+13 1 2 3 0 5 6 7 8 9 10 0 0 0
+LINK_HS         STATIC     ATOMS    <user>   **** 
+9 5 6 7 8 9 10 0 0 0
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 0 0 0 0 0 0 0 0 0 0 0 0 0

@@ -1,0 +1,9 @@
+#----------------------------------------------------------
+#   Optimize parameters
+#   --Optimization intensity
+#----------------------------------------------------------
+OPTIMIZE_PROBABLITY			0.0
+OPTIMIZE_NUMBER				100
+MAXIMAL_ADJUST_DISTANCE			0.3
+MAXIMAL_ADJUST_ROTATE			3.0
+MAXIMAL_ADJUST_TORSION			5.0

@@ -1,0 +1,10 @@
+name: dyscore3
+channels:
+  - bioconda
+  - conda-forge
+  - openbabel
+  - defaults
+dependencies:
+  - openbabel=2.4.1
+  - ambertools=21.12=py37h5d2b9b6_0
+  - pip=22.0.4=pyhd8ed1ab_0

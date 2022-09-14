@@ -1,0 +1,31 @@
+#----------------------------------------------------------
+#   Recommend-lead
+#   -- Score :5.0~6.0
+#   -- Stable : open cavity>0.2, closed cavity>0.3
+#   -- Bump: 3~5
+#   -- Rt: for dock 7, for design 7
+#   -- Hmhb: specific 1.25~1.7
+#   -- Dhm: DeltaHm 0~1
+#   -- Ivdw: 0~-1
+#   -- Chemical: -300~-100
+#----------------------------------------------------------
+RECOMMEND_NUMBER			1000
+RECOMMEND_SCORE[]			5.0
+RECOMMEND_STABLE[]			0.2
+RECOMMEND_BUMP[]			3
+RECOMMEND_RT[]				7
+RECOMMEND_HMHB[]			1.5
+[2-10]RECOMMEND_HMHB[]			2.0
+[Growing]RECOMMEND_HMHB[]		2.5
+[Linking]RECOMMEND_HMHB[]		2.5
+RECOMMEND_DHM[]				1.0	
+RECOMMEND_IVDW[]			0.0
+RECOMMEND_MATCH[]			1.0
+RECOMMEND_CHEMICAL[]			-150
+RECOMMEND_W_STABLE[]			2.0
+RECOMMEND_W_MATCH[]			1.5
+RECOMMEND_W_CHEMICAL[]			1.5
+RECOMMEND_W_HMHB[]			0.5
+RECOMMEND_W_DHM[]			1.5
+RECOMMEND_ADAPTIVE                      YES
+ADAPTIVE_FACTOR                         0.2

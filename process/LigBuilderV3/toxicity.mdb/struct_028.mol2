@@ -1,0 +1,70 @@
+#	Name:			struct_030
+#	Creating user name:	arthur
+#	Creation time:		Fri Jan 15 11:49:53 1999
+
+#	Modifying user name:	arthur
+#	Modification time:	Fri Jan 15 11:50:55 1999
+
+@<TRIPOS>MOLECULE
+struct_030
+   23    25     1     1     0
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 C          -0.1658   -0.6964   -0.4226 C.ar      1 PHENYL      0.0000 
+      2 C           1.1683   -0.3651   -0.1630 C.ar      1 PHENYL      0.0000 
+      3 C           1.5222    0.9567    0.1280 C.ar      1 PHENYL      0.0000 
+      4 C           0.5423    1.9528    0.1602 C.ar      1 PHENYL      0.0000 
+      5 C          -0.7916    1.6260   -0.0981 C.ar      1 PHENYL      0.0000 
+      6 C          -1.1413    0.3042   -0.3882 C.ar      1 PHENYL      0.0000 
+      7 C7          2.2070   -1.4588   -0.2042 C.2       1 PHENYL      0.0000 
+      8 C8          1.7345   -2.8546   -0.5286 C.ar      1 PHENYL      0.0000 
+      9 C9          0.3726   -3.0627   -0.7711 C.ar      1 PHENYL      0.0000 
+     10 O10        -0.5490   -2.0103   -0.7171 O.3       1 PHENYL      0.0000 
+     11 C11         2.6325   -3.9257   -0.5882 C.ar      1 PHENYL      0.0000 
+     12 C12         2.1714   -5.2096   -0.8919 C.ar      1 PHENYL      0.0000 
+     13 C13         0.8118   -5.4217   -1.1357 C.ar      1 PHENYL      0.0000 
+     14 C14        -0.0824   -4.3492   -1.0744 C.ar      1 PHENYL      0.0000 
+     15 O15         3.3841   -1.2235    0.0162 O.2       1 PHENYL      0.0000 
+     16 H1          2.5566    1.2156    0.3298 H         1 PHENYL      0.0000 
+     17 H2          0.8167    2.9788    0.3855 H         1 PHENYL      0.0000 
+     18 H3         -1.5549    2.3976   -0.0734 H         1 PHENYL      0.0000 
+     19 H4         -2.1772    0.0503   -0.5886 H         1 PHENYL      0.0000 
+     20 H5          3.6893   -3.7663   -0.3995 H         1 PHENYL      0.0000 
+     21 H6          2.8680   -6.0411   -0.9384 H         1 PHENYL      0.0000 
+     22 H7          0.4508   -6.4178   -1.3723 H         1 PHENYL      0.0000 
+     23 H8         -1.1383   -4.5139   -1.2634 H         1 PHENYL      0.0000 
+@<TRIPOS>BOND
+     1    1    2 ar   
+     2    1    6 ar   
+     3    6    5 ar   
+     4    5    4 ar   
+     5    4    3 ar   
+     6    3    2 ar   
+     7    2    7 1    
+     8    7    8 1    
+     9    8    9 ar   
+    10    9   10 1    
+    11    1   10 1    
+    12    8   11 ar   
+    13   11   12 ar   
+    14   12   13 ar   
+    15   13   14 ar   
+    16    9   14 ar   
+    17    7   15 2    
+    18    3   16 1    
+    19    4   17 1    
+    20    5   18 1    
+    21    6   19 1    
+    22   11   20 1    
+    23   12   21 1    
+    24   13   22 1    
+    25   14   23 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 PHENYL      1 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 0 0 0 0 0 0 0 0 0 0 0 0 0

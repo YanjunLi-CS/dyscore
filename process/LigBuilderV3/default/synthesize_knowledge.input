@@ -1,0 +1,35 @@
+INCLUDE                                 ../default/diversity_low.input
+#----------------------------------------------------------
+#   Synthesieze
+#   --Search mode 0 :  accept guesstimate
+#     search mode 1 :  reject guesstimate
+#     search mode 2 :  use guesstimate only in rank
+#     search mode 3 :  YES/NO mode
+#   --Limit searh 0 :  disabled
+#     limit searh 1 :  stop if meet reaction num
+#     limit searh 2 :  stop if meet cost
+#     limit searh 3 :  stop if meet 1 or 2
+#     limit searh 4 :  stop if meet both 1 and 2
+#     limit searh 5 :  stop if meet 1 while 2
+#   --Default material cost: default value if not assigned
+#   --Default material nonh: 6~12
+#   --Strategy 0~2, default 1.0
+#----------------------------------------------------------
+PRINCIPLE_SYNTHESIZE			NO
+REACTION_SYNTHESIZE			NO
+KNOWLEDGE_SYNTHESIZE			YES
+MAXIMAL_COST				25
+DEFAULT_MATERIAL_COST			1.0
+MAXIMAL_MATERIAL_WEIGHT			500
+MAXIMAL_MATERIAL_NONH			50
+DEFAULT_MATERIAL_NONH			10
+LIMIT_REACTION_NUM			7
+LIMIT_REACTION_COST			15.0
+UNSYNTHESIZABLE_PENALTY			1.0
+MAXIMAL_SYNTHESIZE_STEP			3
+SYNTHESIZE_STRATEGY			1.0
+SYNTHESIZE_YIELD			NO
+SYNTHESIZE_SIDEREACTION			NO
+SEARCH_MODE				2
+LIMIT_SEARCH				2
+ACCURATE_SEARCH				NO

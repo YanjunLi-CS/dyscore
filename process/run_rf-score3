@@ -1,0 +1,2 @@
+#!/bin/bash
+ls $1/ligand/ | parallel -j $2 --tag "rf-score3 $1/receptor.pdbqt $1/ligand/{}"  |grep pdbqt |sed '{s/.pdbqt//}' >$1/score_rf-score3.record

@@ -1,0 +1,71 @@
+#	Name:			octahydroindolizine (conf 1)
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:55:02 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 21:03:06 2004
+
+@<TRIPOS>MOLECULE
+TEST
+   24    25     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 C1          1.6749    1.1970    0.1701 C.3       1 OCTAHYDROINDOLIZINE_CONF_1    0.0174 
+      2 C2          2.5636   -0.0310   -0.1337 C.3       1 OCTAHYDROINDOLIZINE_CONF_1    0.0187 
+      3 C3          1.6437   -1.2352    0.2052 C.3       1 OCTAHYDROINDOLIZINE_CONF_1    0.0721 
+      4 C4         -0.8850   -1.4943   -0.1665 C.3       1 OCTAHYDROINDOLIZINE_CONF_1    0.0720 
+      5 C5         -2.1694   -0.7605    0.3021 C.3       1 OCTAHYDROINDOLIZINE_CONF_1    0.0174 
+      6 C6         -2.2049    0.6993   -0.2292 C.3       1 OCTAHYDROINDOLIZINE_CONF_1    0.0028 
+      7 C7         -0.9250    1.4672    0.1981 C.3       1 OCTAHYDROINDOLIZINE_CONF_1    0.0160 
+      8 C8          0.3043    0.6833   -0.3162 C.3       1 OCTAHYDROINDOLIZINE_CONF_1    0.0575 
+      9 N1          0.2750   -0.6786    0.2397 N.3       1 OCTAHYDROINDOLIZINE_CONF_1   -0.2740 
+     10 H1          2.0022    2.1160   -0.3426 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     11 H2          1.6469    1.3748    1.2576 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     12 H3          3.5073   -0.0286    0.4358 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     13 H4          2.8017   -0.0382   -1.2109 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     14 H5          1.8605   -1.6229    1.2128 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     15 H6          1.7503   -2.0522   -0.5269 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     16 H7         -0.8895   -1.6283   -1.2602 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     17 H8         -0.8257   -2.4864    0.3095 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     18 H9         -2.1813   -0.7387    1.4045 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     19 H10        -3.0615   -1.3104   -0.0413 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     20 H11        -3.0963    1.2174    0.1624 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     21 H12        -2.2754    0.6839   -1.3293 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     22 H13        -0.8876    1.5359    1.2972 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     23 H14        -0.9236    2.4877   -0.2181 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+     24 H15         0.2948    0.6431   -1.4199 H         1 OCTAHYDROINDOLIZINE_CONF_1   -1.0000 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    1    8 1    
+     3    3    2 1    
+     4    9    3 1    
+     5    4    5 1    
+     6    4    9 1    
+     7    5    6 1    
+     8    6    7 1    
+     9    7    8 1    
+    10    8    9 1    
+    11    1   10 1    
+    12    1   11 1    
+    13    2   12 1    
+    14    2   13 1    
+    15    3   14 1    
+    16    3   15 1    
+    17    4   16 1    
+    18    4   17 1    
+    19    5   18 1    
+    20    5   19 1    
+    21    6   20 1    
+    22    6   21 1    
+    23    7   22 1    
+    24    7   23 1    
+    25    8   24 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 OCTAHYDROINDOLIZINE_CONF_1     4 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

@@ -1,0 +1,40 @@
+# Name:          seed_class_1
+# Creation time: Mon Sep  1 00:41:03 2014
+
+
+@<TRIPOS>MOLECULE
+seed_class_1
+    4     3     1     1     1
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 H          59.5550   31.3236   47.6768 H.spc      1 <1>        0.000
+      2 H          58.9697   32.5569   46.7287 H.spc      1 <1>        0.000
+      3 H          59.6947   32.9895   48.3841 H.spc      1 <1>        0.000
+      4 N7         59.4140   32.3430   47.6330 N.pl3      1 <1>        0.000
+@<TRIPOS>BOND
+     1    4    1 1  
+     2    4    2 1  
+     3    4    3 1  
+# Name:          seed_class_1
+# Creation time: Mon Sep  1 00:41:03 2014
+
+
+@<TRIPOS>MOLECULE
+seed_class_1
+    4     3     1     1     1
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 H          58.9697   32.5569   46.7287 H.spc      1 <1>        0.000
+      2 H          59.5550   31.3236   47.6768 H.spc      1 <1>        0.000
+      3 H          59.6947   32.9895   48.3841 H.spc      1 <1>        0.000
+      4 N7         59.4140   32.3430   47.6330 N.pl3      1 <1>        0.000
+@<TRIPOS>BOND
+     1    4    1 1  
+     2    4    2 1  
+     3    4    3 1  

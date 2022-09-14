@@ -1,0 +1,128 @@
+
+        			LigBuilder V3 for Linux
+        	   An Intergated De Novo Drug Design System
+	                        		   --Written by Yaxia Yuan
+
+=========================================================================================
+
+
+REQUIREMENTS
+============
+ -- OpenBabel 2.3.0 or later
+
+ENVIRONMENT VARIABLES
+=====================
+Add the following line into ~/.bashrc or ~/.cshrc or ~/.tcshrc (According to your shell)
+
+ulimit -s unlimited
+
+(As the program will call the "babel" directly, please add the path of OpenBabel to the 
+enviroment variable if "babel" is not executable in the working directory. This is not
+usually necessary if the OpenBabel is installed with root permission.)
+
+NOTICE: These changes would NOT take effect in shells opened so far.
+Please relogin current shell before running CAVITY
+
+
+INSTALLATION and SOFTWARE FILES
+===============================
+This software can be used on LINUX platform. It is not an open sourced software and 
+user just need to uncompress the "LigBuilderV3.tar.gz" package to run the executable
+binary files under the build directory. The default executable file is static linked.
+User could run following commands to linking to your localized library.
+
+	cd LigBuilderV3
+	./configure
+
+The package contains the following directories and files:
+ bin/			executable binary
+ build/ 		working directory
+ example/		example directory
+ manual/		manual in HTML
+ default/		default presets
+ parameter/		necessary parameter
+ *.mdb/			libraries
+ configure		configure file
+ COPYING		license
+ README                 this readme
+
+Please read the HTML pages under directory "manual" to learn how use this program. 
+The starting page is "index.html".
+
+
+BRIEF TUTORIAL
+==============
+1> Get the target protein structure. 
+Example: download PDB file (PDB code 1DB4) to "example/receptor/1db4.pdb"
+
+2> Prepare the input file for CAVITY.
+Example: Editing the "example/cavity.input"
+---------------------------------------------------------------
+   RECEPTOR_FILE	receptor/1db4.pdb
+---------------------------------------------------------------
+
+3> Run CAVITY
+Example: run under directory "/example"
+---------------------------------------------------------------
+   ./cavity cavity.input
+---------------------------------------------------------------
+
+4> Determine cavity id and estimate the ligandability
+Example: View the output surface "example/receptor/1db4_surface_1.pdb"
+---------------------------------------------------------------
+   REMARK  5  Predicted pKd 8.03
+---------------------------------------------------------------
+
+5> Prepare the input file for BUILD
+Example: Editing the "example/build.input"
+---------------------------------------------------------------
+   POCKET_ATOM_FILE	receptor/1db4_pocket_1.txt
+   POCKET_GRID_FILE	receptor/1db4_grid_1.txt
+---------------------------------------------------------------
+
+6> Run BUILD
+Example: run the automatic server under directory "/example"
+---------------------------------------------------------------
+   ./build -Automatic build-just-example.input
+---------------------------------------------------------------
+Starting another shell and enter directory "/example" to run tasks
+---------------------------------------------------------------
+   chmod +x run_1db4.list
+   ./run_1db4.list
+---------------------------------------------------------------
+NOTICE:
+1: It is recommended to assign each task in the list file (run_1db4.list)
+to a computer cluster rather than run them sequentially in practice. 
+The tasks in the list file will not automatically run, user should 
+run them by yourself.
+2: It is not necessary to make all tasks run or finished. User 
+can carry out tasks on different operation systems and then copy 
+the output files to the outputting path assigned in the 
+"LigBuilderV3/default/path.input". In this way, these tasks 
+will NOT be monitored by the server, and please collect the output 
+files before starting post-process.)
+3: If a subroutine lose activity as appeared in the activity list, 
+please check the memory status first and make sure that a suitable 
+memory strategy is used. Try to terminate the subrountie and restart 
+it. (Sometimes the activity list would not capture the real status 
+of subroutines, especially when the harddisk or memory load is 
+reaching the system limit, that is, you'd better keep watching for 
+a period of time to make sure whether the subroutines are functional 
+or not.)
+4: Simply restart the server if it is abruptly terminated. The 
+restarted server will reconnect to all active subroutines. DO NOT 
+start more than one server for one design task.
+
+
+7> View the report page when accomplished
+Example: view "example/result/report_1db4/report.html" in a 
+browser that support SVG
+
+
+
+==================================NOTE===================================================
+
+Any questions and problems, please contact the author: yaxia.yuan@ufl.edu
+Thanks for your support!
+
+===================================END===================================================

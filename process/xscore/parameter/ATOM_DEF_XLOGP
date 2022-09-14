@@ -1,0 +1,130 @@
+################################################################################
+# Atom types and their parameters defined in XLOGP2 
+# Reference: Perspectives in Drug Discovery & Design, 2000, 19, 47-66. 
+# Latest update: 11/13/2002
+################################################################################
+# 1st column: serial number
+# 2nd column: X atom type definition
+# 3rd column: hydrogen bonding character
+#             DA = H-bond donor/acceptor 
+#              D = H-bond donor 
+#              A = H-bond acceptor 
+#              P = polar atom
+#              H = hydrophobic atom
+#             DH = polar hydrogen
+#              N = none
+# 4th column: atomic hydrophobic scale, cited from the reference. 
+################################################################################
+1    C.3.h3.pi=0      H    0.528
+2    C.3.h3.pi=1      H    0.267
+3    C.3.h3.x         P   -0.032
+4    C.3.h2.pi=0      H    0.358
+5    C.3.h2.pi=1      H   -0.008
+6    C.3.h2.pi=2      P   -0.185
+7    C.3.h2.x.pi=0    P   -0.137
+8    C.3.h2.x.pi=1    P   -0.303
+9    C.3.h2.x.pi=2    P   -0.815
+10   C.3.h.pi=0       H    0.127
+11   C.3.h.pi=1       H   -0.243
+12   C.3.h.pi>1       P   -0.499
+13   C.3.h.x.pi=0     P   -0.205
+14   C.3.h.x.pi=1     P   -0.305
+15   C.3.h.x.pi>1     P   -0.709
+16   C.3.pi=0         H   -0.006
+17   C.3.pi=1         H   -0.570
+18   C.3.pi>1         P   -0.317
+19   C.3.x.pi=0       P   -0.316
+20   C.3.x.pi>0       P   -0.723
+21   C.3.unknown      P    0.528
+22   C.2.h2           H    0.420
+23   C.2.h.pi=0       H    0.466
+24   C.2.h.pi=1       H    0.136
+25   C.2.h.x.pi=0     P    0.001
+26   C.2.h.x.pi=1     P   -0.310
+27   C.2.pi=0         H    0.050
+28   C.2.pi>0         H    0.013
+29   C.2.x.pi=0       P   -0.030
+30   C.2.x.pi>0       P   -0.027
+31   C.2.x2.pi=0      P    0.005
+32   C.2.x2.pi>0      P   -0.315
+33   C.2.unknown      P    0.050
+34   C.ar.h           H    0.337
+35   C.ar.h.(X)       H    0.126
+36   C.ar             H    0.296
+37   C.ar.x           P   -0.151
+38   C.ar.(X)         H    0.174
+39   C.ar.(X).x       H    0.366
+40   C.ar.unknown     P    0.296
+41   C.1.h            H    0.209
+42   C.1              H    0.330
+43   C.1.==           H    2.073
+44   C.1.unknown      H    0.330
+45   C.cat            P   -0.315
+46   N.3.h2.pi=0      D   -0.534
+47   N.3.h2.pi=1      D   -0.329
+48   N.3.h2.x         D   -1.082
+49   N.3.h.pi=0       D   -0.112
+50   N.3.h.pi>0       D    0.166
+51   N.3.h.ring       D    0.545
+52   N.3.h.x          D    0.324
+53   N.3.h.x.ring     D    0.153
+54   N.3.pi=0         P    0.159
+55   N.3.pi>0         P    0.761
+56   N.3.ring         P    0.881
+57   N.3.x            P   -0.239
+58   N.3.x.ring       P   -0.010
+59   N.3.unknown      P    0.159
+60   N.am.h2          D   -0.646
+61   N.am.h           D   -0.096
+62   N.am.h.x         D   -0.044
+63   N.am             P    0.078
+64   N.am.x           P   -0.118
+65   N.am.unknown     P    0.078
+66   N.2.(=C).pi=0    A    0.007
+67   N.2.(=C).pi=1    A   -0.275
+68   N.2.(=C).x.pi=0  A    0.366
+69   N.2.(=C).x.pi=1  A    0.251
+70   N.2.(=N)         A    0.536
+71   N.2.(=N).x       A   -0.597
+72   N.2.o            P    0.427
+73   N.2.o2           P    1.178
+74   N.2.unknown      P    0.007
+75   N.ar             A   -0.493
+76   N.1              A   -0.566
+77   N.4              D   -0.534
+78   O.3.h.pi=0       DA  -0.467
+79   O.3.h.pi=1       DA   0.082
+80   O.3.h.x          DA  -0.522
+81   O.3.pi=0         A    0.084
+82   O.3.pi>0         A    0.435
+83   O.3.x            A    0.105
+84   O.3.unknown      P    0.084
+85   O.2              A   -0.399
+86   O.co2            DA  -0.399
+87   S.3.h            H    0.419
+88   S.3              H    0.255
+89   S.3.unknown      H    0.255
+90   S.2              P   -0.148
+91   S.o              P   -1.375
+92   S.o2             P   -0.168
+93   P.3.(=O)         P   -0.447
+94   P.3.(=S)         P    1.253
+95   P.3.unknown      P   -0.447
+96   F.pi=0           H    0.375
+97   F.pi=1           H    0.202
+98   F.unknown        H    0.375
+99   Cl.pi=0          H    0.512
+100  Cl.pi=1          H    0.663
+101  Cl.unknown       H    0.512
+102  Br.pi=0          H    0.850
+103  Br.pi=1          H    0.839
+104  Br.unknown       H    0.850
+105  I.pi=0           H    1.050
+106  I.pi=1           H    1.109
+107  I.unknown        H    1.050
+108  H                N    0.000
+109  H.hb             DH   0.000
+110  Si               N    0.000
+111  Un               N    0.000
+112  Du               N    0.000
+################################################################################

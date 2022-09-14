@@ -1,0 +1,23 @@
+#	Name:			H-C=O
+#	Creating user name:	arthur
+#	Creation time:		Fri Jan  8 20:47:39 1999
+
+#	Modifying user name:	arthur
+#	Modification time:	Fri Jan  8 20:49:25 1999
+
+@<TRIPOS>MOLECULE
+H-C=O
+    3     2     1     1     0
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 O1         -1.5335    3.4719   -4.0712 O.2       1 <1>         0.0000 
+      2 C2         -1.6165    4.5184   -3.4419 C.2       1 <1>         0.0000 
+      3 H3         -2.4182    5.5090   -3.8479 H         1 <1>         0.0000 
+@<TRIPOS>BOND
+     1    2    1 2    
+     2    2    3 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 ****        2 TEMP              0 ****  ****    0 ROOT 

@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W4C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>LigBuilder V3 Report Page</title>
+<style>
+
+.mesWindow{
+         border:#666 1px solid;
+         background:#fff;
+         position:relative;
+         margin:100px auto 100px auto;
+         width:1100px;
+         text-align:center;
+         }
+.mesWindowTop{border-bottom:#eee 1px solid;margin-left:4px;padding:3px;font-weight:bold;text-align:left;font-size:12px;}
+.mesWindowContent{margin:4px;font-size:12px;height:500px;}
+.mesWindow .close{height:15px;width:58px;border:none;cursor:pointer;text-decoration:underline;background:#fff}
+</style>
+<script>
+var isIe=(document.all)?true:false;
+
+function setSelectState(state)
+{
+var objl=document.getElementsByTagName('select');
+for(var i=0;i<objl.length;i++)
+{
+objl[i].style.visibility=state;
+}
+}
+function mousePosition(ev)
+{
+if(ev.pageX || ev.pageY)
+{
+return {x:ev.pageX, y:ev.pageY};
+}
+return {
+x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,y:ev.clientY + document.body.scrollTop - document.body.clientTop
+};
+}
+
+function showMessageBox(wcontent,ev)
+{
+	var wWidth=1100;
+	var wTitle='Synthesis Routines';
+var pos = mousePosition(ev);
+closeWindow();
+if (document.body && document.body.scrollTop && document.body.scrollLeft)
+{
+top=document.body.scrollTop;
+left=document.body.scrollleft;    
+}
+if (document.documentElement && document.documentElement.scrollTop && document.documentElement.scrollLeft)
+{
+top=document.documentElement.scrollTop;
+left=document.documentElement.scrollLeft;
+}
+var bWidth=parseInt(document.documentElement.scrollWidth);
+var bHeight=parseInt(document.documentElement.scrollHeight);
+if(document.documentElement.scrollTop)var nowHeight=parseInt(document.documentElement.scrollTop);
+else var nowHeight=parseInt(document.body.scrollTop);
+if(isIe){
+setSelectState('hidden');}
+var back=document.createElement("div");
+back.id="back";
+var styleStr="top:0px;left:0px;position:absolute;background:#666;width:"+bWidth+"px;height:"+bHeight+"px;";
+styleStr+=(isIe)?"filter:alpha(opacity=40);":"opacity:0.40;";
+back.style.cssText=styleStr;
+document.body.appendChild(back);
+var mesW=document.createElement("div");
+mesW.id="mesWindow";
+mesW.className="mesWindow";
+mesW.innerHTML="<div class='mesWindowTop'><table width='100%' height='100%'><tr><td>"+wTitle+"</td><td style='width:1px;'><input type='button' onclick='closeWindow();' title='Close' class='close' value='Close' /></td></tr></table></div><div class='mesWindowContent' id='mesWindowContent'><div style='padding:100px 0 atuo 0;text-align:center'><iframe src=images/"+wcontent+" frameborder='0' scrolling='yes' height='100%' width='100%' noresize='noresize'></div></iframe></div><div class='mesWindowBottom'></div>";
+//styleStr="left:"+(((pos.x-wWidth)>0)?(pos.x-wWidth):pos.x)+"px;top:"+(pos.y)+"px;position:absolute;width:"+wWidth+"px;";
+styleStr="left:100px;top:"+nowHeight+"px;position:absolute;width:"+wWidth+"px;";
+mesW.style.cssText=styleStr;
+document.body.appendChild(mesW);
+}
+function showBackground(obj,endInt)
+{
+obj.filters.alpha.opacity+=1;
+if(obj.filters.alpha.opacity<endInt)
+{
+setTimeout(function(){showBackground(obj,endInt)},8);
+}
+}
+
+function closeWindow()
+{
+if(document.getElementById('back')!=null)
+{
+document.getElementById('back').parentNode.removeChild(document.getElementById('back'));
+}
+if(document.getElementById('mesWindow')!=null)
+{
+document.getElementById('mesWindow').parentNode.removeChild(document.getElementById('mesWindow'));
+}
+if(isIe){
+setSelectState('');}
+}
+
+</script>
+<script language='javascript'>
+function displayChange(id)
+{
+    if(id.style.display == "none")
+   {
+    id.style.display = "";
+    }
+    else
+   {
+     id.style.display = "none";
+    }
+}
+</script>
+</head>
+
+
+<body>
+<p align="center" style="font-size:24px">LigBuilder V3 Report Page</p>
+<p>Receptor Number:{{RECEPTOR_NUMBER}}</p>
+<p>Total Clusters Number:{{CLUSTER_NUMBER}}	</p>
+<p>Total Molecules Number:{{MOLE_NUMBER}}</p>
+<table width="1200" border="1">
+  <tr>
+    <th width="50" scope="col" bgcolor="#6699EE">Cluster ID</th>
+    <th width="200" scope="col" bgcolor="#6699EE">2D-Structure</th>
+    <th width="100" scope="col" colspan="2" bgcolor="#6699EE">Information</th>
+  </tr>
+
+
+  {{#SHOW_CLUSTER}}
+
+  <tr onclick="displayChange(id_{{CLUSTER_ID}})">
+    <th scope="row" rowspan="3"  bgcolor="#C1D3FB">{{CLUSTER_ID}}</th>
+    <td rowspan="3" bgcolor="#FFFFFF" onMouseOver="this.bgColor='#CCCCCC'" onMouseOut="this.bgColor='#FFFFFF'"><img src="images/{{CLUSTER_IMG}}" width=300/></td>
+    <th width="64" scope="row">Relative Aboundance</th>
+    <td><div class='bar' style='display: block; position: relative; background: #2255FF; text-align: center; z-index:0; width:{{ABOUNDANCE}}%; background-color: #2255FF;height:'>　</div></td>
+
+    
+  </tr>
+
+
+	<tr>
+
+    <th scope="row">Number</th>
+    <td>{{CLUSTER_COUNT}}</td>
+    </tr>
+  <tr>
+    <th width="64" scope="row">Average Similarity</th>
+    <td >{{AVER_SIM}}%</td>
+  </tr>
+  
+   <tr>
+   <td colspan="5">
+  <table width="100%" border="1" id="id_{{CLUSTER_ID}}" style="display:none">
+  <tr>
+    <th width="50" scope="col" bgcolor="#99EE99">Molecule ID</th>
+    <th width="200" scope="col" bgcolor="#99EE99">2D-Structure</th>
+    <th width="100" scope="col" colspan="6" bgcolor="#99EE99">Information</th>
+  </tr>
+
+
+  {{#SHOW_MOLE}}
+   <tr>
+    <th scope="row" rowspan="7"  bgcolor="#CCEECC" onclick="displayChange(id_{{CLUSTER_ID}})">{{MOLE_ID}}</th>
+    <td rowspan="7" bgcolor="#FFFFFF" onclick="displayChange(id2_{{MOLE_ID}})" onMouseOver="this.bgColor='#CCCCCC'" onMouseOut="this.bgColor='#FFFFFF'"><img  src="images/{{MOLE_IMG}}" width=300/></a></td>
+    <th scope="row">LigScore</td>
+    <td align="right">{{REPORT_EST}}</td>
+    <th scope="row">Score</td>
+    <td align="right">{{REPORT_SCORE}}</td>
+    <th scope="row">Aver. Score</td>
+    <td align="right">{{REPORT_AVER_SCORE}}</td>
+  </tr>
+  <tr>
+    <th scope="row">Stability</td>
+    <td align="right">{{REPORT_STABLE}}%</td>
+    <th scope="row">Matching</td>
+    <td align="right">{{REPORT_MATCH}}</td>
+    <th scope="row">Bump</td>
+    <td align="right">{{REPORT_BUMP}}</td>
+  </tr>
+    <tr>
+    <th scope="row">Strong HB</td>
+    <td align="right">{{REPORT_HB}}</td>
+    <th scope="row">Weak HB</td>
+    <td align="right">{{REPORT_HBSPC}}</td>
+    <th scope="row">Metal HB</td>
+    <td align="right">{{REPORT_MT}}</td>
+  </tr>
+    <tr>
+    <th scope="row">Hydrophobicity(HM)</td>
+    <td align="right">{{REPORT_HM}}</td>
+    <th scope="row">Delta HM</td>
+    <td align="right">{{REPORT_DELTAHM}}</td>
+    <th scope="row">HM vs HB</td>
+    <td align="right">{{REPORT_HMHB}}</td>
+  </tr>
+    <tr>
+    <th scope="row">Inter VDW</td>
+    <td align="right">{{REPORT_VDW}}</td>
+    <th scope="row">Intra VDW</td>
+    <td align="right">{{REPORT_IVDW}}</td>
+    <th scope="row">Rotable Bond</td>
+    <td align="right">{{REPORT_RT}}</td>
+  </tr>
+    <tr>
+    <th scope="row">Chemical Score</td>
+    <td align="right">{{REPORT_CHEMICAL}}</td>
+    <th scope="row">XLogP</td>
+    <td align="right">{{REPORT_LOGP}}</td>
+    <th scope="row">Similarity</td>
+    <td align="right">{{REPORT_SIM}}%</td>
+  </tr>
+    <tr>
+    <th scope="row">Weight</td>
+    <td align="right">{{REPORT_WEIGHT}}</td>
+    <th scope="row">Heavy Atom</td>
+    <td align="right">{{REPORT_HEAVY}}</td>
+    <th scope="row">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+  </tr>
+  
+    <tr>
+   <td colspan="8">
+  <table width="100%" border="1" id="id2_{{MOLE_ID}}" style="display:none">
+  <tr>
+    <th width="50" scope="col" bgcolor="#999999">Protein</th>
+    <th width="200" scope="col" bgcolor="#999999">{{INTERACTION}}</th>
+    <th width="100" scope="col" colspan="6" bgcolor="#999999">Information</th>
+  </tr>
+
+
+  {{#SHOW_PROTEIN}}
+   <tr>
+    <th scope="row" rowspan="7"  bgcolor="#CCCCCC" onclick="displayChange(id2_{{MOLE2_ID}})">{{PROTEIN_ID}}</th>
+    <td rowspan="7" bgcolor="#FFFFFF" onMouseOver="this.bgColor='#CCCCCC'" onMouseOut="this.bgColor='#FFFFFF'"><a href="#none" onclick="showMessageBox('{{SYN_HTML}}',event);"><img src="images/{{PROTEIN_IMG}}" width=300/></a></td>
+    <th scope="row">LigScore</td>
+    <td align="right">{{P_REPORT_EST}}</td>
+    <th scope="row">Score</td>
+    <td align="right">{{P_REPORT_SCORE}}</td>
+    <th scope="row">Aver. Score</td>
+    <td align="right">{{P_REPORT_AVER_SCORE}}</td>
+  </tr>
+  <tr>
+    <th scope="row">Stability</td>
+    <td align="right">{{P_REPORT_STABLE}}%</td>
+    <th scope="row">Matching</td>
+    <td align="right">{{P_REPORT_MATCH}}</td>
+    <th scope="row">Bump</td>
+    <td align="right">{{P_REPORT_BUMP}}</td>
+  </tr>
+    <tr>
+    <th scope="row">Strong HB</td>
+    <td align="right">{{P_REPORT_HB}}</td>
+    <th scope="row">Weak HB</td>
+    <td align="right">{{P_REPORT_HBSPC}}</td>
+    <th scope="row">Metal HB</td>
+    <td align="right">{{P_REPORT_MT}}</td>
+  </tr>
+    <tr>
+    <th scope="row">Hydrophobicity(HM)</td>
+    <td align="right">{{P_REPORT_HM}}</td>
+    <th scope="row">Delta HM</td>
+    <td align="right">{{P_REPORT_DELTAHM}}</td>
+    <th scope="row">HM vs HB</td>
+    <td align="right">{{P_REPORT_HMHB}}</td>
+  </tr>
+    <tr>
+    <th scope="row">Inter VDW</td>
+    <td align="right">{{P_REPORT_VDW}}</td>
+    <th scope="row">Intra VDW</td>
+    <td align="right">{{P_REPORT_IVDW}}</td>
+    <th scope="row">Rotable Bond</td>
+    <td align="right">{{P_REPORT_RT}}</td>
+  </tr>
+    <tr>
+    <th scope="row">Chemical Score</td>
+    <td align="right">{{P_REPORT_CHEMICAL}}</td>
+    <th scope="row">XLogP</td>
+    <td align="right">{{P_REPORT_LOGP}}</td>
+    <th scope="row">Similarity</td>
+    <td align="right">{{P_REPORT_SIM}}%</td>
+  </tr>
+    <tr>
+    <th scope="row">Weight</td>
+    <td align="right">{{P_REPORT_WEIGHT}}</td>
+    <th scope="row">Heavy Atom</td>
+    <td align="right">{{P_REPORT_HEAVY}}</td>
+    <th scope="row">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+  </tr>
+  
+  
+  
+  
+  {{/SHOW_PROTEIN}}
+
+  </table>
+  </td>
+  </tr>
+
+  
+  
+  
+  {{/SHOW_MOLE}}
+
+  </table>
+  </td>
+  </tr>
+
+
+  {{/SHOW_CLUSTER}}
+</table>
+
+</body>
+</html>

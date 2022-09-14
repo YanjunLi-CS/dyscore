@@ -1,0 +1,19 @@
+#
+# Derivation library used in LigBuilder              
+#
+# The 1st column: structure ID
+# The 2nd column: structure file name
+# The 3rd column: derivation possibility
+# The 4th column: description
+#
+#
+#
+1   	hetero1.mol2		1.00
+2   	hetero2.mol2		1.00
+3   	hetero3.mol2		1.00
+4   	hetero4.mol2		1.00
+5   	hetero5.mol2		1.00
+6   	hetero6.mol2		1.00
+7   	hetero7.mol2		1.00
+8   	hetero8.mol2		1.00
+9   	hetero9.mol2		1.00

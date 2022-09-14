@@ -1,0 +1,49 @@
+#----------------------------------------------------------
+#   Structure rules
+#   --Growing Seq: ABCDEFGHIJKLMNOPQ
+#     A:sulfur				
+#     B:phosphor			
+#     C:halogen				
+#     D:nitro				
+#     E:semisaturated ring	(ring num)
+#     F:hetero ring		(ring num)	
+#     G:unsaturated branch	(bond num)
+#     H:e-link branch		(bond num)
+#     I:aromatic link
+#     J:ring link
+#     K:ring number
+#     L:ring system number
+#     M:bigring branch
+#     N:bigaromatic branch
+#     O:smallring branch
+#     P:smallaromatic branch
+#     Q:phenolic hydroxyl
+#     Value: 0:forbiden/1~8:maximal num/9:allow
+#   --HMVSHB: suggest less than 1.25
+#   --ChemicalScore: greater than -200
+#----------------------------------------------------------
+APPLY_FORBIDDEN_STRUCTURE_CHECK		YES
+APPLY_TOXIC_STRUCTURE_CHECK		YES
+APPLY_FINAL_STRUCTURE_CHECK		YES
+APPLY_ADMET_RULES			YES
+APPLY_DEFAULT_PARAMETER			NO
+#GROWING_SEQ MARK                       ABCDEFGHIJKLMNOPQ
+GROWING_SEQ				22222321225432442
+AROMATIC_LINK_PROBABILITY		0.80	
+RING_LINK_PROBABILITY			0.90	
+MAXIMAL_BUMP				10
+MAXIMAL_NORING				15
+MAXIMAL_BRANCHPERCENT			80
+MAXIMAL_SINGLEBRANCH			10
+MAXIMAL_HMVSHB				2.0
+[2-10]MAXIMAL_HMVSHB			2.5
+[Growing]MAXIMAL_HMVSHB			2.2
+[Linking]MAXIMAL_HMVSHB			2.5
+MINIMAL_STRUCTURE_SCORE			0
+MINIMAL_CHEMICAL_SCORE			-300
+#----------------------------------------------------------
+#   Filter
+#   --Filter Seq: ABCDEFGHIJKLMNOPQ
+#----------------------------------------------------------
+#FILTER_SEQ MARK                        ABCDEFGHIJKLMNOPQ
+FILTER_SEQ				22222321225432442

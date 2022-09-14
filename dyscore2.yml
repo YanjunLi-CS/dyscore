@@ -1,0 +1,5 @@
+name: dyscore2
+channels:
+  - nsls2forge
+dependencies:
+  - mgltools=1.5.6
