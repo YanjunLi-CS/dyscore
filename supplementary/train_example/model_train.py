@@ -61,7 +61,6 @@ def main():
         valid_y_pred = model.predict(valid_samples['feats'])
         logger.info(valid_y_pred)
 
-#    record=[["sampleID","prediction"]]
     for ds_name, samples in zip(['valid', 'test'], [valid_samples, test_samples]):
         with timer('=> Model evaluation for {}'.format(ds_name)):
             analyzed_dict = dict()
@@ -72,7 +71,9 @@ def main():
 
     logger.info("Trained model is saved to "+args.weight_save)
     logger.info("Prediction results for test set:")
-    logger.info(analyzed_dict["y_pred"])
+    print("sampleID,prediction")
+    for i in range(len(analyzed_dict['sample_name'])):
+        print(analyzed_dict["sample_name"][i]+","+str(analyzed_dict['y_pred'][i]))
 
 
 if __name__ == '__main__':
