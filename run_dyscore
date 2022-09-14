@@ -201,7 +201,7 @@ then
 fi
 
 ##openbabel test
-source activate dyscore3 >/dev/null 2>&1
+source activate dyscore3 
 babel_check=`babel -v 2>/dev/null|grep "Open Babel 2"`
 if [ ! -z "$babel_check" ]
 then
@@ -213,7 +213,7 @@ else
 fi
 
 #mgl test
-source activate dyscore2  >/dev/null 2>&1 
+source activate dyscore2  
 pythonshpath=`which pythonsh`
 mglroot=`echo $pythonshpath |sed '{s/bin\/pythonsh//}'`
 mgl_check=`$pythonshpath $mglroot/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py |grep "Description of command"`
@@ -274,7 +274,7 @@ cp $pdbname $output/cavity/receptor.pdb  2>/dev/null
 
 #prepare inputfiles
 echo "--> Preparing receptor files"
-source activate dyscore3  >/dev/null 2>&1
+source activate dyscore3  
 babel -h $pdbname  $output/receptor_addh.mol2 >/dev/null 2>&1
 ulimit -s unlimited  >/dev/null 2>&1
 export XSCORE_PARAMETER=$path/process/xscore/parameter
@@ -282,7 +282,7 @@ export DSX_POTENTIALS=$path/process/DSXscore/pdb_pot_0511
 process/xscore/xscore  -fixpdb $output/receptor_addh.pdb $output/receptor_addh_xscore.pdb  >/dev/null 2>&1 
 
 #mgltools
-source activate dyscore2  >/dev/null 2>&1 
+source activate dyscore2  
 pythonshpath=`which pythonsh`
 mglroot=`echo $pythonshpath |sed '{s/bin\/pythonsh//}'`
 $pythonshpath $mglroot/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py -r $pdbname -o $output/receptor.pdbqt -A bonds_hydrogens -U nphs_lps_waters_deleteAltB >/dev/null 2>&1
@@ -341,7 +341,7 @@ fi
 
 #convert
 echo "--> Preparing ligands files"
-source activate dyscore3  >/dev/null 2>&1
+source activate dyscore3  
 if [ $dock_flag == "true" ]
 then
     cat ${output}/$listname | parallel "babel --gen3D ${ligand}/{} ${output}/mol2/{.}.mol2" >/dev/null 2>&1
@@ -368,7 +368,7 @@ cat ${output}/$listname | parallel "babel -p 7 ${output}/docked/{.}.pdbqt ${outp
 
 
 #run
-source activate dyscore2  >/dev/null 2>&1
+source activate dyscore2  
 echo "--> Calculating DSXscore" 
 cat ${output}/$listname | parallel --tag "process/DSXscore/dsxscore $output/receptor_addh.mol2 ${output}/docked/{.}.mol2 ${output}/tmp/{.}.DSXtmp" | grep none |awk '{print $1,$3,$4}'  > ${output}/record/DSXscore.dat  2>/dev/null  
 echo "--> Calculating NNscore" 
@@ -393,7 +393,7 @@ cd $path
 #charge
 if [ $MF_flag == "true" ]
 then
-    source activate dyscore3  >/dev/null 2>&1
+    source activate dyscore3 
     echo "--> Enable MF calculation"
     echo "--> Calculating Formal Charge"
     cat ${output}/$listname | parallel --tag "process/getcharge_mol2 ${output}/ph7/{.}.mol2"  >${output}/record/charge.dat  2>/dev/null 
@@ -411,7 +411,7 @@ then
     echo "--> Running MF Model"
     cp  ${output}/record/collect_mf.csv ${output}/input_mf.csv
     cd process/dyscore_model_mf
-    source activate dyscore3
+    source activate dyscore3 
 #    python -m dyscore_model_mf.predict  -i ${output_abs}/input_mf.csv -o ${output_abs}/predicted_mf.csv -w ${weight_abs}/woMF
     python pred_ml.py --input_file ${output_abs}/input_mf.csv --output_file ${output_abs}/predicted_mf.csv --weight_dir ${weight_abs}/wMF
     cd $path
