@@ -22,10 +22,6 @@ def main():
 
     #  ========================================================================
     # Basic config
-    weight_path = osp.join(WEIGHT_ROOT_PATH, str(args.model_num))
-    if args.model_num != 0 and osp.exists(weight_path):
-        raise ValueError('Weight folder has existed. => {}'.format(weight_path))
-
 
     args_dict = vars(args)
 
@@ -58,7 +54,7 @@ def main():
                   valid_samples['labels'], receptor_idx_d=valid_samples["receptor_idx_d"])
 
     with timer('=> Model saving'):
-        saved_model_f = args.weight_file
+        saved_model_f = args.weight_save
         model.save(saved_model_f)
 
     with timer('=> Model prediction'):
@@ -74,7 +70,9 @@ def main():
             analyzed_dict['y_pred'] = model.predict(samples['feats'])
             analyzed_dict['sample_name'] = samples['sample_name']
 
-#    print("Prediction of test set with trained model {}")
+    logger.info("Trained model is saved to "+args.weight_save)
+    logger.info("Prediction results for test set:")
+    logger.info(analyzed_dict["y_pred"])
 
 
 if __name__ == '__main__':

@@ -32,7 +32,7 @@ def get_arguments():
                         default=[1,4,6,8,9,10,12,13,14,15,16,17,18,19],
                         help='features to keep. '
                              'dyScore: [1,4,6,8,9,10,12,13,14,15,16,17,18,19]')
-    parser.add_argument('--add_feat', nargs='+', default=[],
+    parser.add_argument('--add_feat', type=int,nargs='+', default=[20, 21, 22, 23, 24, 25, 26, 27],
                         help='Whether add chemical structure info.'
                              '[20, 21, 22, 23, 24, 25, 26, 27] for DyScore-MF')
 

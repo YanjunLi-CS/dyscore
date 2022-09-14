@@ -42,7 +42,7 @@ def get_arguments():
     parser.add_argument('--input_dim', type=int, default=14, help='Input dimension.')
     parser.add_argument('--output_dim', type=int, default=1, help='Output dimension.')
     parser.add_argument('--feat_remove', nargs='+', default=None, help='features to remove')
-    parser.add_argument('--feat_keep', nargs='+',
+    parser.add_argument('--feat_keep', type=int, nargs='+',
                         default=[1,4,6,8,9,10,12,13,14,15,16,17,18,19],
                         help='features to keep. '
                              'dyScore: [1,4,6,8,9,10,12,13,14,15,16,17,18,19]. Start from Score (0), 1: Stable, 19: hb + hspc'

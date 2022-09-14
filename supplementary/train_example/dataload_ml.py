@@ -56,7 +56,8 @@ class DataSet(object):
                 self.feats = self.numerical[:, 1:]
         else:
             self.feats = self.numerical[:, 1:20]    # self.feats starts from "Score", ends by "Xscore"
-
+            
+            # HB+HSPC as 14th feature
             hb_hspc = np.reshape(self.numerical[:, 4] + self.numerical[:, 6], (-1, 1))
             self.feats = np.concatenate([self.feats, hb_hspc], axis=1)
             self.indices = list(set([int(num) for num in self.args['feat_keep']]))
