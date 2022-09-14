@@ -1,2 +1,0 @@
-#!/bin/bash
-ls $1/ligand | parallel -j $2 --tag "python ./NNscore/NNScore2.01.py  -receptor  $1/receptor.pdbqt -ligand $1/ligand/{}" |grep "Average Score:" |grep pdbqt |awk '{print $1,$4}' |sed '{s/.pdbqt//}' >$1/score_NNscore.record
