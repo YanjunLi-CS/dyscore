@@ -52,17 +52,17 @@ Stable: Stable Score
 
 LogP: [Not used] octanol–water partition coefficient 
 
-HB: Strong hydrogen bond
+HB: Strong hydrogen bond score
 
 MT: Metal coordination bond
 
-HSPC: Weak hydrogen bond
+HSPC: Weak hydrogen bond score
 
 VDW: [Not used] Van der walls contacts 
 
 BUMP: [Not used] Van der walls crashes
 
-HM: [Not used] Hydrophobic matching
+HM: Hydrophobic matching (score2 algorithm)
 
 RT: Corrected rotatable bonds counts (Score2 algorithm)
 

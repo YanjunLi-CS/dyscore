@@ -47,7 +47,7 @@ def get_arguments():
                         help='features to keep. '
                              'dyScore: [1,4,6,8,9,10,12,13,14,15,16,17,18,19]. Start from Score (0), 1: Stable, 19: hb + hspc'
                              'ranking: list(range(0, 20))')
-    # Note: 0 Score, 1 Stable, 2 LogP, 3 HB, 4 MT, 5 HSPC, 6 VDW, 7 BUMP, 8 HM, 9 RT, 10 Match, 11 Heavy, 12 Vina, 13 RF3, 14 NN, 15 DSX, 16 DSXA, 17 Score2, 18 Xscore, 19 HB+HSPC （数值相加）.
+    # Note: 0 Score, 1 Stable, 2 LogP, 3 HB, 4 MT, 5 HSPC, 6 VDW, 7 BUMP, 8 HM, 9 RT, 10 Match, 11 Heavy, 12 Vina, 13 RF3, 14 NN, 15 DSX, 16 DSXA, 17 Score2, 18 Xscore, 19 HB+HSPC （adding）.
     #
     # final features: 1 4 6 8 9 10 12 13 14 15 16 17 18 19 (In total 14 features)
     # feat_remove and feat_keep should not be specified concurrently, if it is, then feat_remove would be ignored
