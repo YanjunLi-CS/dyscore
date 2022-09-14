@@ -42,6 +42,7 @@ ARGUMENT_LIST=(
   "weight"
 )
 
+
 # read arguments
 if ! opts=$(getopt \
   --longoptions "$(printf "%s:," "${ARGUMENT_LIST[@]}")" \
