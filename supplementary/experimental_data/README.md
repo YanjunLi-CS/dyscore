@@ -39,6 +39,7 @@ LIT-PCBA_preds_mf/PROTEIN-NAME_PDB-NAME_preds_mf.csv : Collected predictions (Dy
 
 
 * **Item Description of CSV file:**
+*Note: Some columns are introduced in development stage of DyScore, but not used in final model (labed as [Not Used]). They still appears in the input CSV file to maintain the consistent format from our development version, please ignore them.
 
 TITLE:  Name of compound
 
