@@ -118,9 +118,9 @@ The outputs will be saved in the directory provided via the `--out_dir` argument
 Example output of example_output/predicted.csv
 ```
 sampleID,prediction
-example1,7.824680263487001e-05
-example2,0.5698399146397909
-example3,0.007706048587958018
+example2,0.14331836998462677
+example3,0.011925183236598969
+example1,0.006415208335965872
 ```
 So compound example2 would be the best and compound example1 would be the worst.
 
