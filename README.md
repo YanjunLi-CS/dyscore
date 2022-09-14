@@ -6,7 +6,7 @@ DyScore is the implementation for the paper [DyScore: A Boosting Scoring Method 
 ## How does it work?
 
 DyScore consists of several steps:
-* **Molecular Docking**: [optional] Dock a ligand to a target protein to form a complex.
+* **Molecular Docking**: [Optional] Dock a ligand to a target protein to identify the ligand binding conformation.
 * **Data Processing**: Generate the static and dynamic features for the protein-ligand complex. 
 * **Model Prediction**: Predict the likelihood of whether a given compound is a true binder.
 
@@ -125,6 +125,16 @@ example3,0.007706048587958018
 So compound example2 would be the best and compound example1 would be the worst.
 
 Detailed defination of all items in the CSV could be found in supplementary/experimental_data/README.md file.
+
+## Supplementary
+
+* experiment_data
+
+Input CSV file generated from docked structure, as well as the output data from DyScore and DyScore-MF
+
+* train_example
+
+The full flowchart of DyScore training is demonstrated in model_train.py
 
 
 ## Citation
