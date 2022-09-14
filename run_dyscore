@@ -351,7 +351,7 @@ cat ${output}/$listname | parallel "babel  ${output}/ph7/{.}.mol2 ${output}/pdbq
 if [ $dock_flag == "true" ]
 then
     echo "--> Docking"
-    cat ${output}/$listname | parallel --progress "process/vina_1.1.2 --config ${output}/vina.conf --ligand ${output}/pdbqt/{.}.pdbqt --out ${output}/docked/{.}.pdbqt  >/dev/null 2>&1" #>/dev/null 2>&1
+    cat ${output}/$listname | parallel --progress "process/vina_1.1.2 --config ${output}/vina.conf --ligand ${output}/pdbqt/{.}.pdbqt --out ${output}/docked/{.}.pdbqt >/dev/null 2>&1" #>/dev/null 2>&1
     #vina
     cat ${output}/$listname | parallel -k --tag "grep 'VINA RESULT:' ${output}/docked/{.}.pdbqt" >$output/record/vina.dat 2>/dev/null 
 else

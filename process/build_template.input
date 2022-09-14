@@ -1,7 +1,7 @@
 
 ############################################################
 PARAMETER_DIRECTORY             ../parameter
-RANDOM_SEED                             0
+RANDOM_SEED                             -1
 DESIGN_MODE                             0
 #----------------------------------------------------------
 #   Binding site information
