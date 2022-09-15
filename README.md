@@ -62,9 +62,9 @@ python docker/run_docker.py \
     --out_dir ./example_output \
     --weight_dir <DOWNLOAD_DIR>
 ```
-* The reference ligand should be extracted from X-ray complex or docked complex, please make sure the reference ligand is correctly bind to the binding site of target protein.
+* The reference ligand should be extracted from the X-ray complex or docked complex, and please make sure the reference ligand is correctly bound to the binding site of the target protein.
 
-The second one is to pass the 3D coordination (i.e., min_x,min_y,min_z,max_x,max_y,max_z) of the box for ligand binding site to the argument `--box`. 
+The second one is to pass the 3D coordinates (i.e., min_x,min_y,min_z,max_x,max_y,max_z) of the box for ligand binding site to the argument `--box`. 
 For example,
 ```
 python docker/run_docker.py \ 
@@ -75,8 +75,8 @@ python docker/run_docker.py \
     --weight_dir <DOWNLOAD_DIR>
 ```
 
-The third one is to automatically detect the most possible ligand binding site using Cavity program. It may takes long time.
-The binding site definiation is critical for the any analysis for protein ligand binding, so we DO NOT recommend user to use automatically detection method, which is possible to miss the correct binding site and mess up all following process.
+The third one is to automatically detect the most likely ligand binding site using the Cavity program. But the detecting process may take a long time.
+The binding site definition is critical for any analysis for protein-ligand binding, so we DO NOT recommend the user to use the automatic detection method, which is possible to miss the correct binding site and mess up all the following processes.
 For example,
 ```
 python docker/run_docker.py \ 
@@ -89,9 +89,8 @@ python docker/run_docker.py \
 *Note that the three methods are mutually exclusive to each other. If users use any combination of them,
 they will receive the argument error.
 
-Although DyScore is designed for post-analysis for results from virtual screening, we also provide the molecular docking option, by default it is set as `True`. In this case, DyScore will automatically perform 3D conformation generation, protonation refinment, and molecular docking for input molecules. 
-If the input molecules are already docked to the protein binding site by user, just pass the argument `--no_dock` to disable the automatically docking. This will save a lot of time.
-
+Although DyScore is designed for post-analysis for results from virtual screening, we also provide the molecular docking option and by default, it is set as `True`. In this case, DyScore will automatically perform 3D conformation generation, protonation refinement, and molecular docking for input molecules. 
+If the input molecules are already docked to the protein binding site by the user, just pass the argument `--no_dock` to disable the automatic docking. This will save a lot of time.
 For example,
 ```
 python docker/run_docker.py \ 
@@ -105,7 +104,8 @@ python docker/run_docker.py \
 
 
 ## Running DyScore-MF
-We also provide the fingerprint based version of DyScore, named DyScore-MF. The DyScore-MF could be activate by pass the argument `--mf`
+We also provide the fingerprint-based version of DyScore, named DyScore-MF. The DyScore-MF could be activated by passing the argument `--mf`.
+For example,
 ```
 python docker/run_docker.py \ 
     --rec_file ./example/3p0g_protein.pdb \
