@@ -23,7 +23,7 @@ cd dyscore
 
 3. Download the model parameters to user specific <DOWNLOAD_DIR> path. 
 ```
-./download_weight <DOWNLOAD_DIR>
+./download_weight.sh <DOWNLOAD_DIR>
 ```
 The `download_weight` script will download the model parameter files for DyScore and DyScore-MF. Once the script has finished, you should have the following directory structure:
 ```
