@@ -28,9 +28,9 @@ cd dyscore
 The `download_weight` script will download the model parameter files for DyScore and DyScore-MF. Once the script has finished, you should have the following directory structure:
 ```
 <DOWNLOAD_DIR>/                            # Total: ~ 18 GB
-    woMF/                                  # ~ 13.1 GB
+    woMF/                                  # ~ 12.1 GB
         # 3 files
-    wMF/                                   # ~ 6 GB
+    wMF/                                   # ~ 6.2 GB
         # 3 files
 ```
 
