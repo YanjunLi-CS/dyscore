@@ -54,8 +54,8 @@ def main():
         #  ========================================================================
         # Restore the previous weight
         restore_weight_path=weight_path+"/weight"+str(i)+".pkl"
-        logger.info(f'==> restoring weights from {}'.format(restore_weight_path))
-        logger.info(restore_weight_path)
+        logger.info('=> restoring weights from {}'.format(restore_weight_path))
+#        logger.info(restore_weight_path)
         model.load(restore_weight_path)
 
         #  ========================================================================
