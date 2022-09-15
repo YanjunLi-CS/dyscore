@@ -46,12 +46,12 @@ docker build -f docker/Dockerfile -t dyscore ./
 ```
 
 6. Run `docker/run_docker.py` to predict whether the given ligands can be bound to the target protein. 
-The receipt file with PDB format is required to passed to the argument `--rec_file`.
-Multiple ligand files with different file names can be stored in a same directory, and the directory is required
+The receipt file with PDB format is required to pass to the argument `--rec_file`.
+Multiple ligand files with different file names can be stored in the same directory, and the directory is required
 to pass to the argument `--lig_dir`.
-The prediction results will be outputted to user specific directory with the argument `--out_dir`.
+The prediction results will be outputted to the user-specific directory with the argument `--out_dir`.
 
-It is imporant to specific the correct ligand binding site, we provide three different methods to find or assign binding site. 
+It is essential to specify the correct ligand binding site. Here, we provide three different methods to find or assign binding site. 
 The first one is to use a reference ligand, where users need to pass the reference ligand file to the argument `--ref_file`.
 For example,
 ```
