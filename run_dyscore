@@ -108,7 +108,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-#parameter checking
+# parameter checking
 if [ -z $pdbname ]
 then
     echo "Need receotpr file --rec"
@@ -201,7 +201,7 @@ then
     exit 0
 fi
 
-##openbabel test
+# openbabel test
 source activate dyscore3   >/dev/null 2>&1
 babel_check=`babel -v 2>/dev/null|grep "Open Babel 2"`
 if [ ! -z "$babel_check" ]
@@ -213,7 +213,7 @@ else
     exit 0
 fi
 
-#mgl test
+# mgl test
 source activate dyscore2   >/dev/null 2>&1
 pythonshpath=`which pythonsh`
 mglroot=`echo $pythonshpath |sed '{s/bin\/pythonsh//}'`
@@ -258,7 +258,7 @@ fi
 echo "--> Total $count molecules in $ligand"
 
 
-#prepare dir
+# prepare dir
 mkdir $output/ 2>/dev/null
 mkdir $output/tmp 2>/dev/null
 mkdir $output/docked  2>/dev/null
@@ -273,7 +273,7 @@ cp $pdbname $output/receptor_addh.pdb  2>/dev/null
 cp $pdbname $output/cavity/receptor.pdb  2>/dev/null
 
 
-#prepare inputfiles
+# prepare inputfiles
 echo "--> Preparing receptor files"
 source activate dyscore3 >/dev/null 2>&1 
 babel -h $pdbname  $output/receptor_addh.mol2 >/dev/null 2>&1
@@ -282,12 +282,12 @@ export XSCORE_PARAMETER=$path/process/xscore/parameter
 export DSX_POTENTIALS=$path/process/DSXscore/pdb_pot_0511
 process/xscore/xscore  -fixpdb $output/receptor_addh.pdb $output/receptor_addh_xscore.pdb  >/dev/null 2>&1 
 
-#mgltools
+# mgltools
 source activate dyscore2 >/dev/null 2>&1 
 pythonshpath=`which pythonsh`
 mglroot=`echo $pythonshpath |sed '{s/bin\/pythonsh//}'`
 $pythonshpath $mglroot/MGLToolsPckgs/AutoDockTools/Utilities24/prepare_receptor4.py -r $pdbname -o $output/receptor.pdbqt -A bonds_hydrogens -U nphs_lps_waters_deleteAltB >/dev/null 2>&1
-#fixmetal
+# fixmetal
 sed -i '{s/0\.000 Ca$/2.000 Ca/}' $output/receptor.pdbqt
 sed -i '{s/0\.000 Mg$/2.000 Mg/}' $output/receptor.pdbqt
 sed -i '{s/0\.000 Mn$/2.000 Mn/}' $output/receptor.pdbqt
@@ -297,23 +297,22 @@ sed -i '{s/0\.000 K/1.000 K/}' $output/receptor.pdbqt
 echo "receptor=$output/receptor.pdbqt" >$output/vina.conf
 
 
-#binding site analysis
+# binding site analysis
 if [ ! -z $refername ]
 then
     sed -n "/ATOM/,/BOND/p" $refername |awk '{if($1+1>1)print $0}'|awk 'BEGIN {minx=10000;miny=10000;minz=10000;maxx=-10000;maxy=-10000;maxz=-10000};{x+=$3;y+=$4;z+=$5;if($3>maxx)maxx=$3;if($3<minx)minx=$3;if($4>maxy)maxy=$4;if($4<miny)miny=$4;if($5>maxz)maxz=$5;if($5<minz)minz=$5;}; END{print "Center: x= "x/NR"\ty= "y/NR"\tz= "z/NR;print "Dim: x= "maxx-minx"\ty= "maxy-miny"\tz= "maxz-minz;}' |awk '{if(i==0){x=$3;y=$5;z=$7;i++}else {dx=$3;dy=$5;dz=$7}} END {print "center_x="x"\ncenter_y="y"\ncenter_z="z"\nsize_x="int(dx+15)"\nsize_y="int(dy+15)"\nsize_z="int(dz+15)"\nnum_modes=1\nenergy_range=10\ncpu=1"}' >>$output/vina.conf
-#echo "===============mglroot is done====================="
 elif [ ! -z $box ]
 then
     echo $box |tr "," " " |awk '{print "Center: x= "($1+$4)/2"\ty= "($2+$5)/2"\tz= "($3+$6)/2;print "Dim: x= "$4-$1"\ty= "$5-$2"\tz= "$6-$3;}' |awk '{if(i==0){x=$3;y=$5;z=$7;i++}else {dx=$3;dy=$5;dz=$7}} END {print "center_x="x"\ncenter_y="y"\ncenter_z="z"\nsize_x="int(dx)"\nsize_y="int(dy)"\nsize_z="int(dz)"\nnum_modes=1\nenergy_range=10\ncpu=1"}' >>$output/vina.conf
 fi
 
-#prepare list
+# prepare list
 echo "--> Binding Site Analysis"
 sed '{s@OUTPUT_DIRECTORY@'$output_abs'@g}' process/cavity_template.input >$output/cavity.input
 if [ ! -z $refername ] || [ ! -z $box ] 
 then
 cat $output/vina.conf | tr "=" " "| awk 'BEGIN {boundary=0} {if($1=="center_x")center_x=$2; if($1=="center_y")center_y=$2; if($1=="center_z")center_z=$2; if($1=="size_x")size_x=$2; if($1=="size_y")size_y=$2;  if($1=="size_z")size_z=$2; } END{ print "MIN_X\t"center_x-size_x/2-boundary;print "MAX_X\t"center_x+size_x/2+boundary;print "MIN_Y\t"center_y-size_y/2-boundary;print "MAX_Y\t"center_y+size_y/2+boundary;print "MIN_Z\t"center_z-size_z/2-boundary;print "MAX_Z\t"center_z+size_z/2+boundary;}' >> $output/cavity.input
-else    #detect mode
+else    # detect mode
     echo "DETECT_MODE  0" >> $output/cavity.input 
     echo "--> Automatically binding site detection would take a while, please be patient..."
 fi
@@ -336,7 +335,7 @@ then
 fi
 
 
-#convert
+# convert
 echo "--> Preparing ligands files"
 source activate dyscore3 >/dev/null 2>&1 
 if [ $dock_flag == "true" ]
@@ -366,7 +365,7 @@ fi
 cat ${output}/$listname | parallel "babel -p 7 ${output}/docked/{.}.pdbqt ${output}/docked/{.}.mol2"  >/dev/null 2>&1
 
 
-#run
+# run
 source activate dyscore2 >/dev/null 2>&1 
 echo "--> Calculating DSXscore" 
 cat ${output}/$listname | parallel -k --tag "process/DSXscore/dsxscore $output/receptor_addh.mol2 ${output}/docked/{.}.mol2 ${output}/tmp/{.}.DSXtmp" | grep none |awk '{print $1,$3,$4}'  > ${output}/record/DSXscore.dat  2>/dev/null  
@@ -380,7 +379,7 @@ echo "--> Calculating Xscore"
 cat ${output}/$listname | parallel -k --tag "process/xscore/xscore_nooutput -score $output/receptor_addh_xscore.pdb ${output}/docked/{.}.mol2" |grep "Predicted average" |awk '{print $1,$6}'  >${output}/record/xscore.dat  2>/dev/null 
 
 
-#Matching Score and Stability Score
+# Matching Score and Stability Score
 echo "--> Calculating Matching Score and Stability Score"
 cat ${output}/$listname | parallel -k echo {.} |awk '{print "'${output_abs}'/docked/"$1".mol2"}' >${output}/record/build_dyscore.list 2>/dev/null
 cat process/build_template.input | sed '{s@OUTPUT_DIRECTORY@'$output_abs'@g}' >${output}/build.input 
@@ -388,23 +387,23 @@ cd process/build_dyscore/build
 ./build_dyscore -Score ${output_abs}/build.input >/dev/null 2>&1
 cd $path
 
-#Calculate MF part
-#charge
+# Calculate MF part
+# charge
 if [ $MF_flag == "true" ]
 then
     source activate dyscore3  >/dev/null 2>&1
     echo "--> Enable MF calculation"
     echo "--> Calculating Formal Charge"
-    cat ${output}/$listname | parallel -k --tag "process/getcharge_mol2 ${output}/ph7/{.}.mol2"  >${output}/record/charge.dat  2>/dev/null 
+    cat ${output}/$listname | parallel -k --tag "process/getcharge_mol2 ${output}/ph7/{.}.mol2"  >${output}/record/charge.dat  2>/dev/null
     echo "--> Calculating Molecular Property"
-    cat ${output}/$listname | parallel -k --tag "process/padel ${output}/ph7/{.}.mol2 ${output}/padel/{.}.csv"  >${output}/record/padel.dat  2>/dev/null 
+    cat ${output}/$listname | parallel -k --tag "process/padel ${output}/ph7/{.}.mol2 ${output}/padel/{.}.csv"  >${output}/record/padel.dat  2>/dev/null
     echo "--> Calculating Fingerprint"
     cat ${output}/$listname | parallel -k --tag "process/getFP2 ${output}/ph7/{.}.mol2"  >${output}/record/FP2.dat  2>/dev/null 
     source activate dyscore2  >/dev/null 2>&1
 fi
 
 echo "--> Collect features"
-pythonsh process/collect_dup.py $output $MF_flag  >/dev/null 2>&1
+pythonsh process/collect_dup.py $output $MF_flag  # >/dev/null 2>&1
 
 if [ $MF_flag == "true" ]
 then
@@ -412,7 +411,6 @@ then
     cp  ${output}/record/collect_mf.csv ${output}/input_mf.csv
     cd process/dyscore_model_mf
     source activate dyscore3  >/dev/null 2>&1
-#    python -m dyscore_model_mf.predict  -i ${output_abs}/input_mf.csv -o ${output_abs}/predicted_mf.csv -w ${weight_abs}/woMF
     python pred_ml.py --input_file ${output_abs}/input_mf.csv --output_file ${output_abs}/predicted_mf.csv --weight_dir ${weight_abs}/wMF
     cd $path
     echo "Input features: ${output}/input_mf.csv"
