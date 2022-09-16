@@ -275,7 +275,7 @@ cp $pdbname $output/cavity/receptor.pdb  2>/dev/null
 
 #prepare inputfiles
 echo "--> Preparing receptor files"
-#source activate dyscore3  
+source activate dyscore3  
 babel -h $pdbname  $output/receptor_addh.mol2 >/dev/null 2>&1
 ulimit -s unlimited  >/dev/null 2>&1
 export XSCORE_PARAMETER=$path/process/xscore/parameter
@@ -338,7 +338,7 @@ fi
 
 #convert
 echo "--> Preparing ligands files"
-#source activate dyscore3  
+source activate dyscore3  
 if [ $dock_flag == "true" ]
 then
     cat ${output}/$listname | parallel "babel --gen3D ${ligand}/{} ${output}/mol2/{.}.mol2" >/dev/null 2>&1
@@ -367,7 +367,7 @@ cat ${output}/$listname | parallel "babel -p 7 ${output}/docked/{.}.pdbqt ${outp
 
 
 #run
-#source activate dyscore2  
+source activate dyscore2  
 echo "--> Calculating DSXscore" 
 cat ${output}/$listname | parallel -k --tag "process/DSXscore/dsxscore $output/receptor_addh.mol2 ${output}/docked/{.}.mol2 ${output}/tmp/{.}.DSXtmp" | grep none |awk '{print $1,$3,$4}'  > ${output}/record/DSXscore.dat  2>/dev/null  
 echo "--> Calculating NNscore" 
@@ -392,6 +392,7 @@ cd $path
 #charge
 if [ $MF_flag == "true" ]
 then
+    source activate dyscore3 
     echo "--> Enable MF calculation"
     echo "--> Calculating Formal Charge"
     cat ${output}/$listname | parallel -k --tag "process/getcharge_mol2 ${output}/ph7/{.}.mol2"  >${output}/record/charge.dat  2>/dev/null 
@@ -399,6 +400,7 @@ then
     cat ${output}/$listname | parallel -k --tag "process/padel ${output}/ph7/{.}.mol2 ${output}/padel/{.}.csv"  >${output}/record/padel.dat  2>/dev/null 
     echo "--> Calculating Fingerprint"
     cat ${output}/$listname | parallel -k --tag "process/getFP2 ${output}/ph7/{.}.mol2"  >${output}/record/FP2.dat  2>/dev/null 
+    source activate dyscore2 
 fi
 
 echo "--> Collect features"
