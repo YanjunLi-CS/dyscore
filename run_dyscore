@@ -342,7 +342,7 @@ if [ $dock_flag == "true" ]
 then
     cat ${output}/$listname | parallel "babel --gen3D ${ligand}/{} ${output}/mol2/{.}.mol2" >/dev/null 2>&1
 else
-    cat ${output}/$listname | parallel "babel ${ligand}/{} ${output}/mol2/{.}.mol2" >/dev/null 2>&1
+    cat ${output}/$listname | parallel "babel -h ${ligand}/{} ${output}/mol2/{.}.mol2" >/dev/null 2>&1
 fi
 cat ${output}/$listname | parallel "babel -p 7 ${output}/mol2/{.}.mol2 ${output}/ph7/{.}.mol2" >/dev/null 2>&1
 cat ${output}/$listname | parallel "babel  ${output}/ph7/{.}.mol2 ${output}/pdbqt/{.}.pdbqt" >/dev/null 2>&1
