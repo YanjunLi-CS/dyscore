@@ -1,2 +1,2 @@
 #!/bin/bash
-cat $1 2>&1 | grep -A 10000 "@<TRIPOS>ATOM" |grep -B 10000 "@" -m 2 |awk '{if(NF>8)print $9}' |paste -sd+ - |bc  |awk '{a=sprintf("%.0f",$1);if(a=="-0")print 0;else print a}'
+cat $1 2>&1 | grep -A 10000 "@<TRIPOS>ATOM" |grep -B 10000 "@" -m 2 |awk '{if(NF>8){i=i+$9}} END {a=sprintf("%.0f",i);if(a=="-0")print 0;else print a}'
