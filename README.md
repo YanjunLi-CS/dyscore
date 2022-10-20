@@ -1,6 +1,6 @@
 # DyScore
 
-DyScore is the implementation for the paper [DyScore: A Boosting Scoring Method with Dynamic Properties for Identifying True Binders and Non-binders in Structure-based Drug Discovery](https://www.biorxiv.org/content/10.1101/2021.10.26.465921v1).
+DyScore is the implementation for the paper [DyScore: A Boosting Scoring Method with Dynamic Properties for Identifying True Binders and Non-binders in Structure-based Drug Discovery](https://www.biorxiv.org/content/10.1101/2021.10.26.465921v2).
 
 
 ## How does it work?
