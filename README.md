@@ -1,6 +1,6 @@
 # DyScore
 
-DyScore is the implementation for the paper [DyScore: A Boosting Scoring Method with Dynamic Properties for Identifying True Binders and Non-binders in Structure-based Drug Discovery](https://www.biorxiv.org/content/10.1101/2021.10.26.465921v2).
+DyScore is the implementation for the paper [DyScore: A Boosting Scoring Method with Dynamic Properties for Identifying True Binders and Non-binders in Structure-based Drug Discovery](https://pubs.acs.org/doi/10.1021/acs.jcim.2c00926).
 
 
 ## How does it work?
@@ -159,12 +159,15 @@ Example for using DyScore/DyScore-MF model with provided CSV file
 ## Citation
 If you use DyScore, please consider citing:
 ```
-@article{li2021dyscore,
-  title={Dyscore: A boosting scoring method with dynamic properties for identifying true binders and non-binders in structure-based drug discovery},
+@article{li2022dyscore,
+  title={DyScore: A boosting scoring method with dynamic properties for identifying true binders and nonbinders in structure-based drug discovery},
   author={Li, Yanjun and Zhou, Daohong and Zheng, Guangrong and Li, Xiaolin and Wu, Dapeng and Yuan, Yaxia},
-  journal={bioRxiv},
-  year={2021},
-  publisher={Cold Spring Harbor Laboratory}
+  journal={Journal of Chemical Information and Modeling},
+  volume={62},
+  number={22},
+  pages={5550--5567},
+  year={2022},
+  publisher={ACS Publications}
 }
 ```
 
